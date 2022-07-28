@@ -4,7 +4,7 @@
 <h1 align="center">Nodejumper web app</h1>
 <h3 align="center">Welcome to Nodejumper's Open Source Multi tool for Cosmos based chains!</h3>
 
-*:rocket: *:rocket: *:rocket: Developing by [Nodejumper](https://nodejumper.io) with love*
+*:rocket: :rocket: :rocket: Developing by [Nodejumper](https://nodejumper.io) with love*
 
 ### About
 Nodejumper is a multi tool for cosmos based networks.
@@ -79,16 +79,18 @@ State sync also can be very handy when it comes to reducing size of the db as it
 
 This page provides the whole list of possible CLI commands users might need on a day-to-day basis. Starting from adding a key and ending with removing a node.
 All the commands are divided by sections for better navigation. They already prepopulated with correct binary name, chain id and denom.
-If you want to find a specific command, there's a search bar which hides irrelevant results. We believe it makes your journey as a cosmos validator easy and enjoyable.  
+If you want to find a specific command, there's a search bar which hides irrelevant results. We believe it makes your journey as a cosmos validator easy and enjoyable.
+
 Here's a quick tour around the page:
 
 ![Cheat Sheet Tour](https://user-images.githubusercontent.com/27004732/181461297-7c313bed-d2ab-45bd-a38e-810886f4c6f9.gif)
 
 # Summary page
 
-This page provides on chain analytics. You can find actual token price, blockchain height, total number of transaction and other metrics from realtime RPC node.We're also building some helpful ratios, so you can find out how decentralized is the chain (how many validators own more than 50% of the total bonded tokens), percentage of current price in ATH price and bonded token ratio (how many tokens are bonded from the total supply). 
+This page provides on chain analytics. You can find actual token price, blockchain height, total number of transaction and other metrics from realtime RPC node. We're also building some helpful ratios, so you can find out how decentralized is the chain (how many validators own more than 50% of the total bonded tokens), percentage of current price in ATH price and bonded token ratio (how many tokens are bonded in total supply). 
 There are few fancy charts available: price/volume chart, voting power chart, distribution of the commission among active validators and missed blocks chart.
 This is BETA version of the page, and we're going to enhance it in the nearest future.
+
 Here's quick overview of the section:
 
 ![Summary Page Overview](https://user-images.githubusercontent.com/27004732/181466738-eb2f1d44-c512-4987-aa11-61a77a0e97ce.gif)
