@@ -39,7 +39,7 @@ Depends on type of the network it synchronizes a node under the hood either by u
 Manual installation script allows newbies to go through every step of the installation script line by line.
 This gives them better understanding of what's going on and reduce the time spent on debugging, if something goes wrong.
 
-Here's the quick demo on how easy chain installation can be, taken Bitcanna as example:
+Here's quick demo on how easy chain installation can be, taken Bitcanna as example:
 
 ![Bitcanna Installation](https://user-images.githubusercontent.com/27004732/181461881-fe42af03-41cd-44b6-a76c-189e6a43660a.gif)
 
@@ -81,7 +81,7 @@ This page provides the whole list of possible CLI commands users might need on a
 All the commands are divided by sections for better navigation. They already prepopulated with correct binary name, chain id and denom.
 If you want to find a specific command, there's a search bar which hides irrelevant results. We believe it makes your journey as a cosmos validator easy and enjoyable.
 
-Here's a quick tour around the page:
+Here's quick tour around the page:
 
 ![Cheat Sheet Tour](https://user-images.githubusercontent.com/27004732/181461297-7c313bed-d2ab-45bd-a38e-810886f4c6f9.gif)
 
