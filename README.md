@@ -6,96 +6,19 @@
 
 *:rocket: :rocket: :rocket: Developing by [Nodejumper](https://nodejumper.io) with love*
 
-### About
-Nodejumper is a multi tool for cosmos based networks.
-The aim of the project is to provide a bunch of helpful support features for cosmos blockchains.
+## About
+Nodejumper web app is a multi tool for cosmos based networks.
+It provides a whole bunch of helpful support features for cosmos blockchains.
 It's built on dedicated server infrastructure with advanced monitoring and alerting system on top of it. 
-Nodejumper supports around 17 networks so far and the number is constantly growing.
+Nodejumper supports around 17 networks and the number is constantly growing.
 
-Currently, Nodejumper supports the following features:
-1. Installation scripts;
-2. Synchronization scripts;
-3. Cheat sheet;
-4. On chain analytics;
+## Nodejumper services and community
+- [Official Website](https://nodejumper.io)
+- [Twitter](https://twitter.com/nodejumper)
+- [Telegram - ENG](https://t.me/nodejumper)
+- [Nodejumper Wiki](https://github.com/nodejumper-org/nodejumper/wiki)
 
-Let's dive deeper in every feature individually.
-
-# Installation scripts page
-
-Nodejumper provides installation scripts of two kinds:
-
-### Automatic Installation
-
-<img width="500" alt="Automatic Installation" src="https://user-images.githubusercontent.com/102145525/181235145-e25a918c-7d56-40c2-ad84-03d34eb6cb30.png">
-
-Automatic installation script spins up a node in few clicks.
-It uses all the best practices like installing very few required system packages, minimum-gas-prices, pruning custom/100/0/10, etc.
-Depends on type of the network it synchronizes a node under the hood either by using snapshots or state sync.
-
-### Manual Installation
-
-<img width="500" alt="Manual Installation" src="https://user-images.githubusercontent.com/102145525/181235156-5a55e603-2f1a-4c4a-80eb-961f42978f60.png">
-
-Manual installation script allows newbies to go through every step of the installation script line by line.
-This gives them better understanding of what's going on and reduce the time spent on debugging, if something goes wrong.
-
-Here's quick demo on how easy chain installation can be, taken Bitcanna as example:
-
-![Bitcanna Installation](https://user-images.githubusercontent.com/27004732/181461881-fe42af03-41cd-44b6-a76c-189e6a43660a.gif)
-
-# Synchronization scripts page
-
-This page includes:
-
-### RPC Server
-
-<img width="500" alt="RPC Server" src="https://user-images.githubusercontent.com/102145525/181228580-4acf18c0-b0d5-4e2a-8ebd-76fcf9c6ca82.png">
-
-Exposes the chain state in real time. It uses https securing all the traffic.
-
-### Live Peers
-
-<img width="500" alt="Live Peers" src="https://user-images.githubusercontent.com/102145525/181234818-2ccc61ce-5f7a-47bd-8db1-8e7dee1f4fcc.png">
-
-Dynamic real time peers list in/out. It also has a command to quickly apply the peers in config.toml in case
-of issues with peers.
-
-### Snapshot
-
-<img width="500" alt="Snapshot" src="https://user-images.githubusercontent.com/102145525/181234851-33dcd40b-9de6-49e0-9aa0-51fe915dc24d.png">
-
-This section provides a set of instructions on how to use snapshots to synchronize the node. It includes size of the snapshot and date time information when it was taken.
-Snapshots are taken every day. We're doing our best to keep the size relatively small, so you don't have to waste a tone of time on downloading.
-
-### State Sync
-
-<img width="500" alt="State Sync" src="https://user-images.githubusercontent.com/102145525/181234866-2e123778-59b9-474f-8b5b-b20f15a4b015.png">
-
-This section provides a set of instructions on how to use state sync to synchronize the node.
-We use 2k snapshot window so in worse case scenario you'll need to fetch 2k blocks to fully catch up.
-State sync also can be very handy when it comes to reducing size of the db as it flushes all existing data before applying snapshot chunks.
-
-# Cheat sheet
-
-This page provides the whole list of possible CLI commands users might need on a day-to-day basis. Starting from adding a key and ending with removing a node.
-All the commands are divided by sections for better navigation. They already prepopulated with correct binary name, chain id and denom.
-If you want to find a specific command, there's a search bar which hides irrelevant results. We believe it makes your journey as a cosmos validator easy and enjoyable.
-
-Here's quick tour around the page:
-
-![Cheat Sheet Tour](https://user-images.githubusercontent.com/27004732/181461297-7c313bed-d2ab-45bd-a38e-810886f4c6f9.gif)
-
-# Summary page
-
-This page provides on chain analytics. You can find actual token price, blockchain height, total number of transaction and other metrics from realtime RPC node. We're also building some helpful ratios, so you can find out how decentralized is the chain (how many validators own more than 50% of the total bonded tokens), percentage of current price in ATH price and bonded token ratio (how many tokens are bonded in total supply). 
-There are few fancy charts available: price/volume chart, voting power chart, distribution of the commission among active validators and missed blocks chart.
-This is BETA version of the page, and we're going to enhance it in the nearest future.
-
-Here's quick overview of the section:
-
-![Summary Page Overview](https://user-images.githubusercontent.com/27004732/181466738-eb2f1d44-c512-4987-aa11-61a77a0e97ce.gif)
-
-# Supported networks
+## Supported networks
 
 <table>
   <tr>
@@ -199,5 +122,22 @@ Here's quick overview of the section:
     <td>Uptick</td>
     <td>Testnet</td>
     <td>https://nodejumper.io/uptick-testnet/installation</td>
+  </tr>
+</table>
+
+## Contributors
+
+Big shout out the guys , you rock! 🤘🚀
+
+<table>
+  <tr>
+    <td>
+      <img src="https://avatars.githubusercontent.com/u/102145525?s=400&u=4273c7f703d56b7e2945a81307beadf90e699ce0&v=4" width="50" alt="RefleXXX1">
+      <a href="https://github.com/RefleXXX1">RefleXXX1</a>
+    </td>
+    <td>
+      <img src="https://avatars.githubusercontent.com/u/100301930?v=4" width="50" alt="Libra442">
+      <a href="https://github.com/RefleXXX1">Libra442</a>
+    </td>
   </tr>
 </table>
