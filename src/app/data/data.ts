@@ -382,7 +382,8 @@ export const CHAINS: Chain[] = [
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Teritori is a multi-chain hub designed to allow IBC and non IBC communities to connect, trade services & NFTs, launch new projects & build further existing ones. The hub notably includes dApps for a daily use such as an NFT launchpad, a marketplace and social features for individuals & communities: Innovate, Trade, Organize.",
-    githubRepoName: 'teritori-chain'
+    githubRepoName: 'teritori-chain',
+    testnetTasksLink: 'https://teritori.crew3.xyz/questboard'
   },
   {
     id: "stride-testnet",
