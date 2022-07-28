@@ -2,7 +2,7 @@
   <a href="https://nodejumper.io" target="_blank" rel="noopener noreferrer"><img width="200" src="https://avatars.githubusercontent.com/u/101663253" alt="Nodejumper logo"></a>
 </p>
 <h1 align="center">Nodejumper web app</h1>
-<h3 align="center">Welcome to Nodejumper's Open Source Multi tool for Cosmos based chains!</h3>
+<h3 align="center">Welcome to Nodejumper's Open Source multi tool for cosmos based networks!</h3>
 
 *:rocket: :rocket: :rocket: Developing by [Nodejumper](https://nodejumper.io) with love*
 
@@ -127,7 +127,7 @@ Nodejumper supports around 17 networks and the number is constantly growing.
 
 ## Contributors
 
-Big shout out the guys , you rock! 🤘🚀
+Big shout out to the guys , you rock! 🤘🚀
 
 <table>
   <tr>
