@@ -73,7 +73,7 @@
       </div>
     </div>
   </div>
-  <div class="row" [ngClass]="hideForSearchArray([e1be173d, e196dfc8, b0ce1e71, d341457e, c29f311f2e09]) ? 'd-none' : ''" id="wallet">
+  <div class="row" [ngClass]="hideForSearchArray([e1be173d, e196dfc8, b0ce1e71, d341457e, c29f311f2e09, d5dcf95a, c264be3d]) ? 'd-none' : ''" id="wallet">
     <p class="title">Key</p>
     <div class="command-container" [ngClass]="hideForSearch(e1be173d) ? 'd-none' : ''" #e1be173d>
       <p>Add New Key</p>
@@ -100,6 +100,20 @@
       <p>Delete Key</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} keys delete {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}</div>
+        <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
+      </div>
+    </div>
+    <div class="command-container" [ngClass]="hideForSearch(d5dcf95a) ? 'd-none' : ''" #d5dcf95a>
+      <p>Export Key (save to {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}.backup)</p>
+      <div class="copy-button-container">
+        <div class="command">{{chain.binaryName}} keys export {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}</div>
+        <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
+      </div>
+    </div>
+    <div class="command-container" [ngClass]="hideForSearch(c264be3d) ? 'd-none' : ''" #c264be3d>
+      <p>Import Key</p>
+      <div class="copy-button-container">
+        <div class="command">{{chain.binaryName}} keys import {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}.backup</div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
     </div>
@@ -268,7 +282,7 @@
       </div>
     </div>
   </div>
-  <div class="row" [ngClass]="hideForSearchArray([d82b6728, e1f574e6, be5e3609fee2, abe0cd09436e, db5f64c9e27e]) ? 'd-none' : ''" id="tokens">
+  <div class="row" [ngClass]="hideForSearchArray([d82b6728, e1f574e6, be5e3609fee2, abe0cd09436e, db5f64c9e27e, d0f5f1aa46a0]) ? 'd-none' : ''" id="tokens">
     <p class="title">Tokens</p>
     <div class="col col-12 col-sm-12 col-md-6 col-lg-4">
       <div class="param-container">
@@ -304,9 +318,18 @@
       </div>
     </div>
     <div class="command-container" [ngClass]="hideForSearch(d82b6728) ? 'd-none' : ''" #d82b6728>
-      <p>Withdraw Commission And Rewards</p>
+      <p>Withdraw Rewards From All Validators </p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx distribution withdraw-all-rewards --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+        </div>
+        <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
+      </div>
+    </div>
+    <div class="command-container" [ngClass]="hideForSearch(d0f5f1aa46a0) ? 'd-none' : ''" #d0f5f1aa46a0>
+      <p>Withdraw Commission And Rewards From Your Validator</p>
+      <div class="copy-button-container">
+        <div class="command">{{chain.binaryName}} tx distribution withdraw-rewards $({{chain.binaryName}} keys show {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --bech val -a) --commission --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
           --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
