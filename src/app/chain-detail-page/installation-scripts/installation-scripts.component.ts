@@ -14,10 +14,10 @@ export class InstallationScriptsComponent implements OnInit {
 
   automaticScriptUrl?: string;
   manualScriptContent?: string;
+  upgradeScriptContent?: string;
   testnetInstructionsContent?: string;
   chain?: Chain;
   highlighted = false;
-  chainBinaryVersion?: string;
 
   constructor(private highlightService: HighlightService,
               private http: HttpClient,
@@ -38,7 +38,6 @@ export class InstallationScriptsComponent implements OnInit {
       const binaryName = this.chainService.getChainBinaryName(this.chain);
 
       this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/${chainNet}/${chainName}/${chainId}-install.sh`
-
       this.http.get(this.automaticScriptUrl, {responseType: 'text'}).subscribe(data => {
 
         const trimmedAutomationScriptContent = data
@@ -57,12 +56,15 @@ export class InstallationScriptsComponent implements OnInit {
           + "NODE_MONIKER=<YOUR_NODE_MONIKER>\n\n"
           + trimmedAutomationScriptContent
           + `\n\nsudo journalctl -u ${binaryName} -f --no-hostname -o cat`;
-
-        this.chainBinaryVersion = this.manualScriptContent.substring(
-          this.manualScriptContent.indexOf("git checkout")+"git checkout".length,
-          this.manualScriptContent.indexOf("make install")
-        ).trim()
       });
+
+      const upgradeScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/${chainNet}/${chainName}/upgrade.sh`
+      this.http
+        .get(upgradeScriptUrl, {responseType: 'text'})
+        .subscribe(
+          data => this.upgradeScriptContent = data,
+          error => console.log(`Missing upgrade script for ${chainName}`)
+        );
 
       if (this.chain.isTestnet) {
         const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/testnet/${chainName}/testnet-instructions.sh`
