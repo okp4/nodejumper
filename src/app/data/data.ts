@@ -195,6 +195,27 @@ export const CHAINS: Chain[] = [
     githubRepoName: 'evmos'
   },
   {
+    id: "juno",
+    chainName: "Juno",
+    chainId: "juno-1",
+    snapshotServer: "https://snapshots1.nodejumper.io",
+    rpcServer: "https://juno.nodejumper.io",
+    rpcPeer: "87ed42f2dd265013f3e5a6643ff6e0fffadb9aa0@juno.nodejumper.io:29656",
+    serviceName: "junod",
+    homeDirectoryName: ".juno",
+    twitter: "https://twitter.com/JunoNetwork",
+    github: "https://github.com/CosmosContracts",
+    globe: "https://www.junonetwork.io",
+    medium: "https://medium.com/@JunoNetwork",
+    discord: "https://discord.gg/bRXvatqreb",
+    validatorUrl: "",
+    denomName: "ujuno",
+    coingekoCoinId: "juno-network",
+    denomPow: 6,
+    newWayUnsafeResetAll: true,
+    githubRepoName: 'juno'
+  },
+  {
     id: "another1-testnet",
     chainName: "Another-1",
     chainId: "anone-testnet-1",
