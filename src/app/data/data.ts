@@ -412,7 +412,7 @@ export const CHAINS: Chain[] = [
     chainId: "STRIDE-TESTNET-2",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
     rpcServer: "https://stride-testnet.nodejumper.io",
-    rpcPeer: "0d19829b0dd1fc324cfde1f7bc15860c896b7ac1@teritori-testnet.nodejumper.io:27656",
+    rpcPeer: "17b24705533d633cb3501233a18912ae6cc36a41@stride-testnet.nodejumper.io:28656",
     serviceName: "strided",
     homeDirectoryName: ".stride",
     twitter: "https://twitter.com/stride_zone",
