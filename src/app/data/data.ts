@@ -428,5 +428,29 @@ export const CHAINS: Chain[] = [
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Stride is a blockchain (\"zone\") that provides liquidity for staked assets. Using Stride, you can earn both staking and DeFi yields across the Cosmos IBC ecosystem.",
     githubRepoName: 'stride'
+  },
+  {
+    id: "rebus-testnet",
+    chainName: "Rebus",
+    chainId: "reb_3333-1",
+    snapshotServer: "https://snapshots2-testnet.nodejumper.io",
+    rpcServer: "https://rebus-testnet.nodejumper.io",
+    rpcPeer: "cfaaa1aa3b47a3d457bd7bad4ca54a18829b83cc@rebus-testnet.nodejumper.io:29656",
+    serviceName: "rebusd",
+    homeDirectoryName: ".rebusd",
+    twitter: "https://twitter.com/RebusChain",
+    github: "https://github.com/rebuschain",
+    globe: "https://www.rebuschain.com",
+    discord: "https://discord.gg/cBGpcyHmBH",
+    medium: "https://medium.com/@RebusChain",
+    validatorUrl: "https://rebus.explorers.guru/validator/rebusvaloper1nntq6xqgcpjgpuz5jl85lhatpmlefywfvrd70f",
+    denomName: "arebus",
+    denomPow: 6,
+    summaryDisabled: true,
+    newWayUnsafeResetAll: true,
+    isTestnet: true,
+    hardwareRequirements: "4CPU 8RAM 200GB",
+    projectOverview: "Rebus is a platform built to host blockchain applications (EVM) and native Vaults usable across multiple sovereign networks.",
+    githubRepoName: 'rebus.core'
   }
 ]
