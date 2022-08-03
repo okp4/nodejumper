@@ -419,7 +419,7 @@ export const CHAINS: Chain[] = [
     github: "https://github.com/Stride-Labs",
     globe: "https://stride.zone/",
     discord: "https://discord.gg/ut6JucWWR3",
-    validatorUrl: "",
+    validatorUrl: "https://stride.explorers.guru/validator/stridevaloper1l8vtxx634c6hkqr0q3zccnsk0dj3njlvwq0faf",
     denomName: "ustrd",
     denomPow: 6,
     summaryDisabled: true,
