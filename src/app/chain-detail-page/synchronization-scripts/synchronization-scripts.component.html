@@ -34,7 +34,7 @@ sudo apt install lz4 -y</code></pre>
 {{this.chainService.getUnsafeResetAllString(chain)}}
 
 cd $HOME/{{chain.homeDirectoryName}}
-rm -rf data
+rm -rf data {{chain.hasWasm ? '\nrm -rf wasm' : ''}}
 
 SNAP_NAME=$(curl -s {{chain.snapshotServer}}/{{chain.id}}/ | egrep -o ">{{chain.chainId}}.*\.tar.lz4" | tr -d ">")
 curl {{chain.snapshotServer}}/{{chain.id}}/${{ '{' }}SNAP_NAME{{ '}' }} | lz4 -dc - | tar -xf -

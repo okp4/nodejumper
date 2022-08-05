@@ -33,6 +33,7 @@ export class Chain {
   archiveReason?: string;
   endedAt?: string;
   testnetTasksLink?: string;
+  hasWasm?: boolean;
 
   constructor(id: string, chainName: string, chainId: string, snapshotServer: string, rpcServer: string,
               rpcPeer: string, serviceName: string, homeDirectoryName: string, twitter: string, github: string,
