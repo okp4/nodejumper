@@ -14,6 +14,12 @@
     <pre><code class="language-bash" id="update-peers-row">peers="{{chain.rpcPeer}}"
 sed -i 's|^persistent_peers *=.*|persistent_peers = "'$peers'"|' $HOME/{{chain.homeDirectoryName}}/config/config.toml</code></pre>
   </div>
+  <div class="row" id="addrbook">
+    <div>
+      <p class="title">Address Book</p>
+    </div>
+    <pre><code class="language-bash">curl -s {{chain.snapshotServer}}/{{chain.id}}/addrbook.json > $HOME/{{chain.homeDirectoryName}}/config/addrbook.json</code></pre>
+  </div>
   <div class="row" *ngIf="!chain.snapshotDisabled" id="snapshot">
     <div>
       <p class="title">Snapshot</p>
@@ -28,7 +34,7 @@ sudo apt install lz4 -y</code></pre>
 {{this.chainService.getUnsafeResetAllString(chain)}}
 
 cd $HOME/{{chain.homeDirectoryName}}
-rm -rf data
+rm -rf data {{chain.hasWasm ? '\nrm -rf wasm' : ''}}
 
 SNAP_NAME=$(curl -s {{chain.snapshotServer}}/{{chain.id}}/ | egrep -o ">{{chain.chainId}}.*\.tar.lz4" | tr -d ">")
 curl {{chain.snapshotServer}}/{{chain.id}}/${{ '{' }}SNAP_NAME{{ '}' }} | lz4 -dc - | tar -xf -
