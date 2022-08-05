@@ -1,5 +1,24 @@
 <div>
   <div class="row">
+    <div class="col">
+      <div class="about-block" [ngClass]="showAbout ? 'full-about' : ''">
+        <p *ngIf="!showAbout">
+          Validation never been so easy yet...
+        </p>
+        <p *ngIf="showAbout">
+          Welcome to Nodejumper's Open Source multi tool for cosmos based networks!
+          <br><br>
+          🚀 🚀 🚀 Developing by Nodejumper with love
+          <br><br>
+          Nodejumper web app is a multi tool for cosmos based networks. It provides a whole bunch of helpful support features for cosmos blockchains. It's built on dedicated server infrastructure with advanced monitoring and alerting system on top of it. Nodejumper supports around 17 networks and the number is constantly growing.
+        </p>
+        <p class="who-we-are-button" (click)="showAbout=!showAbout">
+          {{ showAbout ? "Got it!" : "Who we are?" }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col col-12 col-lg-6">
       <div class="search-field">
         <span class="search-icon">

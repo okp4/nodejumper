@@ -15,6 +15,7 @@ export class HomePageComponent implements OnInit {
   archiveChains: Chain[] = [];
   searchQuery: string = '';
   chainType = 'all';
+  showAbout = false;
 
   constructor(public chainService: ChainService, public stateService: StateService) {
     this.applyChainTypeWithFilter(this.chainType, "");
