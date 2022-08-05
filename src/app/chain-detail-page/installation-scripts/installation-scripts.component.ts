@@ -31,12 +31,11 @@ export class InstallationScriptsComponent implements OnInit {
     this.chain = this.chainService.activeChain;
     if (this.chain) {
 
-      const chainNet = this.chain.isTestnet ? "testnet" : "mainnet";
       const chainName = this.chain.chainName.toLowerCase();
       const chainId = this.chain.chainId;
       const binaryName = this.chainService.getChainBinaryName(this.chain);
 
-      this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/${chainNet}/${chainName}/${chainId}-install.sh`
+      this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/${chainId}-install.sh`
 
       this.http.get(this.automaticScriptUrl, {responseType: 'text'}).subscribe(data => {
 
@@ -59,7 +58,7 @@ export class InstallationScriptsComponent implements OnInit {
       });
 
       if (this.chain.isTestnet) {
-        const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-utils/main/testnet/${chainName}/testnet-instructions.sh`
+        const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/testnet-instructions.sh`
         this.http.get(testnetInstructionsUrl, {responseType: 'text'}).subscribe(data => {
           this.testnetInstructionsContent = data?.trim() || 'TBD';
         });
