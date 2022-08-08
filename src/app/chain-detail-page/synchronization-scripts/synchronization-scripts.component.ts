@@ -19,8 +19,6 @@ export class SynchronizationScriptsComponent implements OnInit {
   snapshotData?: SnapshotData;
   livePeers: string[] = [];
 
-  highlighted = false;
-
   constructor(@Inject(DOCUMENT) private document: Document,
               private highlightService: HighlightService,
               public chainService: ChainService,
@@ -59,6 +57,7 @@ export class SynchronizationScriptsComponent implements OnInit {
           this.snapshotData = new SnapshotData(snapshotHeight, snapshotSize, snapshotBlockTime);
         });
     }
+    this.highlightService.highlightAll();
   }
 
   updateLivePeersView(): void {
@@ -70,13 +69,6 @@ export class SynchronizationScriptsComponent implements OnInit {
     const updatePeersRow = document.getElementById('update-peers-row')?.getElementsByClassName('token string')?.item(0);
     if (updatePeersRow) {
       updatePeersRow.innerHTML = `"${livePeersString}"`;
-    }
-  }
-
-  ngAfterViewChecked() {
-    if (this.chain && !this.highlighted) {
-      this.highlightService.highlightAll();
-      this.highlighted = true;
     }
   }
 }

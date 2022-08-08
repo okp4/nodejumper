@@ -8,7 +8,7 @@ pre {
   outline: none;
 }
 
-.snap-info {
+.details {
   line-height: 1.9;
   opacity: var(--button-opacity);
 }

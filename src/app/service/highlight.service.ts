@@ -14,9 +14,23 @@ export class HighlightService {
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
   }
 
-  highlightAll() {
-    if (isPlatformBrowser(this.platformId)) {
-      Prism.highlightAll();
-    }
+  highlightAll(callback?: any) {
+    const _this = this;
+    setTimeout(() => {
+      if (isPlatformBrowser(_this.platformId)) {
+        Prism.highlightAll(false, callback);
+        console.log('Prism.highlightAll() is invoked.')
+      }
+    }, 1);
+  }
+
+  highlightAllUnder(container: any) {
+    const _this = this;
+    setTimeout(() => {
+      if (isPlatformBrowser(_this.platformId)) {
+        Prism.highlightAllUnder(container);
+        console.log('Prism.highlightAll() is invoked.')
+      }
+    }, 1);
   }
 }

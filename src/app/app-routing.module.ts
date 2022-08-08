@@ -9,6 +9,7 @@ import { AboutComponent } from "./chain-detail-page/about/about.component";
 import { InstallationScriptsComponent } from "./chain-detail-page/installation-scripts/installation-scripts.component";
 import { SummaryComponent } from "./chain-detail-page/summary/summary.component";
 import { CheatSheetComponent } from "./chain-detail-page/cheat-sheet/cheat-sheet.component";
+import { UpgradeScriptsComponent } from "./chain-detail-page/upgrade-scripts/upgrade-scripts.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
       {path: '', component: SummaryComponent},
       {path: 'installation', component: InstallationScriptsComponent},
       {path: 'sync', component: SynchronizationScriptsComponent},
+      {path: 'upgrade', component: UpgradeScriptsComponent},
       {path: 'cheat-sheet', component: CheatSheetComponent},
       {path: 'about', component: AboutComponent}
     ]
