@@ -237,6 +237,7 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     isTestnet: true,
     isArchive: true,
+    archiveReason: 'Testnet ended due to migration to Polygon.',
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Another-1 platform is an ecosystem that aggregates users and markets using a hybrid approach making it seamless for non crypto native users. The AN1 front end is built in Vue.js and served via the browser or electron app.",
     githubRepoName: 'anone'
