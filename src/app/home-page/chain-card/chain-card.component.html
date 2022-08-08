@@ -1,4 +1,4 @@
-<div *ngIf="chain" class="card">
+<div *ngIf="chain" [ngClass]="chain.isArchive ? 'card archive' : 'card'">
   <img alt="{{chain.chainName}}" src="assets/img/chain/{{chain.id.split('-')[0]}}.png">
   <div class="title">{{chain.chainName}}
     <div class="project-support" *ngIf="chain.isProjectSupportUs"

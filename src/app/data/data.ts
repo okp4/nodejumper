@@ -192,6 +192,8 @@ export const CHAINS: Chain[] = [
     denomName: "aevmos",
     denomPow: 18,
     newWayUnsafeResetAll: true,
+    isArchive: true,
+    archiveReason: "We no longer support Evmos due to lack of feedback.",
     githubRepoName: 'evmos'
   },
   {
@@ -306,6 +308,9 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
+    isArchive: true,
+    archiveReason: 'Testnet ended',
+    endedAt: '2022-07-09',
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "The Business Grade Multi-Chain NFT Infrastructure for Web 3.0.",
     githubRepoName: 'uptick'
