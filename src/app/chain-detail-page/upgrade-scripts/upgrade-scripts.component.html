@@ -1,7 +1,7 @@
 <ng-container *ngIf="chainService.activeChain as chain">
   <div class="empty-result" *ngIf="upgradeDataArray && !upgradeDataArray.length">
     <div class="row">
-      <p class="title">No chain upgrades yet. </p>
+      <p class="title">No chain upgrades scheduled yet. </p>
     </div>
   </div>
   <ng-container *ngFor="let upgradeData of upgradeDataArray">
@@ -15,7 +15,7 @@
     </div>
     <div class="row">
       <p class="sub-title">Automatic Upgrade</p>
-      <p class="details">(upgrade will be done automatically, when height: {{upgradeData.height}} is reached)</p>
+      <p class="details">(upgrade will be done automatically, when halt height is reached)</p>
       <pre><code class="language-bash">source <(curl -s https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/dev/{{chain.chainName.toLowerCase()}}/upgrade/{{upgradeData.version}}/automatic_upgrade.sh)</code></pre>
     </div>
   </ng-container>

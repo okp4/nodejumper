@@ -27,7 +27,7 @@ export class UpgradeScriptsComponent implements OnInit {
     if (this.chain) {
       const salt = (new Date()).getTime();
       const chainName = this.chain.chainName.toLowerCase();
-      const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/dev/${chainName}/upgrade/upgrades.json?${salt}`;
+      const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade/upgrades.json?${salt}`;
       this.http.get(url).subscribe({
         next: (data: any) => {
           (<Array<UpgradeData>>data).sort((a, b) => {
@@ -49,7 +49,7 @@ export class UpgradeScriptsComponent implements OnInit {
   fetchManualUpgradeScriptContent(upgradeScript: UpgradeData) {
     const salt = (new Date()).getTime();
     const chainName = this.chain?.chainName.toLowerCase();
-    const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/dev/${chainName}/upgrade/${upgradeScript.version}/upgrade_manual.sh?${salt}`;
+    const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade/${upgradeScript.version}/upgrade_manual.sh?${salt}`;
     this.http.get(url, {responseType: 'text'}).subscribe((data: any) => {
       upgradeScript.manualScriptContent = data;
       this.highlightService.highlightAllUnder(document.getElementById(upgradeScript.version));

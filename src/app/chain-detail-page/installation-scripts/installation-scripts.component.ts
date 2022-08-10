@@ -14,7 +14,6 @@ export class InstallationScriptsComponent implements OnInit {
 
   automaticScriptUrl?: string;
   manualScriptContent?: string;
-  upgradeScriptContent?: string;
   testnetInstructionsContent?: string;
   chain?: Chain;
   highlighted = false;
@@ -61,19 +60,11 @@ export class InstallationScriptsComponent implements OnInit {
         this.highlightService.highlightAllUnder(document.getElementById('manual'));
       });
 
-      const upgradeScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade.sh`
-      this.http
-        .get(upgradeScriptUrl, {responseType: 'text'})
-        .subscribe(
-          data => this.upgradeScriptContent = data,
-          error => console.log(`Missing upgrade script for ${chainName}`)
-        );
-
       if (this.chain.isTestnet) {
         const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/testnet-instructions.sh`
         this.http.get(testnetInstructionsUrl, {responseType: 'text'}).subscribe(data => {
           this.testnetInstructionsContent = data?.trim() || 'TBD';
-          this.highlightService.highlightAllUnder(document.getElementById('create-validator'));
+          this.highlightService.highlightAllUnderElementId('create-validator');
         });
       }
       this.highlightService.highlightAll(this.highlightTaskLink.bind(this));
