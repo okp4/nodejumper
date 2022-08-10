@@ -2,6 +2,39 @@
   padding: 10px;
 }
 
+.about-block {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background-color: var(--code-background-color);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  margin-left: 10px;
+  transition: all var(--animation-speed) ease;
+}
+
+.about-block .short-text {
+  width: 100%;
+  cursor: pointer;
+}
+
+.about-block .who-we-are-button {
+  transition: all var(--animation-speed) ease;
+  color: var(--button-color);
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  padding-left: 10px;
+}
+
+.about-block .who-we-are-button:hover {
+  text-decoration: underline;
+}
+
+.about-block a {
+  color: var(--button-color);
+}
+
 .search-field {
   position: relative;
   margin-left: 10px;
