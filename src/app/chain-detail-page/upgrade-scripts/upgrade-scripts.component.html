@@ -6,7 +6,8 @@
   </div>
   <ng-container *ngFor="let upgradeData of upgradeDataArray">
     <div class="row pb-0">
-      <p class="title">Chain upgrade to {{upgradeData.version}} at height: {{upgradeData.height}}</p>
+      <p class="title">Upgrade to {{upgradeData.version}}</p>
+      <p class="details">height: <strong>{{upgradeData.height}}</strong></p>
     </div>
     <div class="row pb-0" id="{{upgradeData.version}}">
       <p class="sub-title">Manual Upgrade</p>
