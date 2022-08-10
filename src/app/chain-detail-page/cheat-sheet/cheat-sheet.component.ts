@@ -28,7 +28,7 @@ export class CheatSheetComponent implements OnInit {
         activeChain.denomName,
         this.chainService.getChainBinaryName(activeChain),
         activeChain.homeDirectoryName,
-        savedChainInfo.walletName || 'wallet',
+        savedChainInfo.keyName || 'wallet',
         savedChainInfo.gas || 0.1,
         savedChainInfo.moniker || 'Moniker',
         savedChainInfo.identity || 'FFB0AA51A2DF5954', // nodejumper keybase
