@@ -2,6 +2,7 @@ export class Chain {
   id: string;
   chainName: string;
   chainId: string;
+  logo: string;
   snapshotServer: string;
   rpcServer: string;
   rpcPeer: string;
@@ -35,12 +36,13 @@ export class Chain {
   testnetTasksLink?: string;
   hasWasm?: boolean;
 
-  constructor(id: string, chainName: string, chainId: string, snapshotServer: string, rpcServer: string,
+  constructor(id: string, chainName: string, chainId: string, logo:string, snapshotServer: string, rpcServer: string,
               rpcPeer: string, serviceName: string, homeDirectoryName: string, twitter: string, github: string,
               globe: string, denomName: string, denomPow: number) {
     this.id = id;
     this.chainName = chainName;
     this.chainId = chainId;
+    this.logo = logo;
     this.snapshotServer = snapshotServer;
     this.rpcServer = rpcServer;
     this.rpcPeer = rpcPeer;

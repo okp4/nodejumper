@@ -1,6 +1,9 @@
 footer {
   border-top: 1px solid var(--border-color);
   margin-top: 20px;
+  position: relative;
+  background-color: white;
+  z-index: 999;
 }
 
 footer .container {

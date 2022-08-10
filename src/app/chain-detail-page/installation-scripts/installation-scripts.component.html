@@ -1,23 +1,22 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
-  <ng-container *ngIf="chain.isTestnet && manualScriptContent && testnetInstructionsContent || !chain.isTestnet && manualScriptContent">
-    <div class="row" id="hardware" *ngIf="chain.isTestnet">
-      <p class="title">Hardware Requirements</p>
-      <pre><code class="language-bash">{{chain.hardwareRequirements}}</code></pre>
+  <div class="row" id="hardware" *ngIf="chain.hardwareRequirements">
+    <p class="title">Hardware Requirements</p>
+    <pre><code class="language-bash">{{chain.hardwareRequirements}}</code></pre>
+  </div>
+  <div class="row" id="tasks" *ngIf="chain.testnetTasksLink">
+    <p class="title">Tasks</p>
+    <pre><code class="language-bash" id="tasks-link"></code></pre>
+  </div>
+  <div class="row" id="automatic">
+    <div>
+      <p class="title">Automatic Installation</p>
+      <p class="details">pruning: <strong>custom/100/0/10</strong>; indexer: <strong>kv</strong></p>
     </div>
-    <div class="row" id="tasks" *ngIf="chain.isTestnet && chain.testnetTasksLink">
-      <p class="title">Tasks</p>
-      <pre><code class="language-bash" id="tasks-link"></code></pre>
-    </div>
-    <div class="row" id="automatic">
-      <div>
-        <p class="title">Automatic Installation</p>
-        <p class="snap-info">pruning: <strong>custom/100/0/10</strong>; indexer: <strong>kv</strong></p>
-      </div>
-      <pre><code class="language-bash">source <(curl -s {{automaticScriptUrl}})</code></pre>
-    </div>
-    <div class="row" id="manual">
-      <p class="title">Manual Installation</p>
-      <pre><code class="language-bash"># install dependencies, if needed
+    <pre><code class="language-bash">source <(curl -s {{automaticScriptUrl}})</code></pre>
+  </div>
+  <div class="row" id="manual">
+    <p class="title">Manual Installation</p>
+    <pre><code class="language-bash"># install dependencies, if needed
 sudo apt update
 sudo apt install -y curl git jq lz4 build-essential
 
@@ -25,11 +24,10 @@ if [ ! -f "/usr/local/go/bin/go" ]; then
   bash <(curl -s "https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/utils/go_install.sh")
   source .bash_profile
 fi</code></pre>
-      <pre><code class="language-bash">{{manualScriptContent}}</code></pre>
-    </div>
-    <div class="row" id="create-validator" *ngIf="chain.isTestnet">
-      <p class="title">Create Validator</p>
-      <pre><code class="language-bash">{{testnetInstructionsContent}}</code></pre>
-    </div>
-  </ng-container>
+    <pre><code class="language-bash">{{manualScriptContent}}</code></pre>
+  </div>
+  <div class="row" id="create-validator" *ngIf="testnetInstructionsContent">
+    <p class="title">Create Validator</p>
+    <pre><code class="language-bash">{{testnetInstructionsContent}}</code></pre>
+  </div>
 </ng-container>

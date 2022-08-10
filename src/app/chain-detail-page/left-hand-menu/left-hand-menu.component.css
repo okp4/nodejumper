@@ -93,7 +93,7 @@
 }
 
 .support-us-btn {
-  width: 250px;
+  width: 100%;
   border-top: 1px solid var(--border-color);
   cursor: pointer;
   color: #ffffff;

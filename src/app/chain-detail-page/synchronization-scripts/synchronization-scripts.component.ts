@@ -19,8 +19,6 @@ export class SynchronizationScriptsComponent implements OnInit {
   snapshotData?: SnapshotData;
   livePeers: string[] = [];
 
-  highlighted = false;
-
   constructor(@Inject(DOCUMENT) private document: Document,
               private highlightService: HighlightService,
               public chainService: ChainService,
@@ -33,22 +31,24 @@ export class SynchronizationScriptsComponent implements OnInit {
   ngAfterViewInit(): void {
     this.chain = this.chainService.activeChain;
     if (this.chain) {
-      this.chainService.getChainNetInfo(this.chain)
-        .subscribe((data: any) => {
-            this.livePeers.push(this.chain?.rpcPeer || '');
-            let peersArray = data.result.peers;
-            peersArray = peersArray.slice(0, this.MAX_LIVE_PEERS - 1);
-            for (let i = 0; i < peersArray.length; i++) {
-              const peerId = peersArray[i].node_info.id;
-              const listenAddr = peersArray[i].node_info.listen_addr;
-              const listenPort = listenAddr.slice(listenAddr.lastIndexOf(':') + 1);
-              const remoteIp = peersArray[i].remote_ip;
-              const livePeer = `${peerId}@${remoteIp}:${listenPort}`;
-              this.livePeers.push(livePeer);
+      if (!this.chain.isArchive) {
+        this.chainService.getChainNetInfo(this.chain)
+          .subscribe((data: any) => {
+              this.livePeers.push(this.chain?.rpcPeer || '');
+              let peersArray = data.result.peers;
+              peersArray = peersArray.slice(0, this.MAX_LIVE_PEERS - 1);
+              for (let i = 0; i < peersArray.length; i++) {
+                const peerId = peersArray[i].node_info.id;
+                const listenAddr = peersArray[i].node_info.listen_addr;
+                const listenPort = listenAddr.slice(listenAddr.lastIndexOf(':') + 1);
+                const remoteIp = peersArray[i].remote_ip;
+                const livePeer = `${peerId}@${remoteIp}:${listenPort}`;
+                this.livePeers.push(livePeer);
+              }
+              this.updateLivePeersView();
             }
-            this.updateLivePeersView();
-          }
-        );
+          );
+      }
       this.chainService.getChainSnapshotInfo(this.chain)
         .subscribe((data: any) => {
           const snapshotHeight = data.snapshotHeight;
@@ -57,6 +57,7 @@ export class SynchronizationScriptsComponent implements OnInit {
           this.snapshotData = new SnapshotData(snapshotHeight, snapshotSize, snapshotBlockTime);
         });
     }
+    this.highlightService.highlightAll(this.highlightRPCLink.bind(this));
   }
 
   updateLivePeersView(): void {
@@ -71,10 +72,10 @@ export class SynchronizationScriptsComponent implements OnInit {
     }
   }
 
-  ngAfterViewChecked() {
-    if (this.chain && !this.highlighted) {
-      this.highlightService.highlightAll();
-      this.highlighted = true;
+  highlightRPCLink(): void {
+    const rpcLinkElement = document.getElementById('rpc-link');
+    if (rpcLinkElement) {
+      rpcLinkElement.innerHTML = `<a href="${this.chain?.rpcServer}" target="_blank">${this.chain?.rpcServer}</a>`;
     }
   }
 }

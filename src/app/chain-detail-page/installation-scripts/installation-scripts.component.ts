@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { Chain } from "../../model/chain";
 import { HighlightService } from "../../service/highlight.service";
 import { HttpClient } from "@angular/common/http";
@@ -21,7 +21,8 @@ export class InstallationScriptsComponent implements OnInit {
   constructor(private highlightService: HighlightService,
               private http: HttpClient,
               public chainService: ChainService,
-              @Inject(DOCUMENT) private document: Document) {
+              @Inject(DOCUMENT) private document: Document,
+              private cdr: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -36,6 +37,7 @@ export class InstallationScriptsComponent implements OnInit {
       const binaryName = this.chainService.getChainBinaryName(this.chain);
 
       this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/${chainId}-install.sh`
+      this.cdr.detectChanges();
 
       this.http.get(this.automaticScriptUrl, {responseType: 'text'}).subscribe(data => {
 
@@ -55,26 +57,24 @@ export class InstallationScriptsComponent implements OnInit {
           + "NODE_MONIKER=<YOUR_NODE_MONIKER>\n\n"
           + trimmedAutomationScriptContent
           + `\n\nsudo journalctl -u ${binaryName} -f --no-hostname -o cat`;
+        this.highlightService.highlightAllUnder(document.getElementById('manual'));
       });
 
       if (this.chain.isTestnet) {
         const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/testnet-instructions.sh`
         this.http.get(testnetInstructionsUrl, {responseType: 'text'}).subscribe(data => {
           this.testnetInstructionsContent = data?.trim() || 'TBD';
+          this.highlightService.highlightAllUnderElementId('create-validator');
         });
       }
+      this.highlightService.highlightAll(this.highlightTaskLink.bind(this));
     }
   }
 
-  ngAfterViewChecked() {
-    if (this.chain && !this.chain.isTestnet && this.manualScriptContent && !this.highlighted
-      || this.chain && this.chain.isTestnet && this.testnetInstructionsContent && this.manualScriptContent && !this.highlighted) {
-      this.highlightService.highlightAll();
-      this.highlighted = true;
-      const tasksLinkElement = document.getElementById('tasks-link');
-      if (tasksLinkElement) {
-        tasksLinkElement.innerHTML = `<a href="${this.chain.testnetTasksLink}" target="_blank">${this.chain.testnetTasksLink}</a>`;
-      }
+  highlightTaskLink(): void {
+    const tasksLinkElement = document.getElementById('tasks-link');
+    if (tasksLinkElement) {
+      tasksLinkElement.innerHTML = `<a href="${this.chain?.testnetTasksLink}" target="_blank">${this.chain?.testnetTasksLink}</a>`;
     }
   }
 }

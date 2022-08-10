@@ -6,7 +6,7 @@
     <p class="title">NodeJumper</p>
   </div>
   <div class="chain-info">
-    <img class="logo-image" alt="{{chain.chainName}}" src="assets/img/chain/{{chain.id.split('-')[0]}}.png">
+    <img class="logo-image" alt="{{chain.chainName}}" src="assets/img/chain/{{chain.logo}}">
     <p class="title">{{chain.chainName}}</p>
     <p class="details">{{chain.chainId}}</p>
   </div>
@@ -14,6 +14,7 @@
     <p *ngIf="!chain.summaryDisabled" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['./']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">Summary</p>
     <p [routerLink]="['./installation']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">Installation scripts</p>
     <p [routerLink]="['./sync']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">Synchronization scripts</p>
+    <p [routerLink]="['./upgrade']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">Upgrade scripts</p>
     <p [routerLink]="['./cheat-sheet']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">Cheat Sheet</p>
     <p [routerLink]="['./about']" class="menu-item" routerLinkActive="active" (click)="closeLeftHandMenuForMobile()">About</p>
   </div>
