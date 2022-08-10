@@ -192,6 +192,8 @@ export const CHAINS: Chain[] = [
     denomName: "aevmos",
     denomPow: 18,
     newWayUnsafeResetAll: true,
+    isArchive: true,
+    archiveReason: "We no longer support Evmos due to lack of feedback.",
     githubRepoName: 'evmos'
   },
   {
@@ -234,6 +236,8 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     summaryDisabled: true,
     isTestnet: true,
+    isArchive: true,
+    archiveReason: 'Testnet ended due to migration to Polygon.',
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Another-1 platform is an ecosystem that aggregates users and markets using a hybrid approach making it seamless for non crypto native users. The AN1 front end is built in Vue.js and served via the browser or electron app.",
     githubRepoName: 'anone'
@@ -306,6 +310,9 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
+    isArchive: true,
+    archiveReason: 'Testnet ended',
+    endedAt: '2022-07-09',
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "The Business Grade Multi-Chain NFT Infrastructure for Web 3.0.",
     githubRepoName: 'uptick'

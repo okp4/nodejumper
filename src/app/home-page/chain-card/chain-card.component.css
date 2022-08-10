@@ -2,15 +2,27 @@
   height: 270px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  padding: 15px;
   justify-content: center;
   align-items: center;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
-  transition: border-color var(--animation-speed) ease-in-out, box-shadow var(--animation-speed) ease-in-out;
+  transition:
+    border-color var(--animation-speed) ease-in-out,
+    box-shadow var(--animation-speed) ease-in-out;
+  -moz-transition: var(--animation-speed) filter linear;
 }
 
-.card:hover {
+.card:hover,
+.card.archive:hover{
   cursor: pointer;
   border-color: var(--border-active-color);
+  filter: unset;
+  opacity: 1;
+}
+
+.card.archive {
+  filter: grayscale(100%);
+  opacity: 0.8;
 }
 
 .card img {
@@ -29,6 +41,7 @@
 .card .details {
   font-size: 18px;
   color: var(--details-color);
+  text-align: center;
 }
 
 .card .project-support {
