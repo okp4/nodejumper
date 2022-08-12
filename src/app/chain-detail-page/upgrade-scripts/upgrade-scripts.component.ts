@@ -52,6 +52,7 @@ export class UpgradeScriptsComponent implements OnInit {
     const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade/${upgradeScript.version}/upgrade_manual.sh?${salt}`;
     this.http.get(url, {responseType: 'text'}).subscribe((data: any) => {
       upgradeScript.manualScriptContent = data;
+      upgradeScript.manualScriptContent += `\nsudo journalctl -u ${this.chain?.serviceName} -f --no-hostname -o cat`;
       this.highlightService.highlightAllUnder(document.getElementById(upgradeScript.version));
     });
   }
