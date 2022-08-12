@@ -299,6 +299,7 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     summaryDisabled: true,
     isTestnet: true,
+    hasWasm: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "DWS (Decentralized Web Services) is a decentralized cloud infrastructure management platform. DWS will take care of all the decentralized services health and will smoothly reinstantiate any service, which will go down, DWS will control funds spendings and will notify you in Slack/Telegram/Jami about any needed fundings. Also DWS will have a nice dashboard showing all the balances, spendings and incidents happen regarding the cloud infrastructure you use.",
     githubRepoName: 'deweb'
