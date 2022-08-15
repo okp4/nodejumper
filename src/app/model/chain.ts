@@ -15,6 +15,7 @@ export class Chain {
   medium?: string;
   discord?: string;
   telegram?: string;
+  blockExplorer?: string;
   coingekoCoinId?: string;
   validatorUrl?: string;
   projectOverview?: string;

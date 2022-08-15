@@ -37,6 +37,9 @@
     <a *ngIf="chain.telegram" href="{{chain.telegram}}" target="_blank">
       <span class="btn-social fa-brands fa-telegram" ngbTooltip="Telegram" tooltipClass="ratio-tooltip" placement="top"></span>
     </a>
+    <a *ngIf="chain.blockExplorer" href="{{chain.blockExplorer}}" target="_blank">
+      <span class="btn-social fa-solid fa-cubes" ngbTooltip="Block Explorer" tooltipClass="ratio-tooltip" placement="top"></span>
+    </a>
   </div>
   <div class="support-us">
     <a *ngIf="chain.validatorUrl" class="support-us-btn btn btn-block shadow-none" href="{{chain.validatorUrl}}" target="_blank">
