@@ -42,6 +42,7 @@ export const CHAINS: Chain[] = [
     denomName: "ubcna",
     denomPow: 6,
     isProjectSupportUs: true,
+    newWayUnsafeResetAll: true,
     githubRepoName: 'bcna'
   },
   {
