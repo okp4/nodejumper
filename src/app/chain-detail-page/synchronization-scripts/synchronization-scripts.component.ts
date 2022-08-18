@@ -13,7 +13,7 @@ import { UtilsService } from "../../service/utils.service";
 })
 export class SynchronizationScriptsComponent implements OnInit {
 
-  MAX_LIVE_PEERS = 200;
+  MAX_LIVE_PEERS = 100;
 
   chain?: Chain;
   snapshotData?: SnapshotData;
@@ -36,14 +36,15 @@ export class SynchronizationScriptsComponent implements OnInit {
           .subscribe((data: any) => {
               this.livePeers.push(this.chain?.rpcPeer || '');
               let peersArray = data.result.peers;
-              peersArray = peersArray.slice(0, this.MAX_LIVE_PEERS - 1);
-              for (let i = 0; i < peersArray.length; i++) {
+              for (let i = 0; i < peersArray.length && this.livePeers.length < this.MAX_LIVE_PEERS; i++) {
                 const peerId = peersArray[i].node_info.id;
                 const listenAddr = peersArray[i].node_info.listen_addr;
                 const listenPort = listenAddr.slice(listenAddr.lastIndexOf(':') + 1);
                 const remoteIp = peersArray[i].remote_ip;
-                const livePeer = `${peerId}@${remoteIp}:${listenPort}`;
-                this.livePeers.push(livePeer);
+                if (this.utilsService.isValidIP4Address(remoteIp)) {
+                  const livePeer = `${peerId}@${remoteIp}:${listenPort}`;
+                  this.livePeers.push(livePeer);
+                }
               }
               this.updateLivePeersView();
             }
