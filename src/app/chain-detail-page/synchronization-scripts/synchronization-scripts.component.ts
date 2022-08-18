@@ -41,9 +41,10 @@ export class SynchronizationScriptsComponent implements OnInit {
                 const listenAddr = peersArray[i].node_info.listen_addr;
                 const listenPort = listenAddr.slice(listenAddr.lastIndexOf(':') + 1);
                 const remoteIp = peersArray[i].remote_ip;
-                if (this.utilsService.isValidIP4Address(remoteIp)) {
-                  const livePeer = `${peerId}@${remoteIp}:${listenPort}`;
-                  this.livePeers.push(livePeer);
+                if (this.utilsService.isIP6Address(remoteIp)) {
+                  this.livePeers.push(`${peerId}@[${remoteIp}]:${listenPort}`);
+                } else {
+                  this.livePeers.push(`${peerId}@${remoteIp}:${listenPort}`);
                 }
               }
               this.updateLivePeersView();
