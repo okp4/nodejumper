@@ -454,7 +454,7 @@ export const CHAINS: Chain[] = [
   {
     id: "stride-testnet",
     chainName: "Stride",
-    chainId: "STRIDE-TESTNET-2",
+    chainId: "STRIDE-TESTNET-4",
     logo: "stride.png",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
     rpcServer: "https://stride-testnet.nodejumper.io",
