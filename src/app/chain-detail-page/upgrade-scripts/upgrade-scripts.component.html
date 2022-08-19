@@ -13,7 +13,7 @@
       <p class="sub-title">Manual Upgrade</p>
       <pre><code class="language-bash">{{upgradeData.manualScriptContent}}</code></pre>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="!upgradeData.automaticUpgradeDisabled">
       <p class="sub-title">Automatic Upgrade</p>
       <p class="details">upgrade will be done automatically, when halt height is reached</p>
       <pre><code class="language-bash">bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/{{chain.chainName.toLowerCase()}}/upgrade/{{upgradeData.version}}/upgrade_automatic.sh)</code></pre>
