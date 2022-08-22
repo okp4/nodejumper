@@ -423,7 +423,10 @@ export const CHAINS: Chain[] = [
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "StaFiHub is a parallel chain developed by StaFi based on the Cosmos SDK, by implementing the rToken Protocol, StaFiHub releases liquidity of tokens staked in other chains of the Cosmos Ecosystem.",
-    githubRepoName: 'stafihub'
+    githubRepoName: 'stafihub',
+    isArchive: true,
+    archiveReason: 'Testnet ended',
+    endedAt: '2022-08-05',
   },
   {
     id: "teritori-testnet",
