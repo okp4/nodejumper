@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UtilsService {
 
-  constructor() { }
+  constructor() {}
 
   compactNumber(num: number, maximumFractionDigits = 0): string {
     return Intl.NumberFormat('en-US', {
