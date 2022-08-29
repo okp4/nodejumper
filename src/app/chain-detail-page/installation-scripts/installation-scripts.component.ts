@@ -33,7 +33,7 @@ export class InstallationScriptsComponent implements OnInit {
     if (this.chain) {
 
       const chainName = this.chain.chainName.toLowerCase();
-      const chainId = this.chain.chainId;
+      const chainId = this.chain.chainId.toLowerCase();
       const binaryName = this.chainService.getChainBinaryName(this.chain);
 
       this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/${chainId}-install.sh`
