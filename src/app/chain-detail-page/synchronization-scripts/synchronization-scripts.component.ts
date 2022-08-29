@@ -59,7 +59,8 @@ export class SynchronizationScriptsComponent implements OnInit {
           this.snapshotData = new SnapshotData(snapshotHeight, snapshotSize, snapshotBlockTime);
         });
     }
-    this.highlightService.highlightAll(this.highlightRPCLink.bind(this));
+    this.highlightService.highlightAll(this.highlightLinks.bind(this));
+
   }
 
   updateLivePeersView(): void {
@@ -74,10 +75,12 @@ export class SynchronizationScriptsComponent implements OnInit {
     }
   }
 
-  highlightRPCLink(): void {
+  highlightLinks(): void {
     const rpcLinkElement = document.getElementById('rpc-link');
-    if (rpcLinkElement) {
+    const apiLinkElement = document.getElementById('api-link');
+    if (rpcLinkElement && apiLinkElement) {
       rpcLinkElement.innerHTML = `<a href="${this.chain?.rpcServer}" target="_blank">${this.chain?.rpcServer}</a>`;
+      apiLinkElement.innerHTML = `<a href="${this.chain?.rpcServer + ':1317'}" target="_blank">${this.chain?.rpcServer + ':1317'}</a>`;
     }
   }
 }
