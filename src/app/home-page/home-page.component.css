@@ -31,10 +31,6 @@
   text-decoration: underline;
 }
 
-.about-block a {
-  color: var(--button-color);
-}
-
 .search-field {
   position: relative;
   margin-left: 10px;
