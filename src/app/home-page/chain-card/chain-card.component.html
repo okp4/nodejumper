@@ -16,13 +16,15 @@
     </div>
     <div
       class="link"
-      [routerLink]="['/' + chain.id + '/sync#state-sync']"
+      [routerLink]="['/' + chain.id + '/sync']"
+      fragment="state-sync"
     >
       sync
     </div>
     <div
       class="link"
-      [routerLink]="['/' + chain.id + '/sync#snapshot']"
+      [routerLink]="['/' + chain.id + '/sync']"
+      fragment="snapshot"
     >
       snap
     </div>
