@@ -68,21 +68,4 @@ import {filter} from "rxjs";
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(router: Router, viewportScroller: ViewportScroller) {
-    viewportScroller.setOffset([0, 80]);
-    router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
-      if (e.anchor) {
-        // anchor navigation
-        setTimeout(() => {
-          viewportScroller.scrollToAnchor(e.anchor);
-        })
-      } else if (e.position) {
-        // backward navigation
-        viewportScroller.scrollToPosition(e.position);
-      } else {
-        // forward navigation
-        viewportScroller.scrollToPosition([0, 0]);
-      }
-    });
-  }
 }

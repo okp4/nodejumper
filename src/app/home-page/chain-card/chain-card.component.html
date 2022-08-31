@@ -14,25 +14,17 @@
     >
       install
     </div>
-    <div
+    <a
       class="link"
-      [routerLink]="['/' + chain.id + '/sync']"
-      fragment="state-sync"
+      href="{{'/' + chain.id + '/sync#snapshot'}}"
     >
       sync
-    </div>
-    <div
-      class="link"
-      [routerLink]="['/' + chain.id + '/sync']"
-      fragment="snapshot"
-    >
-      snap
-    </div>
+    </a>
     <div
       class="link"
       [routerLink]="['/' + chain.id + '/cheat-sheet']"
     >
-      cheat
+      cheat-sheet
     </div>
   </div>
 </div>

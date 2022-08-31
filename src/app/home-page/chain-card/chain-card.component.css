@@ -1,11 +1,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   height: 270px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  padding: 15px;
+  padding-top: 15px;
+  padding-bottom: 0;
   align-items: center;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
   transition:
@@ -30,9 +31,9 @@
 .card img {
   border-radius: 100%;
   margin-top: 5px;
-  margin-bottom: 5px;
-  width: 100px;
-  height: 100px;
+  margin-bottom: 20px;
+  width: 82px;
+  height: 82px;
 }
 
 .card .title {
@@ -59,7 +60,7 @@
   flex-wrap: wrap;
   visibility: hidden;
   opacity: 0;
-  height: 0;
+  height: 40px;
   padding: 0;
   transition: all var(--animation-speed) ease;
 }
@@ -67,7 +68,6 @@
 .card:hover .fast-links {
   visibility: visible;
   opacity: 1;
-  height: 50px;
   padding: 10px;
 }
 
@@ -79,6 +79,7 @@
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   transition: all var(--animation-speed) ease;
+  text-decoration: none;
 }
 
 .card .fast-links .link:hover {
