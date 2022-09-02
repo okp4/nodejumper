@@ -2,14 +2,16 @@
   padding: 10px;
 }
 
+.about-col {
+  background-color: var(--code-background-color);
+  background-clip: content-box;
+  border-radius: 1.5rem;
+}
+
 .about-block {
   display: flex;
   width: 100%;
-  justify-content: space-between;
-  background-color: var(--code-background-color);
-  border-radius: var(--border-radius);
   padding: 20px;
-  margin-left: 10px;
   transition: all var(--animation-speed) ease;
 }
 
@@ -33,7 +35,6 @@
 
 .search-field {
   position: relative;
-  margin-left: 10px;
 }
 
 .search-field .search-icon {
@@ -98,6 +99,9 @@ input::placeholder {
 
 @media (max-width: 576px) {
   .chains-count {
-    justify-content: flex-start;
+    justify-content: center;
+  }
+  .who-we-are-button {
+    display: none;
   }
 }
