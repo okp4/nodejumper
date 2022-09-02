@@ -1,6 +1,6 @@
 <div>
   <div class="row">
-    <div class="col">
+    <div class="col about-col">
       <div
         class="about-block"
         [ngClass]="showAbout ? 'full-about' : 'short-about'"
@@ -8,7 +8,7 @@
         <p class="short-text" *ngIf="!showAbout" (click)="showAbout=!showAbout">
           Validation has never been so easy yet...
         </p>
-        <p *ngIf="showAbout">
+        <p *ngIf="showAbout" (click)="showAbout=!showAbout">
           Welcome to Nodejumper's Open Source multi tool for cosmos based networks!
           <br><br>
           🚀 🚀 🚀 Developing by Nodejumper with love

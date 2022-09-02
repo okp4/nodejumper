@@ -6,5 +6,26 @@
          tooltipClass="ratio-tooltip">★
     </div>
   </div>
-  <span class="details">{{chain.chainId}}</span>
+  <div class="details">{{chain.chainId}}</div>
+  <div class="fast-links">
+    <div
+      class="link"
+      [routerLink]="['/' + chain.id + '/installation']"
+    >
+      install
+    </div>
+    <div
+      class="link"
+      [routerLink]="['/' + chain.id + '/sync']"
+      fragment="snapshot"
+    >
+      sync
+    </div>
+    <div
+      class="link"
+      [routerLink]="['/' + chain.id + '/cheat-sheet']"
+    >
+      cheat-sheet
+    </div>
+  </div>
 </div>
