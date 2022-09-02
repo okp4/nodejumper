@@ -1,9 +1,11 @@
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 270px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   padding: 15px;
-  justify-content: center;
   align-items: center;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
   transition:
@@ -27,25 +29,69 @@
 
 .card img {
   border-radius: 100%;
-  margin-bottom: 20px;
-  width: 82px;
-  height: 82px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  width: 100px;
+  height: 100px;
 }
 
 .card .title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .card .details {
   font-size: 18px;
   color: var(--details-color);
   text-align: center;
+  margin-bottom: 5px;
 }
 
 .card .project-support {
   display: inline;
   color: #ffc107;
   font-size: 25px;
+}
+
+.card .fast-links {
+  display: flex;
+  flex-wrap: wrap;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  padding: 0;
+  transition: all var(--animation-speed) ease;
+}
+
+.card:hover .fast-links {
+  visibility: visible;
+  opacity: 1;
+  height: 50px;
+  padding: 10px;
+}
+
+.card .fast-links .link {
+  background-color: white;
+  padding: 5px;
+  margin-right: 5px;
+  font-size: 12px;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  transition: all var(--animation-speed) ease;
+  text-decoration: none;
+}
+
+.card .fast-links .link:hover {
+  background-color: #f6f6f6;
+  border-color: var(--border-active-color);
+}
+
+.card .fast-links .link:active {
+  background-color: white;
+  box-shadow: none;
+}
+
+.card .fast-links .link:last-child {
+  margin-right: 0;
 }
