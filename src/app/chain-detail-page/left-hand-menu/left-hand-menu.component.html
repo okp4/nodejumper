@@ -41,18 +41,26 @@
         <div
           class="sub-item"
           [routerLink]="['./installation']"
-          fragment="manual"
-        >
-          Manual
-        </div>
-        <div
-          class="sub-item"
-          [routerLink]="['./installation']"
           fragment="automatic"
         >
           Automatic
         </div>
+        <div
+          class="sub-item"
+          [routerLink]="['./installation']"
+          fragment="manual"
+        >
+          Manual
+        </div>
       </div>
+    </div>
+
+    <div
+      class="item"
+      routerLinkActive="active"
+      [routerLink]="['./upgrade']"
+    >
+      Upgrade
     </div>
 
     <div>
@@ -71,9 +79,16 @@
         <div
           class="sub-item"
           [routerLink]="['./sync']"
-          fragment="state-sync"
+          fragment="peers"
         >
-          State Sync
+          Live peers
+        </div>
+        <div
+          class="sub-item"
+          [routerLink]="['./sync']"
+          fragment="addrbook"
+        >
+          Address book
         </div>
         <div
           class="sub-item"
@@ -81,6 +96,43 @@
           fragment="snapshot"
         >
           Snapshot
+        </div>
+        <div
+          class="sub-item"
+          [routerLink]="['./sync']"
+          fragment="state-sync"
+        >
+          State Sync
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div
+        class="item"
+        routerLinkActive="active"
+        [routerLink]="['./api']"
+      >
+        Public API
+      </div>
+      <div
+        class="sub-item-container"
+        routerLinkActive="active"
+        [routerLink]="['./api']"
+      >
+        <div
+          class="sub-item"
+          [routerLink]="['./api']"
+          fragment="rpc"
+        >
+          RPC
+        </div>
+        <div
+          class="sub-item"
+          [routerLink]="['./api']"
+          fragment="lcd"
+        >
+          LCD (REST)
         </div>
       </div>
     </div>

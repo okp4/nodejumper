@@ -77,25 +77,20 @@
 }
 
 .menu .sub-item-container {
-  height: 0;
-  /*visibility: hidden;*/
-  /*opacity: 0;*/
+  max-height: 0;
   overflow: hidden;
-  transition:
-    all var(--animation-speed) ease-out,
-    width ease .6s;
+  transition: all var(--animation-speed) ease-out;
+  background-color: var(--code-background-color)
 }
 
 .menu .sub-item-container.active {
-  /*visibility: unset;*/
-  /*opacity: 1;*/
-  height: 60px;
+  max-height: 150px; /* just big numer */
 }
 
 .menu .sub-item {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 35px;
   cursor: pointer;
 }
 

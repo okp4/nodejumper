@@ -1,0 +1,12 @@
+<ng-container *ngIf="this.chainService.activeChain as chain">
+  <div class="row" id="rpc">
+    <p class="title">RPC Server</p>
+    <p class="details">Public RPC server</p>
+    <div class="code-block" id="rpc-link">{{chain.rpcServer}}</div>
+  </div>
+  <div class="row" id="api">
+    <p class="title">Rest API Server</p>
+    <p class="details">Public LCD server</p>
+    <div class="code-block" id="api-link" >{{chain.rpcServer + ':1317'}}</div>
+  </div>
+</ng-container>

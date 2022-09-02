@@ -28,6 +28,7 @@ import { UpgradeScriptsComponent } from './chain-detail-page/upgrade-scripts/upg
 import {Router, Scroll} from "@angular/router";
 import {ViewportScroller} from "@angular/common";
 import {filter} from "rxjs";
+import {ApiComponent} from "./chain-detail-page/api/api.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {filter} from "rxjs";
     InstallationScriptsComponent,
     SummaryComponent,
     CheatSheetComponent,
-    UpgradeScriptsComponent
+    UpgradeScriptsComponent,
+    ApiComponent
   ],
   imports: [
     BrowserModule,

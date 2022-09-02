@@ -27,9 +27,23 @@ p.sub-title {
   font-size: 20px;
 }
 
+p.details {
+  line-height: 1.9;
+  opacity: var(--button-opacity);
+}
+
 /* Links */
+
 a {
   color: var(--button-color)!important;
+}
+
+/* Code block */
+.code-block {
+  padding: 16px;
+  margin: 8px;
+  border-radius: var(--border-radius);
+  background-color: var(--code-background-color);
 }
 
 /* Tabs */
