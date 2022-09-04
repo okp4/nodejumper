@@ -209,7 +209,7 @@
 --min-self-delegation=1 \
 --from={{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} \
 --gas-prices={{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} \
---gas-adjustment=1.2 \
+--gas-adjustment=1.5 \
 --gas=auto \
 -y
         </div>
@@ -227,7 +227,7 @@
 --commission-rate=0.1 \
 --from={{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} \
 --gas-prices={{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} \
---gas-adjustment=1.2 \
+--gas-adjustment=1.5 \
 --gas=auto \
 -y
         </div>
@@ -238,7 +238,7 @@
       <p>Unjail Validator</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx slashing unjail --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -321,7 +321,7 @@
       <p>Withdraw Rewards From All Validators </p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx distribution withdraw-all-rewards --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -330,7 +330,7 @@
       <p>Withdraw Commission And Rewards From Your Validator</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx distribution withdraw-rewards $({{chain.binaryName}} keys show {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --bech val -a) --commission --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -340,7 +340,7 @@
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx staking delegate $({{chain.binaryName}} keys show {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --bech val -a)
           {{chain.amount || '&lt;YOUR_AMOUNT&gt;'}}{{chain.denomName}} --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}}
-          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -350,7 +350,7 @@
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx staking delegate {{chain.toValoperAddress || '&lt;TO_VALOPER_ADDRESS&gt;'}}
           {{chain.amount || '&lt;YOUR_AMOUNT&gt;'}}{{chain.denomName}} --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}}
-          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -360,7 +360,7 @@
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx staking redelegate $({{chain.binaryName}} keys show {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --bech val -a) {{chain.toValoperAddress || '&lt;TO_VALOPER_ADDRESS&gt;'}}
           {{chain.amount || '&lt;YOUR_AMOUNT&gt;'}}{{chain.denomName}} --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}}
-          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -369,7 +369,7 @@
       <p>Unbond</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx staking unbond $({{chain.binaryName}} keys show {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --bech val -a) {{chain.amount || '&lt;YOUR_AMOUNT&gt;'}}{{chain.denomName}}
-          --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -379,7 +379,7 @@
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx bank send {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} {{chain.toWalletAddress || '&lt;TO_WALLET_ADDRESS&gt;'}}
           {{chain.amount || '&lt;YOUR_AMOUNT&gt;'}}{{chain.denomName}} --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}} --chain-id {{chain.chainId}}
-          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -416,7 +416,7 @@
       <p>Vote YES</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx gov vote {{chain.proposalId || '&lt;PROPOSAL_ID&gt;'}} yes --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -425,7 +425,7 @@
       <p>Vote NO</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx gov vote {{chain.proposalId || '&lt;PROPOSAL_ID&gt;'}} no --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
@@ -434,7 +434,7 @@
       <p>Vote ABSTAIN</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} tx gov vote {{chain.proposalId || '&lt;PROPOSAL_ID&gt;'}} abstain --from {{chain.keyName || '&lt;YOUR_KEY_NAME&gt;'}}
-          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.2 --gas auto -y
+          --chain-id {{chain.chainId}} --gas-prices {{(chain.gas || '&lt;GAS&gt;') + chain.denomName}} --gas-adjustment 1.5 --gas auto -y
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
