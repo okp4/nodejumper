@@ -24,7 +24,7 @@ export class CheatSheetComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.chainService.activeChain) {
-      let activeChain = this.chainService.activeChain
+      let activeChain = this.chainService.activeChain;
       let savedChainInfo = JSON.parse(localStorage.getItem(activeChain.chainId) || '{}');
 
       this.chain = new ChainCheatSheet(

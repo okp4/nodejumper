@@ -465,7 +465,7 @@
       </div>
     </div>
   </div>
-  <div class="row" [ngClass]="hideForSearchArray([e1d6879f96e7, d7c005a09058, c6c126c83420, c9fa81f310b6, b1623a67b5e0, afd45f16, a8dd6066, adf52944]) ? 'd-none' : ''" id="utility">
+  <div class="row" [ngClass]="hideForSearchArray([e1d6879f96e7, d7c005a09058, c6c126c83420, c9fa81f310b6, b1623a67b5e0, afd45f16, a8dd6066, c765b322, adf52944]) ? 'd-none' : ''" id="utility">
     <p class="title">Utility</p>
     <div class="command-container row multi-command-row" [ngClass]="hideForSearch(e1d6879f96e7) ? 'd-none' : ''" #e1d6879f96e7>
       <p>Change Default Ports</p>
@@ -674,6 +674,13 @@
           $HOME/{{chain.homeDirectoryName}}/config/config.toml | sed -n '/Address to listen for incoming connection/&#123;n;p;&#125;'
           | sed 's/.*://; s/".*//')
         </div>
+        <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
+      </div>
+    </div>
+    <div class="command-container" [ngClass]="hideForSearch(c765b322) ? 'd-none' : ''" #c765b322>
+      <p>Reset Node</p>
+      <div class="copy-button-container">
+        <div class="command">{{chainService.activeChain ? chainService.getUnsafeResetAllString(chainService.activeChain) : ''}}</div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
     </div>
