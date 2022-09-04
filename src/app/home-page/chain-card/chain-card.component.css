@@ -5,7 +5,7 @@
   height: 270px;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  padding: 15px;
+  padding: 15px 0;
   align-items: center;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
   transition:
@@ -15,7 +15,7 @@
 }
 
 .card:hover,
-.card.archive:hover{
+.card.archive:hover {
   cursor: pointer;
   border-color: var(--border-active-color);
   filter: unset;
@@ -68,7 +68,7 @@
   visibility: visible;
   opacity: 1;
   height: 50px;
-  padding: 10px;
+  padding: 10px 0;
 }
 
 .card .fast-links .link {
