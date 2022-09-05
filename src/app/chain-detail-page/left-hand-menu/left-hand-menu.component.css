@@ -194,7 +194,6 @@
     padding: 0;
     align-items: center;
     justify-content: flex-start;
-    border-bottom: 1px solid var(--border-color);
     box-sizing: content-box;
   }
 
