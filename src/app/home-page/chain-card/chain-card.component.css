@@ -80,6 +80,7 @@
   border: 1px solid var(--border-color);
   transition: all var(--animation-speed) ease;
   text-decoration: none;
+  user-select: none;
 }
 
 .card .fast-links .link:hover {
