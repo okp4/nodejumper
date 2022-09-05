@@ -19,7 +19,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 30px 0;
+  padding-top: 30px;
 }
 
 .chain-info .logo-image {
@@ -32,7 +32,6 @@
 .chain-info .title {
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 10px;
 }
 
 .chain-info .details {
@@ -84,7 +83,7 @@
 }
 
 .menu .sub-item-container.active {
-  max-height: 150px; /* just big numer */
+  max-height: 150px; /* just big number */
 }
 
 .menu .sub-item {
@@ -92,6 +91,11 @@
   padding-bottom: 5px;
   padding-left: 35px;
   cursor: pointer;
+  user-select: none;
+}
+
+.menu .sub-item:hover {
+  text-decoration: underline;
 }
 
 .social {

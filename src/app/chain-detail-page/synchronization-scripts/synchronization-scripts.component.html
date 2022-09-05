@@ -1,21 +1,4 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
-  <div class="row" id="peers">
-    <div>
-      <p class="title">Live Peers</p>
-      <p class="details">
-        number of active peers: <strong>{{this.livePeers.length || 1}}</strong>
-      </p>
-    </div>
-    <pre><code class="language-bash" id="peers-row">{{chain.rpcPeer}}</code></pre>
-    <pre><code class="language-bash" id="update-peers-row">peers="{{chain.rpcPeer}}"
-sed -i 's|^persistent_peers *=.*|persistent_peers = "'$peers'"|' $HOME/{{chain.homeDirectoryName}}/config/config.toml</code></pre>
-  </div>
-  <div class="row" id="addrbook">
-    <div>
-      <p class="title">Address Book</p>
-    </div>
-    <pre><code class="language-bash">curl -s {{chain.snapshotServer}}/{{chain.id}}/addrbook.json > $HOME/{{chain.homeDirectoryName}}/config/addrbook.json</code></pre>
-  </div>
   <div class="row" *ngIf="!chain.snapshotDisabled" id="snapshot">
     <div>
       <p class="title">Snapshot</p>
@@ -61,5 +44,22 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/{{chain.ho
 
 sudo systemctl restart {{chain.serviceName}}
 sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat{{chain.stateSyncExtraStep}}</code></pre>
+  </div>
+  <div class="row" id="peers">
+    <div>
+      <p class="title">Live Peers</p>
+      <p class="details">
+        number of active peers: <strong>{{this.livePeers.length || 1}}</strong>
+      </p>
+    </div>
+    <pre><code class="language-bash" id="peers-row">{{chain.rpcPeer}}</code></pre>
+    <pre><code class="language-bash" id="update-peers-row">peers="{{chain.rpcPeer}}"
+sed -i 's|^persistent_peers *=.*|persistent_peers = "'$peers'"|' $HOME/{{chain.homeDirectoryName}}/config/config.toml</code></pre>
+  </div>
+  <div class="row" id="addrbook">
+    <div>
+      <p class="title">Address Book</p>
+    </div>
+    <pre><code class="language-bash">curl -s {{chain.snapshotServer}}/{{chain.id}}/addrbook.json > $HOME/{{chain.homeDirectoryName}}/config/addrbook.json</code></pre>
   </div>
 </ng-container>

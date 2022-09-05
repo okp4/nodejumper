@@ -5,7 +5,6 @@ import { ChainDetailPageComponent } from "./chain-detail-page/chain-detail-page.
 import {
   SynchronizationScriptsComponent
 } from "./chain-detail-page/synchronization-scripts/synchronization-scripts.component";
-import { AboutComponent } from "./chain-detail-page/about/about.component";
 import { InstallationScriptsComponent } from "./chain-detail-page/installation-scripts/installation-scripts.component";
 import { SummaryComponent } from "./chain-detail-page/summary/summary.component";
 import { CheatSheetComponent } from "./chain-detail-page/cheat-sheet/cheat-sheet.component";
@@ -22,7 +21,6 @@ const routes: Routes = [
       {path: 'sync', component: SynchronizationScriptsComponent},
       {path: 'upgrade', component: UpgradeScriptsComponent},
       {path: 'cheat-sheet', component: CheatSheetComponent},
-      {path: 'about', component: AboutComponent},
       {path: 'api', component: ApiComponent}
     ]
   },
@@ -30,7 +28,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {})],
+  imports: [RouterModule.forRoot(routes, {
+    scrollPositionRestoration: "enabled",
+    scrollOffset: [0, 80],
+    anchorScrolling: "enabled",
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule {
