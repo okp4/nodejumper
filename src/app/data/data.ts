@@ -475,6 +475,7 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
+    isArchive: true,
     testnetTasksLink: "https://github.com/Stride-Labs/testnet/tree/main/incentivized-testnet",
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Stride is a blockchain (\"zone\") that provides liquidity for staked assets. Using Stride, you can earn both staking and DeFi yields across the Cosmos IBC ecosystem.",
