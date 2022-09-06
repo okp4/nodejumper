@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './header/header.component';
@@ -24,8 +23,10 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {LeftHandMenuService} from "./service/left-hand-menu.service";
 import {CheatSheetComponent} from './chain-detail-page/cheat-sheet/cheat-sheet.component';
 import {UpgradeScriptsComponent} from './chain-detail-page/upgrade-scripts/upgrade-scripts.component';
-import {Router} from "@angular/router";
 import {ApiComponent} from "./chain-detail-page/api/api.component";
+import {filter} from "rxjs";
+import {ViewportScroller} from "@angular/common";
+import {Router, Scroll} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,21 @@ import {ApiComponent} from "./chain-detail-page/api/api.component";
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(router: Router) {
+  constructor(router: Router, viewportScroller: ViewportScroller) {
+    viewportScroller.setOffset([0, 80]);
+    router.events.pipe(filter(e => e instanceof Scroll)).subscribe((e: any) => {
+      if (e.anchor) {
+        // anchor navigation
+        setTimeout(() => {
+          viewportScroller.scrollToAnchor(e.anchor);
+        })
+      } else if (e.position) {
+        // backward navigation
+        viewportScroller.scrollToPosition(e.position);
+      } else {
+        // forward navigation
+        viewportScroller.scrollToPosition([0, 80]);
+      }
+    });
   }
 }
