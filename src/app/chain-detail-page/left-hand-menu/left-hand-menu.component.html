@@ -13,16 +13,14 @@
   </div>
 
   <div class="menu">
-
-    <div>
-      <div
-        class="item"
-        routerLinkActive="active"
-        [routerLink]="['./']"
-        [routerLinkActiveOptions]="{exact: true}"
-      >
-        Summary
-      </div>
+    <div
+      class="item"
+      routerLinkActive="active"
+      *ngIf="!chain.summaryDisabled"
+      [routerLink]="['./']"
+      [routerLinkActiveOptions]="{exact: true}"
+    >
+      Summary
     </div>
 
     <div>
@@ -144,7 +142,6 @@
     >
       Cheat Sheet
     </div>
-
   </div>
   <div class="social">
     <a *ngIf="chain.twitter" href="{{chain.twitter}}" target="_blank">
