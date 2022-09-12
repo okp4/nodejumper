@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LeftHandMenuService } from "../service/left-hand-menu.service";
 import { StateService } from "../service/state.service";
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { StateService } from "../service/state.service";
 export class HeaderComponent implements OnInit {
 
   constructor(private leftHandMenuService: LeftHandMenuService,
-              public stateService: StateService) {
+              private stateService: StateService,
+              private viewportScroller: ViewportScroller) {
   }
 
   ngOnInit(): void {
@@ -18,5 +20,10 @@ export class HeaderComponent implements OnInit {
 
   openLeftHandMenuForMobile(): void {
     this.leftHandMenuService.openLeftHandMenuForMobile();
+  }
+
+  handleLogoClick() {
+    this.stateService.chainType.next('all');
+    this.viewportScroller.scrollToPosition([0, 0]);
   }
 }
