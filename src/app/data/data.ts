@@ -295,7 +295,7 @@ export const CHAINS: Chain[] = [
   {
     id: "dws-testnet",
     chainName: "DWS",
-    chainId: "deweb-testnet-1",
+    chainId: "deweb-testnet-2",
     logo: "dws.png",
     snapshotServer: "https://snapshots1-testnet.nodejumper.io",
     rpcServer: "https://dws-testnet.nodejumper.io",
