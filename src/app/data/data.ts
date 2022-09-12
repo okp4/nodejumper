@@ -280,7 +280,7 @@ export const CHAINS: Chain[] = [
     discord: "https://discord.gg/6vg2WYEzr2",
     telegram: "https://t.me/seinetwork",
     blockExplorer: "https://testnet-explorer.brocha.in/sei%20atlantic-sub-1",
-    // validatorUrl: "https://sei.explorers.guru/validator/seivaloper1kl7885wtqwu2pau3c6z7x6ptes730fnt4auawd",
+    validatorUrl: "https://testnet-explorer.brocha.in/sei%20atlantic-sub-1/staking/seivaloper1kl7885wtqwu2pau3c6z7x6ptes730fnt4auawd",
     denomName: "usei",
     denomPow: 6,
     summaryDisabled: true,

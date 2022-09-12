@@ -1,33 +1,32 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
-import { ChainService } from "./service/chain.service";
-import { HomePageComponent } from './home-page/home-page.component';
-import { ChainCardComponent } from './home-page/chain-card/chain-card.component';
-import { ChainDetailPageComponent } from './chain-detail-page/chain-detail-page.component';
-import { FormsModule } from "@angular/forms";
-import { HighlightService } from "./service/highlight.service";
-import { HttpClientModule } from "@angular/common/http";
-import { LeftHandMenuComponent } from './chain-detail-page/left-hand-menu/left-hand-menu.component';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './header/header.component';
+import {FooterComponent} from './footer/footer.component';
+import {ChainService} from "./service/chain.service";
+import {HomePageComponent} from './home-page/home-page.component';
+import {ChainCardComponent} from './home-page/chain-card/chain-card.component';
+import {ChainDetailPageComponent} from './chain-detail-page/chain-detail-page.component';
+import {FormsModule} from "@angular/forms";
+import {HighlightService} from "./service/highlight.service";
+import {HttpClientModule} from "@angular/common/http";
+import {LeftHandMenuComponent} from './chain-detail-page/left-hand-menu/left-hand-menu.component';
 import {
   SynchronizationScriptsComponent
 } from './chain-detail-page/synchronization-scripts/synchronization-scripts.component';
-import { AboutComponent } from './chain-detail-page/about/about.component';
-import { InstallationScriptsComponent } from './chain-detail-page/installation-scripts/installation-scripts.component';
-import { NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule } from "ngx-google-analytics";
-import { SummaryComponent } from './chain-detail-page/summary/summary.component';
-import { NgCircleProgressModule } from "ng-circle-progress";
-import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-import { LeftHandMenuService } from "./service/left-hand-menu.service";
-import { CheatSheetComponent } from './chain-detail-page/cheat-sheet/cheat-sheet.component';
-import { UpgradeScriptsComponent } from './chain-detail-page/upgrade-scripts/upgrade-scripts.component';
-import {Router, Scroll} from "@angular/router";
-import {ViewportScroller} from "@angular/common";
+import {InstallationScriptsComponent} from './chain-detail-page/installation-scripts/installation-scripts.component';
+import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
+import {SummaryComponent} from './chain-detail-page/summary/summary.component';
+import {NgCircleProgressModule} from "ng-circle-progress";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {LeftHandMenuService} from "./service/left-hand-menu.service";
+import {CheatSheetComponent} from './chain-detail-page/cheat-sheet/cheat-sheet.component';
+import {UpgradeScriptsComponent} from './chain-detail-page/upgrade-scripts/upgrade-scripts.component';
+import {ApiComponent} from "./chain-detail-page/api/api.component";
 import {filter} from "rxjs";
+import {ViewportScroller} from "@angular/common";
+import {Router, Scroll} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -39,11 +38,11 @@ import {filter} from "rxjs";
     ChainDetailPageComponent,
     LeftHandMenuComponent,
     SynchronizationScriptsComponent,
-    AboutComponent,
     InstallationScriptsComponent,
     SummaryComponent,
     CheatSheetComponent,
-    UpgradeScriptsComponent
+    UpgradeScriptsComponent,
+    ApiComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +74,7 @@ export class AppModule {
         // anchor navigation
         setTimeout(() => {
           viewportScroller.scrollToAnchor(e.anchor);
-        }, 100)
+        })
       } else if (e.position) {
         // backward navigation
         viewportScroller.scrollToPosition(e.position);

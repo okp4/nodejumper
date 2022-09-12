@@ -1,0 +1,19 @@
+<ng-container *ngIf="this.chainService.activeChain as chain">
+  <div class="row" id="rpc">
+    <p class="title">RPC Endpoint</p>
+    <div class="code-block" id="rpc-link">
+      <a href="{{chain.rpcServer}}">
+        {{chain.rpcServer}}
+      </a>
+    </div>
+  </div>
+  <div class="row" id="api">
+    <p class="title">LCD (Rest) API Endpoint</p>
+    <p class="details">With Swagger enabled</p>
+    <div class="code-block" id="api-link" >
+      <a href="{{chain.rpcServer + ':1317'}}">
+        {{chain.rpcServer + ':1317'}}
+      </a>
+    </div>
+  </div>
+</ng-container>
