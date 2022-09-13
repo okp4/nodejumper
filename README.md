@@ -76,10 +76,10 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>https://nodejumper.io/starname</td>
   </tr>
   <tr>
-    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470499-4df4e7ac-271f-4126-93b8-6743d0c15d79.png" alt="Another 1"></td>
-    <td>Another 1</td>
-    <td>Testnet</td>
-    <td>https://nodejumper.io/another1-testnet/installation</td>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/189897514-40c0a8d9-ec64-41cf-a78a-0d0a3def5c74.png" alt="Rebus"></td>
+    <td>Rebus</td>
+    <td>Mainnet</td>
+    <td>https://nodejumper.io/rebus</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470528-91c89337-6a0e-439f-bf49-23f7a253cdaa.png" alt="DWS"></td>
@@ -117,12 +117,6 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>Testnet</td>
     <td>https://nodejumper.io/teritori-testnet/installation</td>
   </tr>
-  <tr>
-    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470588-c21ad706-9b62-4b83-a903-89a88fed750d.png" alt="Uptick"></td>
-    <td>Uptick</td>
-    <td>Testnet</td>
-    <td>https://nodejumper.io/uptick-testnet/installation</td>
-  </tr>
 </table>
 
 ## Contributors
@@ -132,12 +126,16 @@ Big shout out to the guys , you rock! 🤘🚀
 <table>
   <tr>
     <td>
-      <img src="https://avatars.githubusercontent.com/u/102145525?s=400&u=4273c7f703d56b7e2945a81307beadf90e699ce0&v=4" width="50" alt="RefleXXX1">
-      <a href="https://github.com/RefleXXX1">RefleXXX1</a>
+      <img src="https://avatars.githubusercontent.com/u/27004732?v=4" width="50" alt="Hdmiimdh">
+      <a href="https://github.com/hdmiimdh">Hdmiimdh</a>
     </td>
     <td>
-      <img src="https://avatars.githubusercontent.com/u/100301930?v=4" width="50" alt="Libra442">
-      <a href="https://github.com/RefleXXX1">Libra442</a>
+      <img src="https://avatars.githubusercontent.com/u/6923234?v=4" width="50" alt="Vbloher">
+      <a href="https://github.com/vbloher">Vbloher</a>
+    </td>
+    <td>
+      <img src="https://avatars.githubusercontent.com/u/17406355?v=4" width="50" alt="Asadovka">
+      <a href="https://github.com/asadovka">Asadovka</a>
     </td>
   </tr>
 </table>
