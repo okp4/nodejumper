@@ -5,6 +5,8 @@ import { HttpClient } from "@angular/common/http";
 import { ChainService } from "../../service/chain.service";
 import { UpgradeData } from "../../model/upgradeData";
 
+const JUMPER_SCRIPTS_REPO_PREFIX = "https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master"
+
 @Component({
   selector: 'app-upgrade-scripts',
   templateUrl: './upgrade-scripts.component.html',
@@ -27,7 +29,8 @@ export class UpgradeScriptsComponent implements OnInit {
     if (this.chain) {
       const salt = (new Date()).getTime();
       const chainName = this.chain.chainName.toLowerCase();
-      const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade/upgrades.json?${salt}`;
+      const chainId = this.chain.chainId.toLowerCase();
+      const url = `${JUMPER_SCRIPTS_REPO_PREFIX}/${chainName}/${chainId}/upgrade/upgrades.json?${salt}`;
       this.http.get(url).subscribe({
         next: (data: any) => {
           (<Array<UpgradeData>>data).sort((a, b) => {
@@ -49,7 +52,8 @@ export class UpgradeScriptsComponent implements OnInit {
   fetchManualUpgradeScriptContent(upgradeScript: UpgradeData) {
     const salt = (new Date()).getTime();
     const chainName = this.chain?.chainName.toLowerCase();
-    const url = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/upgrade/${upgradeScript.version}/upgrade_manual.sh?${salt}`;
+    const chainId = this.chain?.chainId.toLowerCase();
+    const url = `${JUMPER_SCRIPTS_REPO_PREFIX}/${chainName}/${chainId}/upgrade/${upgradeScript.version}.sh?${salt}`;
     this.http.get(url, {responseType: 'text'}).subscribe((data: any) => {
       upgradeScript.manualScriptContent = data.trim();
       upgradeScript.manualScriptContent += `\nsudo journalctl -u ${this.chain?.serviceName} -f --no-hostname -o cat`;

@@ -5,6 +5,8 @@ import { HttpClient } from "@angular/common/http";
 import { ChainService } from "../../service/chain.service";
 import { DOCUMENT } from "@angular/common";
 
+const JUMPER_SCRIPTS_REPO_PREFIX = "https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master"
+
 @Component({
   selector: 'app-installation-data',
   templateUrl: './installation-scripts.component.html',
@@ -36,7 +38,7 @@ export class InstallationScriptsComponent implements OnInit {
       const chainId = this.chain.chainId.toLowerCase();
       const binaryName = this.chainService.getChainBinaryName(this.chain);
 
-      this.automaticScriptUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/${chainId}-install.sh`
+      this.automaticScriptUrl = `${JUMPER_SCRIPTS_REPO_PREFIX}/${chainName}/${chainId}/install.sh`
       this.cdr.detectChanges();
 
       this.http.get(this.automaticScriptUrl, {responseType: 'text'}).subscribe(data => {
@@ -61,7 +63,7 @@ export class InstallationScriptsComponent implements OnInit {
       });
 
       if (this.chain.isTestnet) {
-        const testnetInstructionsUrl = `https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/${chainName}/testnet-instructions.sh`
+        const testnetInstructionsUrl = `${JUMPER_SCRIPTS_REPO_PREFIX}/${chainName}/${chainId}/testnet-instructions.sh`
         this.http.get(testnetInstructionsUrl, {responseType: 'text'}).subscribe(data => {
           this.testnetInstructionsContent = data?.trim() || 'TBD';
           this.highlightService.highlightAllUnderElementId('create-validator');
