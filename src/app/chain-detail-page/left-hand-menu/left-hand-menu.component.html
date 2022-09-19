@@ -3,8 +3,8 @@
        ngbTooltip="{{!this.chain.isArchive ? this.chainStatusMessage : this.chainService.getArchiveReason(chain)}}"
        tooltipClass="ratio-tooltip no-opacity"></div>
   <div class="mobile-menu-header">
-    <img class="logo-image" src="assets/img/logo.svg" alt="NodeJumper">
-    <p class="title">NodeJumper</p>
+    <img class="logo-image" src="assets/img/logo.svg" alt="Nodejumper">
+    <p class="title">Nodejumper</p>
   </div>
   <div class="chain-info">
     <img class="logo-image" alt="{{chain.chainName}}" src="assets/img/chain/{{chain.logo}}">
@@ -39,14 +39,14 @@
         <div
           class="sub-item"
           [routerLink]="['./installation']"
-          fragment="automatic"
+          (click)="scrollToFragment('automatic')"
         >
           Automatic
         </div>
         <div
           class="sub-item"
           [routerLink]="['./installation']"
-          fragment="manual"
+          (click)="scrollToFragment('manual')"
         >
           Manual
         </div>
@@ -77,28 +77,28 @@
         <div
           class="sub-item"
           [routerLink]="['./sync']"
-          fragment="snapshot"
+          (click)="scrollToFragment('snapshot')"
         >
           Snapshot
         </div>
         <div
           class="sub-item"
           [routerLink]="['./sync']"
-          fragment="state-sync"
+          (click)="scrollToFragment('state-sync')"
         >
           State Sync
         </div>
         <div
           class="sub-item"
           [routerLink]="['./sync']"
-          fragment="peers"
+          (click)="scrollToFragment('peers')"
         >
           Live peers
         </div>
         <div
           class="sub-item"
           [routerLink]="['./sync']"
-          fragment="addrbook"
+          (click)="scrollToFragment('addrbook')"
         >
           Address book
         </div>
@@ -121,14 +121,14 @@
         <div
           class="sub-item"
           [routerLink]="['./api']"
-          fragment="rpc"
+          (click)="scrollToFragment('rpc')"
         >
           RPC
         </div>
         <div
           class="sub-item"
           [routerLink]="['./api']"
-          fragment="lcd"
+          (click)="scrollToFragment('lcd')"
         >
           LCD (REST)
         </div>

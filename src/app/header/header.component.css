@@ -60,7 +60,7 @@ header {
 @media (max-width: 576px) {
   .title,
   .social-icon {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .btn-bars-menu {

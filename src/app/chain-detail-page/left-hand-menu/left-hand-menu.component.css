@@ -206,6 +206,10 @@
     margin-bottom: 0;
   }
 
+  .mobile-menu-header p.title {
+    font-size: 24px;
+  }
+
   .chain-info .title {
     letter-spacing: 4px;
     margin-bottom: 0;
@@ -238,9 +242,18 @@
   }
 
   .chain-info,
-  .social,
-  .support-us {
+  .social {
     display: none;
+  }
+
+  .support-us {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .support-us-btn {
+    border: 0;
+    border-radius: var(--border-radius);
   }
 }
 

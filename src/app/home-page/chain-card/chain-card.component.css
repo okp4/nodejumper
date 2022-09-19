@@ -96,3 +96,10 @@
 .card .fast-links .link:last-child {
   margin-right: 0;
 }
+
+
+@media (max-width: 576px) {
+  .card .fast-links {
+    display: none;
+  }
+}

@@ -239,6 +239,30 @@ export const CHAINS: Chain[] = [
     githubRepoName: 'juno'
   },
   {
+    id: "rebus",
+    chainName: "Rebus",
+    chainId: "reb_1111-1",
+    logo: "rebus.png",
+    snapshotServer: "https://snapshots1.nodejumper.io",
+    rpcServer: "https://rebus.nodejumper.io",
+    rpcPeer: "b574e11e103058a121cc03d1c4d9867ba3daed34@rebus.nodejumper.io:31656",
+    serviceName: "rebusd",
+    homeDirectoryName: ".rebusd",
+    twitter: "https://twitter.com/RebusChain",
+    github: "https://github.com/rebuschain",
+    globe: "https://www.rebuschain.com",
+    discord: "https://discord.gg/cBGpcyHmBH",
+    medium: "https://medium.com/@RebusChain",
+    blockExplorer: "https://rebus.explorers.guru",
+    validatorUrl: "https://rebus.explorers.guru/validator/rebusvaloper1kwv8r3n93dwtk59l5lkyp9qn3u5jzxzy0mrdp8",
+    denomName: "arebus",
+    denomPow: 6,
+    summaryDisabled: true,
+    newWayUnsafeResetAll: true,
+    projectOverview: "Rebus is a platform built to host blockchain applications (EVM) and native Vaults usable across multiple sovereign networks.",
+    githubRepoName: 'rebus.core'
+  },
+  {
     id: "another1-testnet",
     chainName: "Another-1",
     chainId: "anone-testnet-1",
@@ -295,7 +319,7 @@ export const CHAINS: Chain[] = [
   {
     id: "dws-testnet",
     chainName: "DWS",
-    chainId: "deweb-testnet-2",
+    chainId: "deweb-testnet-sirius",
     logo: "dws.png",
     snapshotServer: "https://snapshots1-testnet.nodejumper.io",
     rpcServer: "https://dws-testnet.nodejumper.io",
@@ -313,6 +337,7 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     isTestnet: true,
     hasWasm: true,
+    newWayUnsafeResetAll: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "DWS (Decentralized Web Services) is a decentralized cloud infrastructure management platform. DWS will take care of all the decentralized services health and will smoothly reinstantiate any service, which will go down, DWS will control funds spendings and will notify you in Slack/Telegram/Jami about any needed fundings. Also DWS will have a nice dashboard showing all the balances, spendings and incidents happen regarding the cloud infrastructure you use.",
     githubRepoName: 'deweb'
@@ -503,6 +528,9 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
+    isArchive: true,
+    archiveReason: 'Testnet ended',
+    endedAt: '2022-09-11',
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Rebus is a platform built to host blockchain applications (EVM) and native Vaults usable across multiple sovereign networks.",
     githubRepoName: 'rebus.core'

@@ -40,8 +40,8 @@ a {
 
 /* Code block */
 .code-block {
-  padding: 16px;
-  margin: 8px;
+  padding: 1em;
+  margin: 0.5em 0;
   border-radius: var(--border-radius);
   background-color: var(--code-background-color);
 }
@@ -162,10 +162,12 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   body.left-hand-menu-open .bg-opacity {
     opacity: 0.5;
     background: white;
-    position: absolute;
+    position: fixed;
     height: 100%;
     width: 100%;
     z-index: 101; /*z-index 105 is for hand menu for mobile, this one should be less*/
+    top: 0;
+    bottom: 0;
   }
 
   body.left-hand-menu-open .card {
