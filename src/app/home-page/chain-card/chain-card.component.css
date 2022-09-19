@@ -12,6 +12,7 @@
     border-color var(--animation-speed) ease-in-out,
     box-shadow var(--animation-speed) ease-in-out;
   -moz-transition: var(--animation-speed) filter linear;
+  overflow-anchor: none;
 }
 
 .card:hover,
