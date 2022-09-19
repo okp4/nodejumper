@@ -1,7 +1,7 @@
 <div id="left-hand-menu" class="card" *ngIf="chain">
   <div class="shadow-pulse-circle {{this.chainStatus}}"
        ngbTooltip="{{!this.chain.isArchive ? this.chainStatusMessage : this.chainService.getArchiveReason(chain)}}"
-       tooltipClass="ratio-tooltip no-opacity"></div>
+       tooltipClass="ratio-tooltip no-opacity multiline"></div>
   <div class="mobile-menu-header">
     <img class="logo-image" src="assets/img/logo.svg" alt="Nodejumper">
     <p class="title">Nodejumper</p>

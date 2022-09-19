@@ -134,6 +134,10 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   opacity: 1;
 }
 
+.multiline.tooltip {
+  white-space: pre-line;
+}
+
 :root {
   --max-width: 1212px;
   --details-color: #57606a;
