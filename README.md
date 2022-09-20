@@ -35,7 +35,7 @@ Nodejumper supports around 17 networks and the number is constantly growing.
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470576-ff1a41c6-8a23-40e4-8f18-87b128fdafe3.png" alt="StafiHub"></td>
-    <td>StafiHub</td>
+    <td>StaFiHub</td>
     <td>Mainnet</td>
     <td>https://nodejumper.io/stafihub/installation</td>
   </tr>
