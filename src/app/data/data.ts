@@ -245,7 +245,7 @@ export const CHAINS: Chain[] = [
     logo: "stafihub.svg",
     snapshotServer: "https://snapshots3.nodejumper.io",
     rpcServer: "https://stafihub.nodejumper.io",
-    rpcPeer: "4b5afbe0bd0d128f98943c0f2941976bd3fb0b9b@stafihub.nodejumper.io:26656",
+    rpcPeer: "967d2fc0e58f5d7f7954c2059cef4de62e4c513f@stafihub.nodejumper.io:26656",
     serviceName: "stafihubd",
     homeDirectoryName: ".stafihub",
     twitter: "https://twitter.com/StaFiHub_",

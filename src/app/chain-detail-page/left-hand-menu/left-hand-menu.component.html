@@ -13,7 +13,7 @@
   </div>
 
   <div class="menu">
-    <div
+    <a
       class="item"
       routerLinkActive="active"
       *ngIf="!chain.summaryDisabled"
@@ -21,73 +21,73 @@
       [routerLinkActiveOptions]="{exact: true}"
     >
       Summary
-    </div>
+    </a>
 
     <div>
-      <div
+      <a
         class="item"
         routerLinkActive="active"
         [routerLink]="['./installation']"
       >
         Install
-      </div>
+      </a>
       <div
         class="sub-item-container"
         routerLinkActive="active"
         [routerLink]="['./installation']"
       >
-        <div
+        <a
           class="sub-item"
           [routerLink]="['./installation']"
           (click)="scrollToFragment('automatic')"
         >
           Automatic
-        </div>
-        <div
+        </a>
+        <a
           class="sub-item"
           [routerLink]="['./installation']"
           (click)="scrollToFragment('manual')"
         >
           Manual
-        </div>
+        </a>
       </div>
     </div>
 
-    <div
+    <a
       class="item"
       routerLinkActive="active"
       [routerLink]="['./upgrade']"
     >
       Upgrade
-    </div>
+    </a>
 
     <div>
-      <div
+      <a
         class="item"
         routerLinkActive="active"
         [routerLink]="['./sync']"
       >
         Sync
-      </div>
+      </a>
       <div
         class="sub-item-container"
         routerLinkActive="active"
         [routerLink]="['./sync']"
       >
-        <div
+        <a
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('snapshot')"
         >
           Snapshot
-        </div>
-        <div
+        </a>
+        <a
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('state-sync')"
         >
           State Sync
-        </div>
+        </a>
         <div
           class="sub-item"
           [routerLink]="['./sync']"
@@ -95,53 +95,53 @@
         >
           Live peers
         </div>
-        <div
+        <a
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('addrbook')"
         >
           Address book
-        </div>
+        </a>
       </div>
     </div>
 
     <div>
-      <div
+      <a
         class="item"
         routerLinkActive="active"
         [routerLink]="['./api']"
       >
         Public API
-      </div>
+      </a>
       <div
         class="sub-item-container"
         routerLinkActive="active"
         [routerLink]="['./api']"
       >
-        <div
+        <a
           class="sub-item"
           [routerLink]="['./api']"
           (click)="scrollToFragment('rpc')"
         >
           RPC
-        </div>
-        <div
+        </a>
+        <a
           class="sub-item"
           [routerLink]="['./api']"
           (click)="scrollToFragment('lcd')"
         >
           LCD (REST)
-        </div>
+        </a>
       </div>
     </div>
 
-    <div
+    <a
       class="item"
       routerLinkActive="active"
       [routerLink]="['./cheat-sheet']"
     >
       Cheat Sheet
-    </div>
+    </a>
   </div>
   <div class="social">
     <a *ngIf="chain.twitter" href="{{chain.twitter}}" target="_blank">
