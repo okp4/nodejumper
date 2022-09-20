@@ -43,20 +43,13 @@ export class LeftHandMenuComponent implements OnInit {
             const latestBlockHeight = data.result.sync_info.latest_block_height;
             const latestBlockTime = data.result.sync_info.latest_block_time;
             const timeDifferenceInSeconds = this.utilsService.humanReadableTimeDifferenceSeconds(latestBlockTime);
-            if (timeDifferenceInSeconds > 600) { // 10 minutes
-              this.chainStatus = ChainStatus.HALTED;
-              this.chainStatusMessage = `Chain is halted ${this.utilsService.secondsToHumanReadableFormat(timeDifferenceInSeconds)}
-               ago, latest block height: ${latestBlockHeight}`
-              return;
-            }
-            this.chainStatus = ChainStatus.SYNCED;
-            this.chainStatusMessage = this.chain?.summaryDisabled
-              ? `Chain is up and running, latest block height: ${latestBlockHeight}`
-              : 'Chain is up and running';
+            this.chainStatus = timeDifferenceInSeconds > 60 ? ChainStatus.HALTED : ChainStatus.SYNCED;
+            this.chainStatusMessage = `Latest Block: ${latestBlockHeight}
+            (${this.utilsService.secondsToHumanReadableFormat(timeDifferenceInSeconds)} ago)`;
           },
           error: (error: any) => {
             this.chainStatus = ChainStatus.INACTIVE;
-            this.chainStatusMessage = 'Our RPC node is down, apologies for inconvenience.';
+            this.chainStatusMessage = 'RPC server is temporary unavailable.';
           }
         });
     }

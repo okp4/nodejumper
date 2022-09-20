@@ -46,7 +46,8 @@ export class UtilsService {
     if (interval >= 1) {
       return interval + " minute" + (interval > 1 ? 's' : '');
     }
-    return Math.floor(seconds) + " second" + (interval > 1 ? 's' : '');
+    interval = Math.floor(seconds);
+    return interval + " second" + (interval > 1 ? 's' : '');
   }
 
   isIP6Address(ip: string) {

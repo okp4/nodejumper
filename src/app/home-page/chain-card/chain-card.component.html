@@ -8,23 +8,23 @@
   </div>
   <div class="details">{{chain.chainId}}</div>
   <div class="fast-links">
-    <div
+    <a
       class="link"
       [routerLink]="['/' + chain.id + '/installation']"
     >
       install
-    </div>
-    <div
+    </a>
+    <a
       class="link"
       [routerLink]="['/' + chain.id + '/sync']"
     >
       sync
-    </div>
-    <div
+    </a>
+    <a
       class="link"
       [routerLink]="['/' + chain.id + '/cheat-sheet']"
     >
       cheat-sheet
-    </div>
+    </a>
   </div>
 </div>
