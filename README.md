@@ -34,10 +34,10 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>https://nodejumper.io/desmos</td>
   </tr>
   <tr>
-    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181469623-42f3636c-5975-4cb5-84db-ad69d3850f7e.png" alt="Evmos"></td>
-    <td>Evmos</td>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470576-ff1a41c6-8a23-40e4-8f18-87b128fdafe3.png" alt="StafiHub"></td>
+    <td>StafiHub</td>
     <td>Mainnet</td>
-    <td>https://nodejumper.io/evmos</td>
+    <td>https://nodejumper.io/stafihub/installation</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470533-68d3c332-ec1b-4cfc-89e7-d8905549d64a.png" alt="Galaxy"></td>
@@ -98,12 +98,6 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>Sei</td>
     <td>Testnet</td>
     <td>https://nodejumper.io/sei-testnet/installation</td>
-  </tr>
-  <tr>
-    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470576-ff1a41c6-8a23-40e4-8f18-87b128fdafe3.png" alt="Stafihub"></td>
-    <td>Stafihub</td>
-    <td>Testnet</td>
-    <td>https://nodejumper.io/stafihub-testnet/installation</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181472237-c1f1d4dc-34ee-467a-a594-f8bf021ed2fe.png" alt="Stride"></td>
