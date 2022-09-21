@@ -49,12 +49,6 @@
   margin-bottom: 5px;
 }
 
-.card .project-support {
-  display: inline;
-  color: #ffc107;
-  font-size: 25px;
-}
-
 .card .fast-links {
   display: flex;
   flex-wrap: wrap;

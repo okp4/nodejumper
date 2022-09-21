@@ -26,7 +26,6 @@ export class Chain {
   denomPow: number;
   apiChainId?: string;
   stateSyncExtraStep?: string;
-  isProjectSupportUs?: boolean;
   newWayUnsafeResetAll?: boolean;
   isTestnet?: boolean;
   hardwareRequirements?: string;

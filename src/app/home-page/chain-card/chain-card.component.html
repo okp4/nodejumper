@@ -1,11 +1,6 @@
 <div *ngIf="chain" [ngClass]="chain.isArchive ? 'card archive' : 'card'">
   <img alt="{{chain.chainName}}" src="assets/img/chain/{{chain.logo}}">
-  <div class="title">{{chain.chainName}}
-    <div class="project-support" *ngIf="chain.isProjectSupportUs"
-         ngbTooltip="{{chain.chainName}} supports us"
-         tooltipClass="ratio-tooltip">★
-    </div>
-  </div>
+  <div class="title">{{chain.chainName}}</div>
   <div class="details">{{chain.chainId}}</div>
   <div class="fast-links">
     <a

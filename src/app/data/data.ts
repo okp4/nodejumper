@@ -41,7 +41,6 @@ export const CHAINS: Chain[] = [
     validatorUrl: "https://restake.app/bitcanna/bcnavaloper1nlyurpgk5zcg6f6dcpdt2mq9khv27ajg4px45y",
     denomName: "ubcna",
     denomPow: 6,
-    isProjectSupportUs: true,
     newWayUnsafeResetAll: true,
     githubRepoName: 'bcna'
   },
@@ -88,7 +87,6 @@ export const CHAINS: Chain[] = [
     validatorUrl: "https://restake.app/desmos/desmosvaloper184nr4azm7kwas40yzftfxy9ma2lrm5pp5q795x",
     denomName: "udsm",
     denomPow: 6,
-    isProjectSupportUs: true,
     githubRepoName: 'desmos'
   },
   {
@@ -188,7 +186,6 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     denomName: "uglx",
     denomPow: 6,
-    isProjectSupportUs: true,
     githubRepoName: 'galaxy'
   },
   {
