@@ -159,13 +159,13 @@ export class SummaryComponent implements OnInit {
 
   extractBondedTokens(chain: Chain, summary: any): string {
     let bondedTokens = summary.bondedTokens / Math.pow(10, chain.denomPow);
-    return this.utilsService.compactNumber(bondedTokens);
+    return this.utilsService.compactNumber(bondedTokens, 1);
   }
 
   extractTotalSupply(chain: Chain, summary: any): string {
     let totalSupply = this.findTotalSupply(chain, summary);
     totalSupply = totalSupply / Math.pow(10, chain.denomPow);
-    return this.utilsService.compactNumber(totalSupply);
+    return this.utilsService.compactNumber(totalSupply, 1);
   }
 
   findTotalSupply(chain: Chain, summary: any) {
