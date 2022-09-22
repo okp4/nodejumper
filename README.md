@@ -82,6 +82,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>https://nodejumper.io/rebus</td>
   </tr>
   <tr>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/191722903-3f59fea2-a283-4a7f-a57a-5bacfff4d4b9.png" alt="Sifchain"></td>
+    <td>Sifchain</td>
+    <td>Mainnet</td>
+    <td>https://nodejumper.io/sifchain</td>
+  </tr>  
+  <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470528-91c89337-6a0e-439f-bf49-23f7a253cdaa.png" alt="DWS"></td>
     <td>DWS</td>
     <td>Testnet</td>
