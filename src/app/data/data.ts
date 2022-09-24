@@ -458,6 +458,7 @@ export const CHAINS: Chain[] = [
     github: "https://github.com/palomachain",
     globe: "https://www.palomachain.com",
     telegram: "https://t.me/palomachain",
+    discord: "https://discord.gg/ET4tEgWQCj",
     blockExplorer: "https://paloma.explorers.guru",
     validatorUrl: "https://paloma.explorers.guru/validator/palomavaloper18dc22w5ayq0xqfp8skpeq8ghx4c7ahtgnpfs4l",
     denomName: "ugrain",
