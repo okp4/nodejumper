@@ -460,7 +460,7 @@ export const CHAINS: Chain[] = [
     telegram: "https://t.me/palomachain",
     discord: "https://discord.gg/ET4tEgWQCj",
     blockExplorer: "https://paloma.explorers.guru",
-    validatorUrl: "https://paloma.explorers.guru/validator/palomavaloper18dc22w5ayq0xqfp8skpeq8ghx4c7ahtgnpfs4l",
+    validatorUrl: "https://paloma.explorers.guru/validator/palomavaloper1kludne80z0tcq9t7j9fqa630fechsjhxc324tt",
     denomName: "ugrain",
     denomPow: 6,
     summaryDisabled: true,
