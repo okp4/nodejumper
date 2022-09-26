@@ -85,6 +85,7 @@
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('state-sync')"
+          *ngIf="!chain.stateSyncDisabled"
         >
           State Sync
         </a>
