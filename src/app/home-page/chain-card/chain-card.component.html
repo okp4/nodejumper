@@ -1,6 +1,6 @@
 <div *ngIf="chain" [ngClass]="chain.isArchive ? 'card archive' : 'card'">
   <img alt="{{chain.chainName}}" src="assets/img/chain/{{chain.logo}}">
-  <div class="title">{{chain.chainName}}</div>
+  <div class="title">{{chain.prettyChainName || chain.chainName}}</div>
   <div class="details">{{chain.chainId}}</div>
   <div class="fast-links">
     <a
