@@ -1,6 +1,7 @@
 export class Chain {
   id: string;
   chainName: string;
+  prettyChainName?: string;
   chainId: string;
   logo: string;
   snapshotServer: string;
