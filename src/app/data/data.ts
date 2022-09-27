@@ -621,6 +621,7 @@ export const CHAINS: Chain[] = [
     globe: "http://terp.network",
     discord: "https://discord.gg/vwxzVdhHCg",
     blockExplorer: "https://explorer.nodestake.top/terp-testnet",
+    validatorUrl: "https://explorer.nodestake.top/terp-testnet/staking/terpvaloper1rwyn6w46u3067enhpdceqasg2um8dddt6tehsv",
     denomName: "terp",
     denomPow: 6,
     summaryDisabled: true,
