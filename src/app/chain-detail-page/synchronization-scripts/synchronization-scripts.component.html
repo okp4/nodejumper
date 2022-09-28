@@ -10,13 +10,16 @@
 sudo apt update
 sudo apt install lz4 -y</code></pre>
     <pre><code class="language-bash">sudo systemctl stop {{chain.serviceName}}
+
+cp $HOME/{{chain.homeDirectoryName}}/data/priv_validator_state.json $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup
 {{this.chainService.getUnsafeResetAllString(chain)}}
 
-cd $HOME/{{chain.homeDirectoryName}}
-rm -rf data {{chain.hasWasm ? '\nrm -rf wasm' : ''}}
+rm -rf $HOME/{{chain.homeDirectoryName}}/data {{chain.hasWasm ? '\nrm -rf $HOME/' + chain.homeDirectoryName + '/wasm' : ''}}
 
 SNAP_NAME=$(curl -s {{chain.snapshotServer}}/{{chain.id}}/ | egrep -o ">{{chain.chainId}}.*\.tar.lz4" | tr -d ">")
-curl {{chain.snapshotServer}}/{{chain.id}}/${{ '{' }}SNAP_NAME{{ '}' }} | lz4 -dc - | tar -xf -
+curl {{chain.snapshotServer}}/{{chain.id}}/${{ '{' }}SNAP_NAME{{ '}' }} | lz4 -dc - | tar -xf - -C $HOME/{{chain.homeDirectoryName}}
+
+mv $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup $HOME/{{chain.homeDirectoryName}}/data/priv_validator_state.json
 
 sudo systemctl restart {{chain.serviceName}}
 sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat</code></pre>
@@ -24,6 +27,8 @@ sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat</code></pre>
   <div class="row" *ngIf="!chain.stateSyncDisabled" id="state-sync">
     <p class="title">State Sync</p>
     <pre><code class="language-bash">sudo systemctl stop {{chain.serviceName}}
+
+cp $HOME/{{chain.homeDirectoryName}}/data/priv_validator_state.json $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup
 {{this.chainService.getUnsafeResetAllString(chain)}}
 
 SNAP_RPC="{{chain.rpcServer}}:443"
@@ -41,6 +46,8 @@ sed -i -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/{{chain.homeDirectoryName}}/config/config.toml
+
+mv $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup $HOME/{{chain.homeDirectoryName}}/data/priv_validator_state.json
 
 sudo systemctl restart {{chain.serviceName}}
 sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat{{chain.stateSyncExtraStep}}</code></pre>
