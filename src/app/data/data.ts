@@ -501,7 +501,7 @@ export const CHAINS: Chain[] = [
   {
     id: "teritori-testnet",
     chainName: "Teritori",
-    chainId: "teritori-testnet-v2",
+    chainId: "teritori-testnet-v3",
     logo: "teritori.png",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
     rpcServer: "https://teritori-testnet.nodejumper.io",
@@ -519,6 +519,7 @@ export const CHAINS: Chain[] = [
     summaryDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
+    stateSyncDisabled: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "Teritori is a multi-chain hub designed to allow IBC and non IBC communities to connect, trade services & NFTs, launch new projects & build further existing ones. The hub notably includes dApps for a daily use such as an NFT launchpad, a marketplace and social features for individuals & communities: Innovate, Trade, Organize.",
     githubRepoName: 'teritori-chain',
