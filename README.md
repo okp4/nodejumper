@@ -82,6 +82,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>https://nodejumper.io/rebus</td>
   </tr>
   <tr>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470582-b3c2859e-43f6-4bcb-81b0-4803b2833fd9.png" alt="Teritori"></td>
+    <td>Teritori</td>
+    <td>Mainnet</td>
+    <td>https://nodejumper.io/teritori/installation</td>
+  </tr>  
+  <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/191722903-3f59fea2-a283-4a7f-a57a-5bacfff4d4b9.png" alt="Sifchain"></td>
     <td>Sifchain</td>
     <td>Mainnet</td>
