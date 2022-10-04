@@ -675,6 +675,7 @@ export const CHAINS: Chain[] = [
     denomName: "umpwr",
     denomPow: 6,
     summaryDisabled: true,
+    newWayUnsafeResetAll: true,
     stateSyncDisabled: true,
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
