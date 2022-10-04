@@ -123,6 +123,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>Testnet</td>
     <td>https://nodejumper.io/teritori-testnet/installation</td>
   </tr>
+  <tr>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/193849588-62c835dc-9d36-4973-9a46-4c86243c0572.png" alt="Empower"></td>
+    <td>Empower Chain</td>
+    <td>Testnet</td>
+    <td>https://nodejumper.io/empower-testnet/installation</td>
+  </tr>
 </table>
 
 ## Contributors
