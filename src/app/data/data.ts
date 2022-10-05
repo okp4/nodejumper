@@ -472,7 +472,7 @@ export const CHAINS: Chain[] = [
   {
     id: "paloma-testnet",
     chainName: "Paloma",
-    chainId: "paloma-testnet-10",
+    chainId: "paloma-testnet-11",
     logo: "paloma.png",
     snapshotServer: "https://snapshots1-testnet.nodejumper.io",
     rpcServer: "https://paloma-testnet.nodejumper.io",
