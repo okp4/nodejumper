@@ -649,6 +649,7 @@ export const CHAINS: Chain[] = [
     denomName: "uterpx",
     denomPow: 6,
     summaryDisabled: true,
+    hasWasm: true,
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: "",
