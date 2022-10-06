@@ -476,7 +476,7 @@ export const CHAINS: Chain[] = [
     logo: "paloma.png",
     snapshotServer: "https://snapshots1-testnet.nodejumper.io",
     rpcServer: "https://paloma-testnet.nodejumper.io",
-    rpcPeer: "484e0d3cc02ba868d4ad68ec44caf89dd14d1845@paloma-testnet.nodejumper.io:33656",
+    rpcPeer: "484e0d3cc02ba868d4ad68ec44caf89dd14d1845@paloma-testnet.nodejumper.io:33659",
     serviceName: "palomad",
     homeDirectoryName: ".paloma",
     twitter: "https://twitter.com/paloma_chain",
