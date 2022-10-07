@@ -1,12 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
-import { DOCUMENT } from "@angular/common";
+import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LeftHandMenuService {
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor() {
   }
 
   openLeftHandMenuForMobile(): void {

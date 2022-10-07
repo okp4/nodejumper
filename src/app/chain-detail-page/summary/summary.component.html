@@ -124,6 +124,62 @@
         <div [ngClass]="noMissedBlocks ? 'no-data': 'hide'"><span>No Missed Blocks Yet</span></div>
         <canvas id="missedBlocksChart" class="chart"></canvas>
       </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="title"><span>Nodes Distribution (BETA)</span></div>
+        <div class="map-responsive">
+          <div id="google-map"></div>
+        </div>
+      </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="title"><span>Nodes Per Country (BETA)</span></div>
+        <div class="nodes-per-country">
+          <table mat-table [dataSource]="nodesPerCountryDatasource">
+            <ng-container matColumnDef="country">
+              <th mat-header-cell *matHeaderCellDef>Country</th>
+              <td mat-cell *matCellDef="let row">{{row.country}}</td>
+            </ng-container>
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef> Number of Nodes </th>
+              <td mat-cell *matCellDef="let row"> {{row.count}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="nodesPerCountryDisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: nodesPerCountryDisplayColumns;"></tr>
+          </table>
+          <mat-paginator #nodesPerCountryPaginator
+                         [pageSize]="nodesPerCountryPageSize"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true"
+                         [length]="nodesPerCountryTotalSize"
+                         [pageIndex]="nodesPerCountryCurrentPage"
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="title"><span>Nodes Per Organization (BETA)</span></div>
+        <div class="nodes-per-country">
+          <mat-table [dataSource]="nodesPerOrganizationDatasource">
+            <ng-container matColumnDef="organization">
+              <mat-header-cell *matHeaderCellDef> Organization </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.organization}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="count">
+              <mat-header-cell *matHeaderCellDef> Number of Nodes </mat-header-cell>
+              <mat-cell *matCellDef="let row"> {{row.count}} </mat-cell>
+            </ng-container>
+            <mat-header-row *matHeaderRowDef="nodesPerOrganizationDisplayColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: nodesPerOrganizationDisplayColumns;">
+            </mat-row>
+          </mat-table>
+          <mat-paginator #paginator
+                         [pageSize]="nodesPerOrganizationPageSize"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true"
+                         [length]="nodesPerOrganizationTotalSize"
+                         [pageIndex]="nodesPerOrganizationCurrentPage"
+                         (page)="nodesPerOrganizationHandlePage($event)"
+          ></mat-paginator>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>

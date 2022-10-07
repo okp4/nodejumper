@@ -1,7 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChainService } from "../../service/chain.service";
 import { ChainCheatSheet } from "../../model/chainCheatSheet";
-import { DOCUMENT } from "@angular/common";
 import { ActivatedRoute } from "@angular/router";
 
 @Component({
@@ -14,8 +13,7 @@ export class CheatSheetComponent implements OnInit {
   chain?: ChainCheatSheet;
   searchText = '';
 
-  constructor(@Inject(DOCUMENT) private document: Document,
-              public chainService: ChainService,
+  constructor(public chainService: ChainService,
               private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.searchText = params['q'];

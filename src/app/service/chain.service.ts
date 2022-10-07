@@ -104,4 +104,23 @@ export class ChainService {
     }
     return chain.archiveReason || '';
   }
+
+  getChainAddressBook(chain: Chain) {
+    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json`;
+    return this.http.get(url);
+  }
+
+  getIPGeoInfo(ip: string) {
+    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
+    const url = `https://api.ipgeolocation.io/ipgeo?ip=${ip}${apiKey}`;
+    return this.http.get(url);
+  }
+
+  getIPGeoInfoBulk(ips: string[]) {
+    const formData: any = new FormData();
+    formData.append('ips', ips);
+    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
+    const url = `https://api.ipgeolocation.io/ipgeo-bulk?${apiKey}`;
+    return this.http.post(url, formData);
+  }
 }

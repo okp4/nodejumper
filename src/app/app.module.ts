@@ -25,6 +25,11 @@ import {CheatSheetComponent} from './chain-detail-page/cheat-sheet/cheat-sheet.c
 import {UpgradeScriptsComponent} from './chain-detail-page/upgrade-scripts/upgrade-scripts.component';
 import {ApiComponent} from "./chain-detail-page/api/api.component";
 import {Router} from "@angular/router";
+import { GoogleMapsModule } from "@angular/google-maps";
+import { MatTableModule } from "@angular/material/table";
+import { MatPaginatorModule } from "@angular/material/paginator";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { environment } from "../environments/environment";
 
 @NgModule({
   declarations: [
@@ -59,7 +64,11 @@ import {Router} from "@angular/router";
       animation: true,
       responsive: true
     }),
-    NgbModule
+    NgbModule,
+    GoogleMapsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule
   ],
   providers: [ChainService, HighlightService, LeftHandMenuService],
   bootstrap: [AppComponent]

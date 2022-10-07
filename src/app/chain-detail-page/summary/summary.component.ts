@@ -1,9 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChainService } from "../../service/chain.service";
 import { Chain } from "../../model/chain";
 import Chart from 'chart.js/auto';
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { UtilsService } from "../../service/utils.service";
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
+import { forkJoin, map } from "rxjs";
+import { MatPaginator } from "@angular/material/paginator";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
   selector: 'app-summary',
@@ -34,8 +38,26 @@ export class SummaryComponent implements OnInit {
   coingekoMarketDataSubscription: any;
   chainValidatorsSubscription: any;
 
+  @ViewChild(MatPaginator) paginator?: MatPaginator;
+  @ViewChild(MatPaginator) nodesPerCountryPaginator?: MatPaginator;
+
+  nodesPerCountryData = [];
+  nodesPerCountryDisplayColumns = ['country', 'count'];
+  nodesPerCountryDatasource?: any;
+  nodesPerCountryPageSize = 5;
+  nodesPerCountryCurrentPage = 0;
+  nodesPerCountryTotalSize = 0;
+
+  @ViewChild(MatPaginator) nodesPerOrganizationPaginator?: MatPaginator;
+
+  nodesPerOrganizationData = [];
+  nodesPerOrganizationDisplayColumns = ['organization', 'count'];
+  nodesPerOrganizationDatasource?: any;
+  nodesPerOrganizationPageSize = 5;
+  nodesPerOrganizationCurrentPage = 0;
+  nodesPerOrganizationTotalSize = 0;
+
   constructor(private router: Router,
-              private route: ActivatedRoute,
               public chainService: ChainService,
               public utilsService: UtilsService) {
     this.CHART_INTERVAL_DAYS = 14;
@@ -104,6 +126,18 @@ export class SummaryComponent implements OnInit {
             this.drawCommissionDistributionChart(validators);
             this.drawMissedBlocksChart(validators);
           }
+        });
+
+      this.chainService.getChainAddressBook(this.chain)
+        .subscribe((addressBook: any) => {
+          const addressBookEntries: any = [];
+          addressBook.addrs.forEach((address: any) => {
+            addressBookEntries.push({
+              id: address.addr.id,
+              ip: address.addr.ip
+            });
+          });
+          this.drawNodesDistributionAnalytics(addressBookEntries);
         });
     } else {
       this.router.navigateByUrl('/');
@@ -676,5 +710,157 @@ export class SummaryComponent implements OnInit {
         }
       }
     });
+  }
+
+  drawNodesDistributionAnalytics(addressBookEntries: []) {
+    const getIPGeoHttpRequests = this.buildGetIPGeoHttpRequests(addressBookEntries);
+    forkJoin(getIPGeoHttpRequests).subscribe((geoLocationData: any) => {
+      this.drawGoogleMap(geoLocationData);
+      this.drawNodesPerCountryDistributionTable(geoLocationData);
+      this.drawNodesPerOrganizationDistributionTable(geoLocationData);
+    });
+  }
+
+  buildGetIPGeoHttpRequests(addressBookEntries: []) : any {
+    const getIPGeoHttpRequests = [];
+    const chunkSize = 50; // 50 is max number of IPs per bulk operation for ipgeolocation.io
+    for (let i = 0; i < addressBookEntries.length; i += chunkSize) {
+      const chunk = addressBookEntries.slice(i, i + chunkSize);
+      const ips = chunk.map((nodeInfo: any) => {
+        return nodeInfo.ip;
+      });
+      const httpRequest = this.chainService.getIPGeoInfoBulk(ips)
+        .pipe(map((data: any) => {
+          return {
+            data: data,
+            addressBookEntries: chunk
+          };
+        }));
+      getIPGeoHttpRequests.push(httpRequest);
+    }
+    return getIPGeoHttpRequests;
+  }
+
+  drawGoogleMap(geoLocationData: []) {
+    const googleMap = new google.maps.Map(document.getElementById('google-map') as HTMLElement, {
+      zoom: 1,
+      center: {lat: 20, lng: 20},
+      streetViewControl: false
+    });
+    const infoWindow = new google.maps.InfoWindow({
+      content: "",
+      disableAutoPan: true
+    });
+
+    const markers: any = [];
+    const markerClustererMap = new MarkerClusterer({markers, map: googleMap});
+
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      const addressBookEntries = httpResponse.addressBookEntries;
+      data.forEach((geolocation: any, i: number) => {
+        const position = {lat: +geolocation.latitude, lng: +geolocation.longitude};
+        const addressBookEntry: any = addressBookEntries[i];
+        const label = `Node ID: ${addressBookEntry.id}
+                        <br> IP: ${geolocation.ip}
+                        <br> Provider: ${geolocation.isp}
+                        <br> Country: <img height="20px" src="${geolocation.country_flag}" alt="${geolocation.country_name}"> ${geolocation.country_name}`;
+        const marker = new google.maps.Marker({
+          position
+        });
+        marker.addListener("click", () => {
+          const innerStyles = "word-wrap: break-word;" +
+            "  font-family: 'Monaco', sans-serif !important;" +
+            "  font-size: 14px;" +
+            "  line-height: 25px;";
+          const content = `<div style="${innerStyles}">${label}</div>`;
+          infoWindow.setContent(content);
+          infoWindow.open(googleMap, marker);
+        });
+        markers.push(marker);
+      });
+    });
+    markerClustererMap.addMarkers(markers);
+  }
+
+  drawNodesPerCountryDistributionTable(geoLocationData: []) {
+    const countryFlags: any = {};
+    const nodesPerCountry: any = {};
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      data.forEach((geolocation: any) => {
+        const currentCount = nodesPerCountry[geolocation.country_name] || 0;
+        nodesPerCountry[geolocation.country_name] = currentCount + 1;
+        countryFlags[geolocation.country_name] = geolocation.countryFlag;
+      });
+    });
+    const tableData: any = [];
+    for (let country in nodesPerCountry) {
+      tableData.push({
+        countryFlag: countryFlags[country],
+        country: country,
+        count: nodesPerCountry[country]
+      })
+    }
+    tableData.sort((a: any, b: any) => {
+      return b.count - a.count;
+    });
+    this.nodesPerCountryDatasource = new MatTableDataSource<any[]>(tableData);
+    this.nodesPerCountryDatasource.paginator = this.nodesPerCountryPaginator;
+    this.nodesPerCountryData = tableData;
+    this.nodesPerCountryTotalSize = this.nodesPerCountryData.length;
+    this.nodesPerCountryIterator();
+  }
+
+  nodesPerCountryIterator() {
+    const end = (this.nodesPerCountryCurrentPage + 1) * this.nodesPerCountryPageSize;
+    const start = this.nodesPerCountryCurrentPage * this.nodesPerCountryPageSize;
+    const part = this.nodesPerCountryData.slice(start, end);
+    this.nodesPerCountryDatasource = part;
+  }
+
+  nodesPerCountryHandlePage(e: any) {
+    this.nodesPerCountryCurrentPage = e.pageIndex;
+    this.nodesPerCountryPageSize = e.pageSize;
+    this.nodesPerCountryIterator();
+  }
+
+  drawNodesPerOrganizationDistributionTable(geoLocationData: []) {
+    const nodesPerOrganization: any = {};
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      data.forEach((geolocation: any) => {
+        const currentCount = nodesPerOrganization[geolocation.organization] || 0;
+        nodesPerOrganization[geolocation.organization] = currentCount + 1;
+      });
+    });
+    const tableData: any = [];
+    for (let organization in nodesPerOrganization) {
+      tableData.push({
+        organization: organization,
+        count: nodesPerOrganization[organization]
+      })
+    }
+    tableData.sort((a: any, b: any) => {
+      return b.count - a.count;
+    });
+    this.nodesPerOrganizationDatasource = new MatTableDataSource<any[]>(tableData);
+    this.nodesPerOrganizationDatasource.paginator = this.nodesPerOrganizationPaginator;
+    this.nodesPerOrganizationData = tableData;
+    this.nodesPerOrganizationTotalSize = this.nodesPerOrganizationData.length;
+    this.nodesPerOrganizationIterator();
+  }
+
+  nodesPerOrganizationIterator() {
+    const end = (this.nodesPerOrganizationCurrentPage + 1) * this.nodesPerOrganizationPageSize;
+    const start = this.nodesPerOrganizationCurrentPage * this.nodesPerOrganizationPageSize;
+    const part = this.nodesPerOrganizationData.slice(start, end);
+    this.nodesPerOrganizationDatasource = part;
+  }
+
+  nodesPerOrganizationHandlePage(e: any) {
+    this.nodesPerOrganizationCurrentPage = e.pageIndex;
+    this.nodesPerOrganizationPageSize = e.pageSize;
+    this.nodesPerOrganizationIterator();
   }
 }

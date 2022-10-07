@@ -1,5 +1,4 @@
-import { Component, Inject } from '@angular/core';
-import { DOCUMENT } from "@angular/common";
+import { Component } from '@angular/core';
 import { LeftHandMenuService } from "./service/left-hand-menu.service";
 
 @Component({
@@ -10,8 +9,7 @@ import { LeftHandMenuService } from "./service/left-hand-menu.service";
 export class AppComponent {
   title = 'nodejumper';
 
-  constructor(@Inject(DOCUMENT) private document: Document,
-              private leftHandMenuService: LeftHandMenuService) {
+  constructor(private leftHandMenuService: LeftHandMenuService) {
   }
 
   closeLeftHandMenuForMobile(): void {

@@ -88,6 +88,45 @@
   margin-top: 150px;
 }
 
+table {
+  width: 100%;
+}
+
+
+
+/* review  */
+.map-responsive {
+  padding-top: 70px;
+  overflow:hidden;
+  padding-bottom: 50%;
+  position:relative;
+  height:0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+.mat-cell {
+  font-family: 'Monaco', sans-serif;
+}
+.mat-header-cell {
+  font-family: 'Monaco', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+#google-map {
+  left:0;
+  bottom:0;
+  height: calc(100% - 70px);
+  width:100%;
+  position:absolute;
+}
+.nodes-per-country {
+  padding-top: 70px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
 @media (max-width: 576px) {
   .charts .title {
     font-size: 18px;

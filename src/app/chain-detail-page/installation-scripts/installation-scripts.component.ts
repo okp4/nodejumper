@@ -1,9 +1,8 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Chain } from "../../model/chain";
 import { HighlightService } from "../../service/highlight.service";
 import { HttpClient } from "@angular/common/http";
 import { ChainService } from "../../service/chain.service";
-import { DOCUMENT } from "@angular/common";
 
 const JUMPER_SCRIPTS_REPO_PREFIX = "https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master"
 
@@ -23,7 +22,6 @@ export class InstallationScriptsComponent implements OnInit {
   constructor(private highlightService: HighlightService,
               private http: HttpClient,
               public chainService: ChainService,
-              @Inject(DOCUMENT) private document: Document,
               private cdr: ChangeDetectorRef) {
   }
 

@@ -178,3 +178,6 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
     transform: translateX(0);
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
