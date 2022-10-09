@@ -29,7 +29,8 @@ import { GoogleMapsModule } from "@angular/google-maps";
 import { MatTableModule } from "@angular/material/table";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { environment } from "../environments/environment";
+import {MatSortModule} from '@angular/material/sort';
+import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -68,7 +69,9 @@ import { environment } from "../environments/environment";
     GoogleMapsModule,
     MatTableModule,
     MatPaginatorModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [ChainService, HighlightService, LeftHandMenuService],
   bootstrap: [AppComponent]

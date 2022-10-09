@@ -86,14 +86,10 @@ export class ChainService {
   }
 
   getUnsafeResetAllString(chain: Chain): string {
-    if (chain.newWayUnsafeResetAll) {
-      return this.getChainBinaryName(chain) + ' tendermint unsafe-reset-all --home $HOME/' + chain.homeDirectoryName + " --keep-addr-book";
+    if (chain.isTendermintUnsafeResetEnabled) {
+      return chain.binaryName + ' tendermint unsafe-reset-all --home $HOME/' + chain.homeDirectoryName + " --keep-addr-book";
     }
-    return this.getChainBinaryName(chain) + ' unsafe-reset-all';
-  }
-
-  getChainBinaryName(chain: Chain): string {
-    return chain.binaryName || chain.serviceName;
+    return chain.binaryName + ' unsafe-reset-all';
   }
 
   getArchiveReason(chain: Chain): string {

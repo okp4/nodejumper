@@ -8,6 +8,7 @@ import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import { forkJoin, map } from "rxjs";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-summary',
@@ -16,16 +17,16 @@ import { MatTableDataSource } from "@angular/material/table";
 })
 export class SummaryComponent implements OnInit {
 
-  chain?: Chain;
-  price?: string;
-  summary?: any;
+  chain: Chain | undefined;
+  price: string | undefined;
+  summary: any;
   CHART_INTERVAL_DAYS: number;
-  noPrices?: boolean;
-  noVolumes?: boolean;
-  noMissedBlocks?: boolean;
-  bondedTokensRatio?: any;
-  tokensDistributionRatio?: any;
-  athPriceRatio?: any;
+  noPrices: boolean | undefined;
+  noVolumes: boolean | undefined;
+  noMissedBlocks: boolean | undefined;
+  bondedTokensRatio: any;
+  tokensDistributionRatio: any;
+  athPriceRatio: any;
 
   innerStrokeColor_SUCCESS: string;
   outerStrokeColor_SUCCESS: string;
@@ -38,24 +39,25 @@ export class SummaryComponent implements OnInit {
   coingekoMarketDataSubscription: any;
   chainValidatorsSubscription: any;
 
-  @ViewChild(MatPaginator) paginator?: MatPaginator;
-  @ViewChild(MatPaginator) nodesPerCountryPaginator?: MatPaginator;
+  geoLocationDataLength: number | undefined;
 
-  nodesPerCountryData = [];
+  @ViewChild('nodesPerCountryPaginator') nodesPerCountryPaginator: MatPaginator | undefined;
+  @ViewChild('nodesPerOrganizationPaginator') nodesPerOrganizationPaginator: MatPaginator | undefined;
+  @ViewChild('nodesPerContinentPaginator') nodesPerContinentPaginator: MatPaginator | undefined;
+  @ViewChild('nodesPerCountrySort') nodesPerCountrySort: MatSort | undefined;
+  @ViewChild('nodesPerOrganizationSort') nodesPerOrganizationSort: MatSort | undefined;
+  @ViewChild('nodesPerContinentSort') nodesPerContinentSort: MatSort | undefined;
+
   nodesPerCountryDisplayColumns = ['country', 'count'];
-  nodesPerCountryDatasource?: any;
-  nodesPerCountryPageSize = 5;
-  nodesPerCountryCurrentPage = 0;
-  nodesPerCountryTotalSize = 0;
-
-  @ViewChild(MatPaginator) nodesPerOrganizationPaginator?: MatPaginator;
-
-  nodesPerOrganizationData = [];
   nodesPerOrganizationDisplayColumns = ['organization', 'count'];
-  nodesPerOrganizationDatasource?: any;
-  nodesPerOrganizationPageSize = 5;
-  nodesPerOrganizationCurrentPage = 0;
-  nodesPerOrganizationTotalSize = 0;
+  nodesPerContinentDisplayColumns = ['continent', 'count'];
+
+  nodesPerCountryDatasource: any;
+  nodesPerOrganizationDatasource: any;
+  nodesPerContinentDatasource: any;
+
+  isValidatorChartLoading = true;
+  isDistributionMapLoading = true;
 
   constructor(private router: Router,
               public chainService: ChainService,
@@ -74,24 +76,26 @@ export class SummaryComponent implements OnInit {
 
   ngAfterViewInit(): void {
     this.chain = this.chainService.activeChain;
-    if (this.chain && !this.chain.summaryDisabled) {
+    if (!this.chain) {
+      this.router.navigateByUrl('/');
+      return;
+    }
+    if (this.chain.isSummaryEnabled) {
       let apiChainId = this.chain.apiChainId || this.chain.id;
       this.chainService.getChainSummary(apiChainId)
         .subscribe((summary: any) => {
-          if (this.chain) {
-            let ratio = this.extractBondedTokensRatio(this.chain, summary);
-            this.bondedTokensRatio = {
-              ratio: ratio,
-              innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
-              outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
-            };
-            this.summary = summary;
-            this.summary.blockTime = this.extractBlockTime(summary);
-            this.summary.inflation = this.extractInflation(summary);
-            this.summary.bondedTokens = this.extractBondedTokens(this.chain, summary);
-            this.summary.totalSupply = this.extractTotalSupply(this.chain, summary);
-            this.summary.communityPool = this.extractCommunityPool(this.chain, summary);
-          }
+          let ratio = this.extractBondedTokensRatio(this.chain!, summary);
+          this.bondedTokensRatio = {
+            ratio: ratio,
+            innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
+            outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
+          };
+          this.summary = summary;
+          this.summary.blockTime = this.extractBlockTime(summary);
+          this.summary.inflation = this.extractInflation(summary);
+          this.summary.bondedTokens = this.extractBondedTokens(this.chain!, summary);
+          this.summary.totalSupply = this.extractTotalSupply(this.chain!, summary);
+          this.summary.communityPool = this.extractCommunityPool(this.chain!, summary);
         });
       let coingekoCoinId = this.chain.coingekoCoinId || this.chain.id;
       this.chainSummarySubscription = this.chainService.getCoingekoSummary(coingekoCoinId)
@@ -113,21 +117,21 @@ export class SummaryComponent implements OnInit {
           this.drawVolumeChart(coingekoMarketData);
         });
 
-       this.chainValidatorsSubscription = this.chainService.getChainValidators(apiChainId)
+      this.chainValidatorsSubscription = this.chainService.getChainValidators(apiChainId)
         .subscribe((validators: any) => {
-          if (this.chain) {
-            let ratio = this.extractTokensDistributionRatio(validators);
-            this.tokensDistributionRatio = {
-              ratio: ratio,
-              innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
-              outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
-            };
-            this.drawVotingPowerChart(validators, this.chain);
-            this.drawCommissionDistributionChart(validators);
-            this.drawMissedBlocksChart(validators);
-          }
+          this.isValidatorChartLoading = false;
+          let ratio = this.extractTokensDistributionRatio(validators);
+          this.tokensDistributionRatio = {
+            ratio: ratio,
+            innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
+            outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
+          };
+          this.drawVotingPowerChart(validators, this.chain!);
+          this.drawCommissionDistributionChart(validators);
+          this.drawMissedBlocksChart(validators);
         });
-
+    }
+    if (this.chain.isDistributionMapEnabled) {
       this.chainService.getChainAddressBook(this.chain)
         .subscribe((addressBook: any) => {
           const addressBookEntries: any = [];
@@ -139,8 +143,6 @@ export class SummaryComponent implements OnInit {
           });
           this.drawNodesDistributionAnalytics(addressBookEntries);
         });
-    } else {
-      this.router.navigateByUrl('/');
     }
   }
 
@@ -715,13 +717,16 @@ export class SummaryComponent implements OnInit {
   drawNodesDistributionAnalytics(addressBookEntries: []) {
     const getIPGeoHttpRequests = this.buildGetIPGeoHttpRequests(addressBookEntries);
     forkJoin(getIPGeoHttpRequests).subscribe((geoLocationData: any) => {
+      this.isDistributionMapLoading = false;
+      this.geoLocationDataLength = this.getGeoLocationDataLength(geoLocationData);
       this.drawGoogleMap(geoLocationData);
+      this.drawNodesPerContinentDistributionTable(geoLocationData);
       this.drawNodesPerCountryDistributionTable(geoLocationData);
       this.drawNodesPerOrganizationDistributionTable(geoLocationData);
     });
   }
 
-  buildGetIPGeoHttpRequests(addressBookEntries: []) : any {
+  buildGetIPGeoHttpRequests(addressBookEntries: []): any {
     const getIPGeoHttpRequests = [];
     const chunkSize = 50; // 50 is max number of IPs per bulk operation for ipgeolocation.io
     for (let i = 0; i < addressBookEntries.length; i += chunkSize) {
@@ -741,8 +746,17 @@ export class SummaryComponent implements OnInit {
     return getIPGeoHttpRequests;
   }
 
+  getGeoLocationDataLength(geoLocationData: []): number {
+    let geoLocationDataLength = 0;
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      geoLocationDataLength += data.filter((geolocation: any) => !geolocation.message).length;
+    });
+    return geoLocationDataLength;
+  }
+
   drawGoogleMap(geoLocationData: []) {
-    const googleMap = new google.maps.Map(document.getElementById('google-map') as HTMLElement, {
+    const googleMap = new google.maps.Map(document.getElementById('distribution-map') as HTMLElement, {
       zoom: 1,
       center: {lat: 20, lng: 20},
       streetViewControl: false
@@ -758,27 +772,29 @@ export class SummaryComponent implements OnInit {
     geoLocationData.forEach((httpResponse: any) => {
       const data = httpResponse.data;
       const addressBookEntries = httpResponse.addressBookEntries;
-      data.forEach((geolocation: any, i: number) => {
-        const position = {lat: +geolocation.latitude, lng: +geolocation.longitude};
-        const addressBookEntry: any = addressBookEntries[i];
-        const label = `Node ID: ${addressBookEntry.id}
+      data
+        .filter((geolocation: any) => !geolocation.message)
+        .forEach((geolocation: any, i: number) => {
+          const position = {lat: +geolocation.latitude, lng: +geolocation.longitude};
+          const addressBookEntry: any = addressBookEntries[i];
+          const label = `Node ID: ${addressBookEntry.id}
                         <br> IP: ${geolocation.ip}
                         <br> Provider: ${geolocation.isp}
                         <br> Country: <img height="20px" src="${geolocation.country_flag}" alt="${geolocation.country_name}"> ${geolocation.country_name}`;
-        const marker = new google.maps.Marker({
-          position
+          const marker = new google.maps.Marker({
+            position
+          });
+          marker.addListener("click", () => {
+            const innerStyles = "word-wrap: break-word;" +
+              "  font-family: 'Monaco', sans-serif !important;" +
+              "  font-size: 14px;" +
+              "  line-height: 25px;";
+            const content = `<div style="${innerStyles}">${label}</div>`;
+            infoWindow.setContent(content);
+            infoWindow.open(googleMap, marker);
+          });
+          markers.push(marker);
         });
-        marker.addListener("click", () => {
-          const innerStyles = "word-wrap: break-word;" +
-            "  font-family: 'Monaco', sans-serif !important;" +
-            "  font-size: 14px;" +
-            "  line-height: 25px;";
-          const content = `<div style="${innerStyles}">${label}</div>`;
-          infoWindow.setContent(content);
-          infoWindow.open(googleMap, marker);
-        });
-        markers.push(marker);
-      });
     });
     markerClustererMap.addMarkers(markers);
   }
@@ -788,11 +804,13 @@ export class SummaryComponent implements OnInit {
     const nodesPerCountry: any = {};
     geoLocationData.forEach((httpResponse: any) => {
       const data = httpResponse.data;
-      data.forEach((geolocation: any) => {
-        const currentCount = nodesPerCountry[geolocation.country_name] || 0;
-        nodesPerCountry[geolocation.country_name] = currentCount + 1;
-        countryFlags[geolocation.country_name] = geolocation.countryFlag;
-      });
+      data
+        .filter((geolocation: any) => !geolocation.message)
+        .forEach((geolocation: any) => {
+          const currentCount = nodesPerCountry[geolocation.country_name] || 0;
+          nodesPerCountry[geolocation.country_name] = currentCount + 1;
+          countryFlags[geolocation.country_name] = geolocation.country_flag;
+        });
     });
     const tableData: any = [];
     for (let country in nodesPerCountry) {
@@ -807,32 +825,19 @@ export class SummaryComponent implements OnInit {
     });
     this.nodesPerCountryDatasource = new MatTableDataSource<any[]>(tableData);
     this.nodesPerCountryDatasource.paginator = this.nodesPerCountryPaginator;
-    this.nodesPerCountryData = tableData;
-    this.nodesPerCountryTotalSize = this.nodesPerCountryData.length;
-    this.nodesPerCountryIterator();
-  }
-
-  nodesPerCountryIterator() {
-    const end = (this.nodesPerCountryCurrentPage + 1) * this.nodesPerCountryPageSize;
-    const start = this.nodesPerCountryCurrentPage * this.nodesPerCountryPageSize;
-    const part = this.nodesPerCountryData.slice(start, end);
-    this.nodesPerCountryDatasource = part;
-  }
-
-  nodesPerCountryHandlePage(e: any) {
-    this.nodesPerCountryCurrentPage = e.pageIndex;
-    this.nodesPerCountryPageSize = e.pageSize;
-    this.nodesPerCountryIterator();
+    this.nodesPerCountryDatasource.sort = this.nodesPerCountrySort;
   }
 
   drawNodesPerOrganizationDistributionTable(geoLocationData: []) {
     const nodesPerOrganization: any = {};
     geoLocationData.forEach((httpResponse: any) => {
       const data = httpResponse.data;
-      data.forEach((geolocation: any) => {
-        const currentCount = nodesPerOrganization[geolocation.organization] || 0;
-        nodesPerOrganization[geolocation.organization] = currentCount + 1;
-      });
+      data
+        .filter((geolocation: any) => !geolocation.message)
+        .forEach((geolocation: any) => {
+          const currentCount = nodesPerOrganization[geolocation.organization] || 0;
+          nodesPerOrganization[geolocation.organization] = currentCount + 1;
+        });
     });
     const tableData: any = [];
     for (let organization in nodesPerOrganization) {
@@ -846,21 +851,32 @@ export class SummaryComponent implements OnInit {
     });
     this.nodesPerOrganizationDatasource = new MatTableDataSource<any[]>(tableData);
     this.nodesPerOrganizationDatasource.paginator = this.nodesPerOrganizationPaginator;
-    this.nodesPerOrganizationData = tableData;
-    this.nodesPerOrganizationTotalSize = this.nodesPerOrganizationData.length;
-    this.nodesPerOrganizationIterator();
+    this.nodesPerOrganizationDatasource.sort = this.nodesPerOrganizationSort;
   }
 
-  nodesPerOrganizationIterator() {
-    const end = (this.nodesPerOrganizationCurrentPage + 1) * this.nodesPerOrganizationPageSize;
-    const start = this.nodesPerOrganizationCurrentPage * this.nodesPerOrganizationPageSize;
-    const part = this.nodesPerOrganizationData.slice(start, end);
-    this.nodesPerOrganizationDatasource = part;
-  }
-
-  nodesPerOrganizationHandlePage(e: any) {
-    this.nodesPerOrganizationCurrentPage = e.pageIndex;
-    this.nodesPerOrganizationPageSize = e.pageSize;
-    this.nodesPerOrganizationIterator();
+  drawNodesPerContinentDistributionTable(geoLocationData: []) {
+    const nodesPerContinent: any = {};
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      data
+        .filter((geolocation: any) => !geolocation.message)
+        .forEach((geolocation: any) => {
+          const currentCount = nodesPerContinent[geolocation.continent_name] || 0;
+          nodesPerContinent[geolocation.continent_name] = currentCount + 1;
+        });
+    });
+    const tableData: any = [];
+    for (let continent in nodesPerContinent) {
+      tableData.push({
+        continent: continent,
+        count: nodesPerContinent[continent]
+      })
+    }
+    tableData.sort((a: any, b: any) => {
+      return b.count - a.count;
+    });
+    this.nodesPerContinentDatasource = new MatTableDataSource<any[]>(tableData);
+    this.nodesPerContinentDatasource.paginator = this.nodesPerContinentPaginator;
+    this.nodesPerContinentDatasource.sort = this.nodesPerContinentSort;
   }
 }

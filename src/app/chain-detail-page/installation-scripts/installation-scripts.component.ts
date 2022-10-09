@@ -34,7 +34,7 @@ export class InstallationScriptsComponent implements OnInit {
 
       const chainName = this.chain.chainName.toLowerCase();
       const chainId = this.chain.chainId.toLowerCase();
-      const binaryName = this.chainService.getChainBinaryName(this.chain);
+      const binaryName = this.chain.binaryName;
 
       this.automaticScriptUrl = `${JUMPER_SCRIPTS_REPO_PREFIX}/${chainName}/${chainId}/install.sh`
       this.cdr.detectChanges();

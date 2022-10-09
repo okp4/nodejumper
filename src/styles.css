@@ -138,6 +138,9 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   white-space: pre-line;
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+}
+
 :root {
   --max-width: 1212px;
   --details-color: #57606a;
@@ -178,6 +181,3 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
     transform: translateX(0);
   }
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
