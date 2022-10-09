@@ -489,7 +489,6 @@ export const CHAINS: Chain[] = [
     denomName: "ugrain",
     denomPow: 6,
     summaryDisabled: true,
-    stateSyncDisabled: true,
     newWayUnsafeResetAll: true,
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
