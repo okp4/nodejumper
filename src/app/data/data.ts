@@ -680,5 +680,30 @@ export const CHAINS: Chain[] = [
     isTestnet: true,
     hardwareRequirements: "4CPU 8RAM 200GB",
     projectOverview: ""
+  },
+  {
+    id: "ollo-testnet",
+    chainName: "Ollo",
+    chainId: "ollo-testnet-0",
+    logo: "ollo.png",
+    snapshotServer: "https://snapshots2-testnet.nodejumper.io",
+    rpcServer: "https://ollo-testnet.nodejumper.io",
+    rpcPeer: "6aa3e31cc85922be69779df9747d7a08326a44f2@ollo-testnet.nodejumper.io:28656",
+    serviceName: "ollod",
+    homeDirectoryName: ".ollo",
+    twitter: "https://twitter.com/OllOStation",
+    github: "https://github.com/OllO-Station",
+    telegram: "https://t.me/+s8i4AKk0Tt44Yzgx",
+    globe: "https://www.ollostation.zone",
+    discord: "https://discord.gg/bmDSF7jtZP",
+    blockExplorer: "https://ollo.explorers.guru/",
+    validatorUrl: "https://ollo.explorers.guru/validator/ollovaloper1dw8n8wygrf7ylaf6qcly2wf3k9q0ffwy22nej4",
+    denomName: "utollo",
+    denomPow: 6,
+    summaryDisabled: true,
+    newWayUnsafeResetAll: true,
+    isTestnet: true,
+    hardwareRequirements: "4CPU 8RAM 200GB",
+    projectOverview: ""
   }
 ]
