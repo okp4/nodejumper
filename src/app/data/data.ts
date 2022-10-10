@@ -684,6 +684,7 @@ export const CHAINS: Chain[] = [
   {
     id: "ollo-testnet",
     chainName: "Ollo",
+    prettyChainName: "OLLO",
     chainId: "ollo-testnet-0",
     logo: "ollo.png",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
