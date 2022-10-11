@@ -606,7 +606,7 @@ export const CHAINS: Chain[] = [
   {
     id: "cardchain-testnet",
     chainName: "Cardchain",
-    chainId: "Testnet-3",
+    chainId: "Testnet3",
     logo: "cardchain.png",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
     rpcServer: "https://cardchain-testnet.nodejumper.io",
