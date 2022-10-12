@@ -50,9 +50,7 @@
 .menu .item {
   width: 100%;
   display: inline-block;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 20px;
+  padding: 7px 0 7px 20px;
   cursor: pointer;
   user-select: none;
   transition: all var(--animation-speed) ease-out;
@@ -78,26 +76,47 @@
   opacity: var(--button-opacity-active);
 }
 
-.menu .sub-item-container {
+.menu .sub-item-container-1,
+.menu .sub-item-container-2,
+.menu .sub-item-container-3,
+.menu .sub-item-container-4 {
   max-height: 0;
   overflow: hidden;
   transition: all var(--animation-speed) ease-out;
   background-color: var(--code-background-color)
 }
 
-.menu .sub-item-container.active {
-  max-height: 150px; /* just big number */
+.menu .sub-item-container-1.active {
+  max-height: 44px;
+}
+
+.menu .sub-item-container-2.active {
+  max-height: 78px;
+}
+
+.menu .sub-item-container-3.active {
+  max-height: 112px;
+}
+
+.menu .sub-item-container-4.active {
+  max-height: 150px;
 }
 
 .menu .sub-item {
   width: 100%;
   display: inline-block;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 35px;
+  padding: 5px 0 5px 35px;
   cursor: pointer;
   user-select: none;
   text-decoration: none;
+}
+
+.menu .sub-item:first-child {
+  padding-top: 10px;
+}
+
+.menu .sub-item:last-child {
+  padding-bottom: 10px;
 }
 
 .menu .sub-item:hover {
