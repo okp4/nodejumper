@@ -57,7 +57,7 @@ export class SummaryComponent implements OnInit {
   nodesPerContinentDatasource: any;
 
   isValidatorChartLoading = true;
-  isDistributionMapLoading = true;
+  isDecentralizationMapLoading = true;
 
   constructor(private router: Router,
               public chainService: ChainService,
@@ -131,21 +131,17 @@ export class SummaryComponent implements OnInit {
           this.drawMissedBlocksChart(validators);
         });
     }
-    if (this.chain.isDistributionMapEnabled) {
+    if (this.chain.isDecentralizationMapEnabled) {
       this.chainService.getChainAddressBook(this.chain)
         .subscribe((addressBook: any) => {
           const addressBookEntries: any = [];
-          addressBook.addrs
-            .filter((address: any) => {
-              return address.last_success !== '0001-01-01T00:00:00Z';
-            })
-            .forEach((address: any) => {
+          addressBook.addrs.forEach((address: any) => {
             addressBookEntries.push({
               id: address.addr.id,
               ip: address.addr.ip
             });
           });
-          this.drawNodesDistributionAnalytics(addressBookEntries);
+          this.drawNodesDecentralizationAnalytics(addressBookEntries);
         });
     }
   }
@@ -718,10 +714,10 @@ export class SummaryComponent implements OnInit {
     });
   }
 
-  drawNodesDistributionAnalytics(addressBookEntries: []) {
+  drawNodesDecentralizationAnalytics(addressBookEntries: []) {
     const getIPGeoHttpRequests = this.buildGetIPGeoHttpRequests(addressBookEntries);
     forkJoin(getIPGeoHttpRequests).subscribe((geoLocationData: any) => {
-      this.isDistributionMapLoading = false;
+      this.isDecentralizationMapLoading = false;
       this.geoLocationDataLength = this.getGeoLocationDataLength(geoLocationData);
       this.drawGoogleMap(geoLocationData);
       this.drawNodesPerContinentDistributionTable(geoLocationData);
@@ -760,7 +756,7 @@ export class SummaryComponent implements OnInit {
   }
 
   drawGoogleMap(geoLocationData: []) {
-    const googleMap = new google.maps.Map(document.getElementById('distribution-map') as HTMLElement, {
+    const googleMap = new google.maps.Map(document.getElementById('decentralization-map') as HTMLElement, {
       zoom: 1,
       center: {lat: 20, lng: 20},
       streetViewControl: false
@@ -801,6 +797,32 @@ export class SummaryComponent implements OnInit {
         });
     });
     markerClustererMap.addMarkers(markers);
+  }
+
+  drawNodesPerContinentDistributionTable(geoLocationData: []) {
+    const nodesPerContinent: any = {};
+    geoLocationData.forEach((httpResponse: any) => {
+      const data = httpResponse.data;
+      data
+        .filter((geolocation: any) => !geolocation.message)
+        .forEach((geolocation: any) => {
+          const currentCount = nodesPerContinent[geolocation.continent_name] || 0;
+          nodesPerContinent[geolocation.continent_name] = currentCount + 1;
+        });
+    });
+    const tableData: any = [];
+    for (let continent in nodesPerContinent) {
+      tableData.push({
+        continent: continent,
+        count: nodesPerContinent[continent]
+      })
+    }
+    tableData.sort((a: any, b: any) => {
+      return b.count - a.count;
+    });
+    this.nodesPerContinentDatasource = new MatTableDataSource<any[]>(tableData);
+    this.nodesPerContinentDatasource.paginator = this.nodesPerContinentPaginator;
+    this.nodesPerContinentDatasource.sort = this.nodesPerContinentSort;
   }
 
   drawNodesPerCountryDistributionTable(geoLocationData: []) {
@@ -856,31 +878,5 @@ export class SummaryComponent implements OnInit {
     this.nodesPerOrganizationDatasource = new MatTableDataSource<any[]>(tableData);
     this.nodesPerOrganizationDatasource.paginator = this.nodesPerOrganizationPaginator;
     this.nodesPerOrganizationDatasource.sort = this.nodesPerOrganizationSort;
-  }
-
-  drawNodesPerContinentDistributionTable(geoLocationData: []) {
-    const nodesPerContinent: any = {};
-    geoLocationData.forEach((httpResponse: any) => {
-      const data = httpResponse.data;
-      data
-        .filter((geolocation: any) => !geolocation.message)
-        .forEach((geolocation: any) => {
-          const currentCount = nodesPerContinent[geolocation.continent_name] || 0;
-          nodesPerContinent[geolocation.continent_name] = currentCount + 1;
-        });
-    });
-    const tableData: any = [];
-    for (let continent in nodesPerContinent) {
-      tableData.push({
-        continent: continent,
-        count: nodesPerContinent[continent]
-      })
-    }
-    tableData.sort((a: any, b: any) => {
-      return b.count - a.count;
-    });
-    this.nodesPerContinentDatasource = new MatTableDataSource<any[]>(tableData);
-    this.nodesPerContinentDatasource.paginator = this.nodesPerContinentPaginator;
-    this.nodesPerContinentDatasource.sort = this.nodesPerContinentSort;
   }
 }

@@ -142,17 +142,17 @@
           </mat-progress-spinner>
         </div>
       </ng-container>
-      <ng-container *ngIf="chain.isDistributionMapEnabled">
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12" id="distribution">
-        <div class="title"><span>Nodes Distribution (BETA)</span></div>
-        <div class="distribution-map-wrapper">
-          <div id="distribution-map" class="distribution-map"></div>
-          <div class="total" *ngIf="!isDistributionMapLoading">Total: {{geoLocationDataLength}} Nodes</div>
+      <ng-container *ngIf="chain.isDecentralizationMapEnabled">
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12" id="decentralization">
+        <div class="title"><span>Decentralization Map (BETA)</span></div>
+        <div class="decentralization-map-wrapper">
+          <div id="decentralization-map" class="decentralization-map"></div>
+          <div class="total" *ngIf="!isDecentralizationMapLoading">Total: {{geoLocationDataLength}} Nodes</div>
         </div>
         <mat-progress-spinner
           mode="indeterminate"
           class="spinner"
-          *ngIf="isDistributionMapLoading">
+          *ngIf="isDecentralizationMapLoading">
         </mat-progress-spinner>
       </div>
       <div class="col col-12 col-sm-12 col-md-12 col-lg-12">

@@ -103,7 +103,7 @@ table {
   font-weight: bold;
 }
 
-.distribution-map-wrapper {
+.decentralization-map-wrapper {
   padding-top: 70px;
   overflow:hidden;
   padding-bottom: 50%;
@@ -114,7 +114,7 @@ table {
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
 }
 
-.distribution-map {
+.decentralization-map {
   position:absolute;
   bottom:0;
   height: calc(100% - 70px);

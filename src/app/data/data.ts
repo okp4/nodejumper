@@ -45,7 +45,7 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     githubRepoName: 'bcna',
     isSummaryEnabled: true,
-    isDistributionMapEnabled: true
+    isDecentralizationMapEnabled: true
   }),
   new Chain({
     id: "kichain",
@@ -260,7 +260,7 @@ export const CHAINS: Chain[] = [
     projectOverview: "StaFiHub is a parallel chain developed by StaFi based on the Cosmos SDK, by implementing the rToken Protocol, StaFiHub releases liquidity of tokens staked in other chains of the Cosmos Ecosystem.",
     githubRepoName: 'stafihub',
     isSummaryEnabled: true,
-    isDistributionMapEnabled: true
+    isDecentralizationMapEnabled: true
   }),
   new Chain({
     id: "sifchain",

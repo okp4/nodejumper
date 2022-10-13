@@ -16,7 +16,7 @@
     <div>
       <a class="item"
         routerLinkActive="active"
-         *ngIf="chain.isSummaryEnabled || chain.isDistributionMapEnabled"
+         *ngIf="chain.isSummaryEnabled || chain.isDecentralizationMapEnabled"
         [routerLink]="['./']"
         [routerLinkActiveOptions]="{exact: true}">
         Summary
@@ -37,11 +37,11 @@
         </a>
         <a
           class="sub-item"
-          *ngIf="chain.isDistributionMapEnabled"
+          *ngIf="chain.isDecentralizationMapEnabled"
           [routerLink]="['./']"
-          (click)="scrollToFragment('distribution')"
+          (click)="scrollToFragment('decentralization')"
         >
-          Nodes Distribution
+          Decentralization Map
         </a>
       </div>
     </div>
