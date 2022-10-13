@@ -54,4 +54,11 @@ export class HomePageComponent implements OnInit {
         this.archiveChains = this.chainService.getChains('all', searchText, true);
     }
   }
+
+  rootRouterLink(chain: Chain) {
+    if (chain.isSummaryEnabled || chain.isDecentralizationMapEnabled) {
+      return '/' + chain.id;
+    }
+    return '/' + chain.id + '/installation';
+  }
 }

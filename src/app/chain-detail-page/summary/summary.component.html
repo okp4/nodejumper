@@ -165,7 +165,7 @@
             </ng-container>
             <ng-container matColumnDef="count">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
-              <td mat-cell *matCellDef="let row"> {{row.count}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="nodesPerContinentDisplayColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: nodesPerContinentDisplayColumns;"></tr>
@@ -190,7 +190,7 @@
             </ng-container>
             <ng-container matColumnDef="count">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
-              <td mat-cell *matCellDef="let row"> {{row.count}}</td>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}}</td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="nodesPerCountryDisplayColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: nodesPerCountryDisplayColumns;"></tr>
@@ -212,7 +212,7 @@
             </ng-container>
             <ng-container matColumnDef="count">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
-              <td mat-cell *matCellDef="let row"> {{row.count}} </td>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="nodesPerOrganizationDisplayColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: nodesPerOrganizationDisplayColumns;"></tr>

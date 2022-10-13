@@ -812,9 +812,13 @@ export class SummaryComponent implements OnInit {
     });
     const tableData: any = [];
     for (let continent in nodesPerContinent) {
+      const count = nodesPerContinent[continent];
+      const total = this.geoLocationDataLength;
+      const percentage = this.utilsService.calculatePercentage(count, total!);
       tableData.push({
         continent: continent,
-        count: nodesPerContinent[continent]
+        count: nodesPerContinent[continent],
+        countWithPercentage: `${count} (${percentage}%)`
       })
     }
     tableData.sort((a: any, b: any) => {
@@ -840,10 +844,14 @@ export class SummaryComponent implements OnInit {
     });
     const tableData: any = [];
     for (let country in nodesPerCountry) {
+      const count = nodesPerCountry[country];
+      const total = this.geoLocationDataLength;
+      const percentage = this.utilsService.calculatePercentage(count, total!);
       tableData.push({
         countryFlag: countryFlags[country],
         country: country,
-        count: nodesPerCountry[country]
+        count: count,
+        countWithPercentage: `${count} (${percentage}%)`
       })
     }
     tableData.sort((a: any, b: any) => {
@@ -855,11 +863,24 @@ export class SummaryComponent implements OnInit {
   }
 
   drawNodesPerOrganizationDistributionTable(geoLocationData: []) {
+    const organizationMergeMap : { [key: string]: string } = {
+      'Contabo': 'Contabo GmbH',
+      'Charter Communications Inc': 'Charter Communications, Inc',
+    };
     const nodesPerOrganization: any = {};
     geoLocationData.forEach((httpResponse: any) => {
       const data = httpResponse.data;
       data
         .filter((geolocation: any) => !geolocation.message)
+        .map((geolocation: any) => {
+          for (let key in organizationMergeMap) {
+            if (geolocation.organization.toLowerCase() === key.toLowerCase()
+              || geolocation.organization.toLowerCase().includes(key.toLowerCase())) {
+              geolocation.organization = organizationMergeMap[key];
+            }
+          }
+          return geolocation;
+        })
         .forEach((geolocation: any) => {
           const currentCount = nodesPerOrganization[geolocation.organization] || 0;
           nodesPerOrganization[geolocation.organization] = currentCount + 1;
@@ -867,9 +888,13 @@ export class SummaryComponent implements OnInit {
     });
     const tableData: any = [];
     for (let organization in nodesPerOrganization) {
+      const count = nodesPerOrganization[organization];
+      const total = this.geoLocationDataLength;
+      const percentage = this.utilsService.calculatePercentage(count, total!);
       tableData.push({
         organization: organization,
-        count: nodesPerOrganization[organization]
+        count: nodesPerOrganization[organization],
+        countWithPercentage: `${count} (${percentage}%)`
       })
     }
     tableData.sort((a: any, b: any) => {

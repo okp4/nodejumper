@@ -54,4 +54,8 @@ export class UtilsService {
     const match = ip.match(/:/g);
     return match && match.length > 1;
   }
+
+  calculatePercentage(partial: number, total: number) {
+    return ((partial * 100) / total).toFixed(2)
+  }
 }
