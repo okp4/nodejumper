@@ -44,8 +44,7 @@ export const CHAINS: Chain[] = [
     denomName: "ubcna",
     denomPow: 6,
     githubRepoName: 'bcna',
-    isSummaryEnabled: true,
-    isDecentralizationMapEnabled: true
+    isSummaryEnabled: true
   }),
   new Chain({
     id: "kichain",

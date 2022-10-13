@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ChainService } from "../../service/chain.service";
 import { Chain } from "../../model/chain";
-import Chart from 'chart.js/auto';
 import { Router } from "@angular/router";
 import { UtilsService } from "../../service/utils.service";
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
@@ -9,6 +8,7 @@ import { forkJoin, map } from "rxjs";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
+import { ChartService } from "../../service/chart.service";
 
 @Component({
   selector: 'app-summary',
@@ -56,34 +56,14 @@ export class SummaryComponent implements OnInit {
   strokeOuterColor: string;
   borderColor: string;
   backgroundColor: string;
-  colorSchema: string[];
 
   constructor(private router: Router,
               public chainService: ChainService,
-              public utilsService: UtilsService) {
+              public utilsService: UtilsService,
+              private chartService: ChartService) {
     this.CHART_INTERVAL_DAYS = 14;
-    this.strokeInnerColor = 'rgba(98, 193, 161, 0.4)';
-    this.strokeOuterColor = 'rgba(98, 193, 161, 1)';
-    this.borderColor = this.strokeOuterColor;
-    this.backgroundColor = 'rgba(98, 193, 161, 0.1)';
-    this.colorSchema = [
-      '#388F72', '#45B08C', '#62C1A1', '#83CEB5',
-      '#24B3A8', '#30D5C8', '#56DDD2', '#7CE4DC'
-    ];
-    // this.colorSchema = [
-    //   '#5A5E68', '#6F7581', '#868C97', '#9FA3AC',
-    //   '#B8BBC1', '#D0D2D7', '#E9EAEC', '#868C97',
-    //   '#9FA3AC', '#B8BBC1', '#D0D2D7', '#E9EAEC'
-    // ];
-    // this.colorSchema = [
-    //   '#89CFF0', '#62B8FC', '#60BEEB', '#38AEE6',
-    //   '#35A4FB', '#088FFA', '#0476D0', '#035CA3',
-    //   '#024376', '#012949'
-    // ];
-    // this.colorSchema = [
-    //   '#4E545C', '#747474', '#747474', '#B1B1B1',
-    //   '#8D9797', '#D1D0D0', '#7E7C73', '#BBC4C2',
-    // ];
+    this.strokeInnerColor = 'rgba(102, 153, 128, 0.4)';
+    this.strokeOuterColor = 'rgba(102, 153, 128, 1)';
   }
 
   ngOnInit(): void {
@@ -130,7 +110,7 @@ export class SummaryComponent implements OnInit {
           const ratio = this.extractTokensDistributionRatio(validators);
           this.tokensDistributionRatio = ratio;
           this.drawVotingPowerChart(validators, this.chain!);
-          this.drawCommissionDistributionChart(validators);
+          this.drawCommissionChart(validators);
           this.drawMissedBlocksChart(validators);
         });
     }
@@ -268,264 +248,44 @@ export class SummaryComponent implements OnInit {
       this.noPrices = true;
       return;
     }
-
-    const pricesX = prices.map((item: any) => item[0]);
-    const pricesY = prices.map((item: any) => item[1]);
-
-    const pricesLabels: any = [];
-    pricesX.forEach((item: any) => {
-      let priceLabel = new Date(item);
-      pricesLabels.push(priceLabel.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
+    const dataX = prices.map((item: any) => item[0]);
+    const dataY = prices.map((item: any) => item[1]);
+    const labels: string[] = [];
+    dataX.forEach((item: any) => {
+      let label = new Date(item);
+      labels.push(label.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
-
-    const chart = new Chart('priceChart', {
-      type: 'line',
-      data: {
-        labels: pricesLabels,
-        datasets: [
-          {
-            data: pricesY,
-            borderColor: this.borderColor,
-            backgroundColor: this.backgroundColor,
-            fill: true,
-            borderWidth: 2,
-            tension: 0.4,
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              label: function (context) {
-                let label = context.dataset.label || '';
-                if (context.parsed.y !== null) {
-                  label += new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD'
-                  }).format(context.parsed.y);
-                }
-                return label;
-              }
-            }
-          }
-        },
-        responsive: true,
-        interaction: {
-          intersect: false,
-        },
-        scales: {
-          x: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          },
-          y: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          }
-        }
-      }
-    });
+    this.chartService.drawLineChart('priceChart', labels, dataY);
   }
 
   drawVolumeChart(coingekoMarketData: any): void {
-    const _this = this;
     const volume = coingekoMarketData.total_volumes.slice(0, -1);
     if (!volume.length) {
       this.noVolumes = true;
       return;
     }
-
-    const volumeX = volume.map((item: any) => item[0]);
-    const volumeY = volume.map((item: any) => item[1]);
-
-    const volumeLabels: any = [];
-    volumeX.forEach((item: any) => {
-      let volumeLabel = new Date(item);
-      volumeLabels.push(volumeLabel.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
+    const dataX = volume.map((item: any) => item[0]);
+    const dataY = volume.map((item: any) => item[1]);
+    const labels: string[] = [];
+    dataX.forEach((item: any) => {
+      let label = new Date(item);
+      labels.push(label.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
-
-    const chart = new Chart('volumeChart', {
-      type: 'line',
-      data: {
-        labels: volumeLabels,
-        datasets: [
-          {
-            data: volumeY,
-            borderColor: this.borderColor,
-            backgroundColor: this.backgroundColor,
-            fill: true,
-            borderWidth: 2,
-            tension: 0.4,
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              label: function (context) {
-                let label = context.dataset.label || '';
-                if (context.parsed.y !== null) {
-                  label += new Intl.NumberFormat('en-US', {
-                    style: 'currency',
-                    currency: 'USD'
-                  }).format(context.parsed.y);
-                }
-                return label;
-              }
-            }
-          }
-        },
-        responsive: true,
-        interaction: {
-          intersect: false,
-        },
-        scales: {
-          x: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          },
-          y: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              },
-              callback: function (value) {
-                return _this.utilsService.compactNumber(parseInt(value.toString()), 2);
-              }
-            },
-          }
-        }
-      }
-    });
+    this.chartService.drawLineChart('volumeChart', labels, dataY);
   }
 
   drawVotingPowerChart(validators: any, chain: Chain): void {
-    const _this = this;
     validators.sort((a: any, b: any) => b.votingPower - a.votingPower)
     const topValidators = validators.slice(0, 9);
     const labels = topValidators.map((validator: any) => validator.moniker);
-    const data = topValidators.map((validator: any) => validator.votingPower / Math.pow(10, chain.denomPow))
-    const chart = new Chart('votingPowerChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            barPercentage: 0.5,
-            maxBarThickness: 50,
-            borderRadius: {
-              topRight: 10,
-              bottomRight: 10
-            },
-            data: data,
-            backgroundColor: this.colorSchema
-          }
-        ]
-      },
-      options: {
-        indexAxis: 'y',
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              title: function () {
-                return ''
-              },
-              label: function (context) {
-                let label = context.label || '';
-                let value = context.dataset.data[context.dataIndex];
-                return label  + ': ' + value;
-              },
-            },
-          }
-        },
-        responsive: true,
-        scales: {
-          y: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              },
-              callback: function (value, index) {
-                let label = this.getLabelForValue(index);
-                return label && label.length > 15 && data.length > 5
-                  ? label.substring(0, 11) + '...'
-                  : label;
-              }
-            }
-          },
-          x: {
-            display: true,
-            ticks: {
-              precision: 0,
-              font: {
-                size: 15,
-                family: 'Monaco'
-              },
-              callback: function (value) {
-                return _this.utilsService.compactNumber(parseInt(value.toString()));
-              }
-            }
-          }
-        }
-      }
-    });
+    const data = topValidators.map((validator: any) => {
+      const votingPower = validator.votingPower / Math.pow(10, chain.denomPow);
+      return votingPower.toFixed();
+    })
+    this.chartService.drawVotingPowerBarChart('votingPowerChart', labels, data);
   }
 
-  drawCommissionDistributionChart(validators: any): void {
+  drawCommissionChart(validators: any): void {
     const commissionDistribution: any = {};
     validators.forEach((validator: any) => {
       if (!commissionDistribution[validator.commission]) {
@@ -544,166 +304,18 @@ export class SummaryComponent implements OnInit {
 
     const labels = sortableArray.map((res: any) => this.displayPercent(res[0]));
     const data = sortableArray.map((res: any) => res[1]);
-    const chart = new Chart('commissionChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            barPercentage: 0.5,
-            maxBarThickness: 50,
-            borderRadius: {
-              topLeft: 10,
-              topRight: 10
-            },
-            data: data,
-            backgroundColor: this.colorSchema
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              title: function () {
-                return ''
-              },
-              label: function (context) {
-                let label = context.label || '';
-                let value = context.dataset.data[context.dataIndex];
-                return label  + ': ' + value;
-              },
-            },
-          }
-        },
-        responsive: true,
-        interaction: {
-          intersect: false,
-        },
-        scales: {
-          x: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          },
-          y: {
-            display: true,
-            ticks: {
-              precision: 0,
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          }
-        }
-      }
-    });
+    this.chartService.drawCommissionBarChart('commissionChart', labels, data);
   }
 
   drawMissedBlocksChart(validators: any): void {
-
+    validators.sort((a: any, b: any) => a.moniker.length - b.moniker.length);
     const labels = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.moniker);
     const data = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.missedBlocks);
-
     if (!data.length) {
       this.noMissedBlocks = true;
       return;
     }
-
-    const char = new Chart('missedBlocksChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            barPercentage: 0.5,
-            maxBarThickness: 50,
-            borderRadius: {
-              topLeft: 10,
-              topRight: 10
-            },
-            data: data,
-            backgroundColor: this.colorSchema
-          }
-        ]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              title: function () {
-                return ''
-              },
-              label: function (context) {
-                let label = context.label || '';
-                let value = context.dataset.data[context.dataIndex];
-                return label  + ': ' + value;
-              },
-            },
-          }
-        },
-        responsive: true,
-        interaction: {
-          intersect: false,
-        },
-        scales: {
-          x: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              },
-              callback: function (value, index) {
-                let label = this.getLabelForValue(index);
-                return label && label.length > 15 && data.length > 5
-                  ? label.substring(0, 11) + '...'
-                  : label;
-              }
-            }
-          },
-          y: {
-            min: 0,
-            max: 100,
-            display: true,
-            ticks: {
-              precision: 0,
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          }
-        }
-      }
-    });
+    this.chartService.drawMissedBlocksBarChart('missedBlocksChart', labels, data);
   }
 
   drawNodesDecentralizationAnalytics(addressBookEntries: []) {
@@ -855,7 +467,7 @@ export class SummaryComponent implements OnInit {
   }
 
   drawNodesPerOrganizationDistribution(geoLocationData: []) {
-    const organizationMergeMap : { [key: string]: string } = {
+    const organizationMergeMap: { [key: string]: string } = {
       'Contabo': 'Contabo GmbH',
       'Charter Communications Inc': 'Charter Communications, Inc',
     };
@@ -902,7 +514,6 @@ export class SummaryComponent implements OnInit {
   }
 
   drawNodesPerOrganizationChart(tableData: any[]): void {
-    let _this = this;
     const topOrganizations = tableData.slice(0, 5);
     const otherOrganizations = tableData.slice(5);
     const otherOrganization = {
@@ -923,76 +534,6 @@ export class SummaryComponent implements OnInit {
       return `${shortOrganizationName} (${percentage}%)`
     }));
     const data = topOrganizations.map((organization) => organization.count);
-    const chart = new Chart('organizationChart', {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            barPercentage: 0.5,
-            maxBarThickness: 50,
-            borderRadius: {
-              topLeft: 10,
-              topRight: 10
-            },
-            data: data,
-            backgroundColor: this.colorSchema
-          }
-        ]
-      },
-      options: {
-        indexAxis: 'x',
-        plugins: {
-          legend: {
-            display: false,
-          },
-          tooltip: {
-            titleFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            bodyFont: {
-              size: 20,
-              family: 'Monaco'
-            },
-            callbacks: {
-              title: function () {
-                return ''
-              },
-              label: function (context) {
-                let label = context.label || '';
-                let value = context.dataset.data[context.dataIndex];
-                return label  + ': ' + value;
-              },
-            },
-          }
-        },
-        responsive: true,
-        scales: {
-          x: {
-            display: true,
-            ticks: {
-              font: {
-                size: 15,
-                family: 'Monaco'
-              }
-            }
-          },
-          y: {
-            display: true,
-            ticks: {
-              precision: 0,
-              font: {
-                size: 15,
-                family: 'Monaco'
-              },
-              callback: function (value) {
-                return _this.utilsService.compactNumber(parseInt(value.toString()));
-              }
-            }
-          }
-        }
-      }
-    });
+    this.chartService.drawNodesPerOrganizationBarChart('organizationChart', labels, data);
   }
 }

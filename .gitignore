@@ -43,3 +43,4 @@ Thumbs.db
 
 # Local dev environemnt
 environment.local.ts
+package-lock.json

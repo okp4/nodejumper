@@ -37,7 +37,7 @@ export class Chain {
   isStateSyncEnabled?: boolean = true;
   isTopLevelWasmEnabled?: boolean = false;
   isSummaryEnabled?: boolean = false;
-  isDecentralizationMapEnabled?: boolean = true;
+  isDecentralizationMapEnabled?: boolean = false;
 
   constructor(chainConfig: Partial<Chain> = {}) {
     Object.assign(this, chainConfig);
