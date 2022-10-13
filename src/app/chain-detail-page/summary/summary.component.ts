@@ -276,22 +276,22 @@ export class SummaryComponent implements OnInit {
   }
 
   drawPriceChart(coingekoMarketData: any): void {
-    let prices = coingekoMarketData.prices.slice(0, -1);
+    const prices = coingekoMarketData.prices.slice(0, -1);
     if (!prices.length) {
       this.noPrices = true;
       return;
     }
 
-    let pricesX = prices.map((item: any) => item[0]);
-    let pricesY = prices.map((item: any) => item[1]);
+    const pricesX = prices.map((item: any) => item[0]);
+    const pricesY = prices.map((item: any) => item[1]);
 
-    let pricesLabels: any = [];
+    const pricesLabels: any = [];
     pricesX.forEach((item: any) => {
       let priceLabel = new Date(item);
       pricesLabels.push(priceLabel.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
 
-    let priceChart = new Chart('priceChart', {
+    const priceChart = new Chart('priceChart', {
       type: 'line',
       data: {
         labels: pricesLabels,
@@ -363,23 +363,23 @@ export class SummaryComponent implements OnInit {
   }
 
   drawVolumeChart(coingekoMarketData: any): void {
-    let _this = this;
-    let volume = coingekoMarketData.total_volumes.slice(0, -1);
+    const _this = this;
+    const volume = coingekoMarketData.total_volumes.slice(0, -1);
     if (!volume.length) {
       this.noVolumes = true;
       return;
     }
 
-    let volumeX = volume.map((item: any) => item[0]);
-    let volumeY = volume.map((item: any) => item[1]);
+    const volumeX = volume.map((item: any) => item[0]);
+    const volumeY = volume.map((item: any) => item[1]);
 
-    let volumeLabels: any = [];
+    const volumeLabels: any = [];
     volumeX.forEach((item: any) => {
       let volumeLabel = new Date(item);
       volumeLabels.push(volumeLabel.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
 
-    let volumeChart = new Chart('volumeChart', {
+    const chart = new Chart('volumeChart', {
       type: 'line',
       data: {
         labels: volumeLabels,
@@ -454,17 +454,23 @@ export class SummaryComponent implements OnInit {
   }
 
   drawVotingPowerChart(validators: any, chain: Chain): void {
-    let _this = this;
+    const _this = this;
     validators.sort((a: any, b: any) => b.votingPower - a.votingPower)
-    let top20validators = validators.slice(0, 9);
-    let labels = top20validators.map((validator: any) => validator.moniker);
-    let data = top20validators.map((validator: any) => validator.votingPower / Math.pow(10, chain.denomPow))
-    let votingPowerChart = new Chart('votingPowerChart', {
+    const topValidators = validators.slice(0, 9);
+    const labels = topValidators.map((validator: any) => validator.moniker);
+    const data = topValidators.map((validator: any) => validator.votingPower / Math.pow(10, chain.denomPow))
+    const chart = new Chart('votingPowerChart', {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [
           {
+            barPercentage: 0.5,
+            maxBarThickness: 50,
+            borderRadius: {
+              topRight: 10,
+              bottomRight: 10
+            },
             data: data,
             backgroundColor: [
               '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
@@ -513,7 +519,7 @@ export class SummaryComponent implements OnInit {
               },
               callback: function (value, index) {
                 let label = this.getLabelForValue(index);
-                return label && label.length > 15
+                return label && label.length > 15 && data.length > 5
                   ? label.substring(0, 11) + '...'
                   : label;
               }
@@ -538,7 +544,7 @@ export class SummaryComponent implements OnInit {
   }
 
   drawCommissionDistributionChart(validators: any): void {
-    let commissionDistribution: any = {};
+    const commissionDistribution: any = {};
     validators.forEach((validator: any) => {
       if (!commissionDistribution[validator.commission]) {
         commissionDistribution[validator.commission] = 0;
@@ -554,14 +560,20 @@ export class SummaryComponent implements OnInit {
     sortableArray = sortableArray.sort((a: any, b: any) => b[1] - a[1]);
     sortableArray = sortableArray.slice(0, 5);
 
-    let labels = sortableArray.map((res: any) => this.displayPercent(res[0]));
-    let data = sortableArray.map((res: any) => res[1]);
-    let commissionChart = new Chart('commissionChart', {
+    const labels = sortableArray.map((res: any) => this.displayPercent(res[0]));
+    const data = sortableArray.map((res: any) => res[1]);
+    const chart = new Chart('commissionChart', {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [
           {
+            barPercentage: 0.5,
+            maxBarThickness: 50,
+            borderRadius: {
+              topLeft: 10,
+              topRight: 10
+            },
             data: data,
             backgroundColor: [
               '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
@@ -629,20 +641,26 @@ export class SummaryComponent implements OnInit {
 
   drawMissedBlocksChart(validators: any): void {
 
-    let labels = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.moniker);
-    let data = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.missedBlocks);
+    const labels = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.moniker);
+    const data = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.missedBlocks);
 
     if (!data.length) {
       this.noMissedBlocks = true;
       return;
     }
 
-    let missedBlocksChart = new Chart('missedBlocksChart', {
+    const char = new Chart('missedBlocksChart', {
       type: 'bar',
       data: {
         labels: labels,
         datasets: [
           {
+            barPercentage: 0.5,
+            maxBarThickness: 50,
+            borderRadius: {
+              topLeft: 10,
+              topRight: 10
+            },
             data: data,
             backgroundColor: [
               '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
@@ -693,13 +711,15 @@ export class SummaryComponent implements OnInit {
               },
               callback: function (value, index) {
                 let label = this.getLabelForValue(index);
-                return label && label.length > 15
+                return label && label.length > 15 && data.length > 5
                   ? label.substring(0, 11) + '...'
                   : label;
               }
             }
           },
           y: {
+            min: 0,
+            max: 100,
             display: true,
             ticks: {
               precision: 0,
@@ -722,7 +742,7 @@ export class SummaryComponent implements OnInit {
       this.drawGoogleMap(geoLocationData);
       this.drawNodesPerContinentDistributionTable(geoLocationData);
       this.drawNodesPerCountryDistributionTable(geoLocationData);
-      this.drawNodesPerOrganizationDistributionTable(geoLocationData);
+      this.drawNodesPerOrganizationDistribution(geoLocationData);
     });
   }
 
@@ -862,7 +882,7 @@ export class SummaryComponent implements OnInit {
     this.nodesPerCountryDatasource.sort = this.nodesPerCountrySort;
   }
 
-  drawNodesPerOrganizationDistributionTable(geoLocationData: []) {
+  drawNodesPerOrganizationDistribution(geoLocationData: []) {
     const organizationMergeMap : { [key: string]: string } = {
       'Contabo': 'Contabo GmbH',
       'Charter Communications Inc': 'Charter Communications, Inc',
@@ -874,6 +894,9 @@ export class SummaryComponent implements OnInit {
         .filter((geolocation: any) => !geolocation.message)
         .map((geolocation: any) => {
           for (let key in organizationMergeMap) {
+            if (!geolocation.organization) {
+              geolocation.organization = 'Unknown';
+            }
             if (geolocation.organization.toLowerCase() === key.toLowerCase()
               || geolocation.organization.toLowerCase().includes(key.toLowerCase())) {
               geolocation.organization = organizationMergeMap[key];
@@ -903,5 +926,106 @@ export class SummaryComponent implements OnInit {
     this.nodesPerOrganizationDatasource = new MatTableDataSource<any[]>(tableData);
     this.nodesPerOrganizationDatasource.paginator = this.nodesPerOrganizationPaginator;
     this.nodesPerOrganizationDatasource.sort = this.nodesPerOrganizationSort;
+    this.drawNodesPerOrganizationChart(tableData);
+  }
+
+  drawNodesPerOrganizationChart(tableData: any[]): void {
+    let _this = this;
+    const topOrganizations = tableData.slice(0, 5);
+    const otherOrganizations = tableData.slice(5);
+    const otherOrganization = {
+      organization: 'Others',
+      count: 0,
+      countWithPercentage: ''
+    };
+    otherOrganizations.forEach((organization: any) => {
+      otherOrganization.count += organization.count;
+    })
+    topOrganizations.push(otherOrganization);
+
+    const labels = topOrganizations.map((organization => {
+      const count = organization.count;
+      const total = this.geoLocationDataLength;
+      const percentage = this.utilsService.calculatePercentage(count, total!);
+      const shortOrganizationName = organization.organization.split(' ')[0].replace(',', '');
+      return `${shortOrganizationName} (${percentage}%)`
+    }));
+    const data = topOrganizations.map((organization) => organization.count);
+    const chart = new Chart('organizationChart', {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            barPercentage: 0.5,
+            maxBarThickness: 50,
+            borderRadius: {
+              topLeft: 10,
+              topRight: 10
+            },
+            data: data,
+            backgroundColor: [
+              '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
+              '#4891EA', '#EE965B', '#F284D1', '#6FDBCB',
+              '#2D71C4', '#EF5A5A', '#609C29', '#C69B06',
+              '#8A2299', '#996D6C', '#2F2F6C', '#1C6C61',
+            ]
+          }
+        ]
+      },
+      options: {
+        indexAxis: 'x',
+        plugins: {
+          legend: {
+            display: false,
+          },
+          tooltip: {
+            titleFont: {
+              size: 20,
+              family: 'Monaco'
+            },
+            bodyFont: {
+              size: 20,
+              family: 'Monaco'
+            },
+            callbacks: {
+              title: function () {
+                return ''
+              },
+              label: function (context) {
+                let label = context.label || '';
+                let value = context.dataset.data[context.dataIndex];
+                return label  + ': ' + value;
+              },
+            },
+          }
+        },
+        responsive: true,
+        scales: {
+          x: {
+            display: true,
+            ticks: {
+              font: {
+                size: 15,
+                family: 'Monaco'
+              }
+            }
+          },
+          y: {
+            display: true,
+            ticks: {
+              precision: 0,
+              font: {
+                size: 15,
+                family: 'Monaco'
+              },
+              callback: function (value) {
+                return _this.utilsService.compactNumber(parseInt(value.toString()));
+              }
+            }
+          }
+        }
+      }
+    });
   }
 }
