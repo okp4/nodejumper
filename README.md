@@ -82,6 +82,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>https://nodejumper.io/rebus</td>
   </tr>
   <tr>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470582-b3c2859e-43f6-4bcb-81b0-4803b2833fd9.png" alt="Teritori"></td>
+    <td>Teritori</td>
+    <td>Mainnet</td>
+    <td>https://nodejumper.io/teritori/installation</td>
+  </tr>  
+  <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/191722903-3f59fea2-a283-4a7f-a57a-5bacfff4d4b9.png" alt="Sifchain"></td>
     <td>Sifchain</td>
     <td>Mainnet</td>
@@ -116,6 +122,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>Teritori</td>
     <td>Testnet</td>
     <td>https://nodejumper.io/teritori-testnet/installation</td>
+  </tr>
+  <tr>
+    <td><img width="50" src="https://user-images.githubusercontent.com/27004732/193849588-62c835dc-9d36-4973-9a46-4c86243c0572.png" alt="Empower"></td>
+    <td>Empower Chain</td>
+    <td>Testnet</td>
+    <td>https://nodejumper.io/empower-testnet/installation</td>
   </tr>
 </table>
 
