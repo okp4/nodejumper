@@ -28,13 +28,6 @@ export class SummaryComponent implements OnInit {
   tokensDistributionRatio: any;
   athPriceRatio: any;
 
-  innerStrokeColor_SUCCESS: string;
-  outerStrokeColor_SUCCESS: string;
-  innerStrokeColor_WARN: string;
-  outerStrokeColor_WARN: string;
-  innerStrokeColor_DANGER: string;
-  outerStrokeColor_DANGER: string;
-
   chainSummarySubscription: any;
   coingekoMarketDataSubscription: any;
   chainValidatorsSubscription: any;
@@ -59,16 +52,38 @@ export class SummaryComponent implements OnInit {
   isValidatorChartLoading = true;
   isDecentralizationMapLoading = true;
 
+  strokeInnerColor: string;
+  strokeOuterColor: string;
+  borderColor: string;
+  backgroundColor: string;
+  colorSchema: string[];
+
   constructor(private router: Router,
               public chainService: ChainService,
               public utilsService: UtilsService) {
     this.CHART_INTERVAL_DAYS = 14;
-    this.innerStrokeColor_SUCCESS = 'rgba(120, 192, 0, 0.4)';
-    this.outerStrokeColor_SUCCESS = 'rgba(120, 192, 0, 1)';
-    this.innerStrokeColor_WARN = 'rgba(255, 193, 7, 0.4)';
-    this.outerStrokeColor_WARN = 'rgba(255, 193, 7, 1)';
-    this.innerStrokeColor_DANGER = 'rgba(220, 53, 69, 0.4)';
-    this.outerStrokeColor_DANGER = 'rgba(220, 53, 69, 1)';
+    this.strokeInnerColor = 'rgba(98, 193, 161, 0.4)';
+    this.strokeOuterColor = 'rgba(98, 193, 161, 1)';
+    this.borderColor = this.strokeOuterColor;
+    this.backgroundColor = 'rgba(98, 193, 161, 0.1)';
+    this.colorSchema = [
+      '#388F72', '#45B08C', '#62C1A1', '#83CEB5',
+      '#24B3A8', '#30D5C8', '#56DDD2', '#7CE4DC'
+    ];
+    // this.colorSchema = [
+    //   '#5A5E68', '#6F7581', '#868C97', '#9FA3AC',
+    //   '#B8BBC1', '#D0D2D7', '#E9EAEC', '#868C97',
+    //   '#9FA3AC', '#B8BBC1', '#D0D2D7', '#E9EAEC'
+    // ];
+    // this.colorSchema = [
+    //   '#89CFF0', '#62B8FC', '#60BEEB', '#38AEE6',
+    //   '#35A4FB', '#088FFA', '#0476D0', '#035CA3',
+    //   '#024376', '#012949'
+    // ];
+    // this.colorSchema = [
+    //   '#4E545C', '#747474', '#747474', '#B1B1B1',
+    //   '#8D9797', '#D1D0D0', '#7E7C73', '#BBC4C2',
+    // ];
   }
 
   ngOnInit(): void {
@@ -81,15 +96,11 @@ export class SummaryComponent implements OnInit {
       return;
     }
     if (this.chain.isSummaryEnabled) {
-      let apiChainId = this.chain.apiChainId || this.chain.id;
+      const apiChainId = this.chain.apiChainId || this.chain.id;
       this.chainService.getChainSummary(apiChainId)
         .subscribe((summary: any) => {
-          let ratio = this.extractBondedTokensRatio(this.chain!, summary);
-          this.bondedTokensRatio = {
-            ratio: ratio,
-            innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
-            outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
-          };
+          const ratio = this.extractBondedTokensRatio(this.chain!, summary);
+          this.bondedTokensRatio = ratio;
           this.summary = summary;
           this.summary.blockTime = this.extractBlockTime(summary);
           this.summary.inflation = this.extractInflation(summary);
@@ -97,17 +108,13 @@ export class SummaryComponent implements OnInit {
           this.summary.totalSupply = this.extractTotalSupply(this.chain!, summary);
           this.summary.communityPool = this.extractCommunityPool(this.chain!, summary);
         });
-      let coingekoCoinId = this.chain.coingekoCoinId || this.chain.id;
+      const coingekoCoinId = this.chain.coingekoCoinId || this.chain.id;
       this.chainSummarySubscription = this.chainService.getCoingekoSummary(coingekoCoinId)
         .subscribe((coingekoSummary: any) => {
           this.price = this.extractPrice(coingekoSummary);
-          let ratio = this.extractAthPriceRatio(coingekoSummary);
+          const ratio = this.extractAthPriceRatio(coingekoSummary);
           if (ratio) {
-            this.athPriceRatio = {
-              ratio: ratio,
-              innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 40),
-              outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 40)
-            };
+            this.athPriceRatio = ratio;
           }
         });
 
@@ -120,12 +127,8 @@ export class SummaryComponent implements OnInit {
       this.chainValidatorsSubscription = this.chainService.getChainValidators(apiChainId)
         .subscribe((validators: any) => {
           this.isValidatorChartLoading = false;
-          let ratio = this.extractTokensDistributionRatio(validators);
-          this.tokensDistributionRatio = {
-            ratio: ratio,
-            innerStrokeColor: this.innerStokeColorForRatio(ratio, 10, 25),
-            outerStrokeColor: this.outerStokeColorByRatio(ratio, 10, 25)
-          };
+          const ratio = this.extractTokensDistributionRatio(validators);
+          this.tokensDistributionRatio = ratio;
           this.drawVotingPowerChart(validators, this.chain!);
           this.drawCommissionDistributionChart(validators);
           this.drawMissedBlocksChart(validators);
@@ -166,7 +169,7 @@ export class SummaryComponent implements OnInit {
   }
 
   extractPrice(coingekoSummary: any): string {
-    let price = coingekoSummary?.market_data?.current_price?.usd;
+    const price = coingekoSummary?.market_data?.current_price?.usd;
     if (!price) {
       return '-';
     }
@@ -178,7 +181,7 @@ export class SummaryComponent implements OnInit {
   }
 
   extractInflation(summary: any): string {
-    let inflation = summary.inflation;
+    const inflation = summary.inflation;
     if (!inflation) {
       return '-';
     }
@@ -194,7 +197,7 @@ export class SummaryComponent implements OnInit {
   }
 
   extractBondedTokens(chain: Chain, summary: any): string {
-    let bondedTokens = summary.bondedTokens / Math.pow(10, chain.denomPow);
+    const bondedTokens = summary.bondedTokens / Math.pow(10, chain.denomPow);
     return this.utilsService.compactNumber(bondedTokens, 1);
   }
 
@@ -226,8 +229,8 @@ export class SummaryComponent implements OnInit {
   }
 
   extractBondedTokensRatio(chain: Chain, summary: any): number {
-    let bondedTokens = summary.bondedTokens;
-    let totalSupply = this.findTotalSupply(chain, summary);
+    const bondedTokens = summary.bondedTokens;
+    const totalSupply = this.findTotalSupply(chain, summary);
     return +(bondedTokens / totalSupply * 100).toFixed(2);
   }
 
@@ -240,7 +243,7 @@ export class SummaryComponent implements OnInit {
     let tmpVotingPower = 0;
     let percentage = 0;
     for (let i = 0; i < validators.length && !percentage; i++) {
-      let validator = validators[i];
+      const validator = validators[i];
       tmpVotingPower += validator.votingPower;
       validatorsNum++;
       if (tmpVotingPower / totalVotingPower * 100 >= 50) {
@@ -251,28 +254,12 @@ export class SummaryComponent implements OnInit {
   }
 
   extractAthPriceRatio(coingekoSummary: any): any {
-    let currentPrice = coingekoSummary?.market_data?.current_price?.usd;
-    let athPrice = coingekoSummary?.market_data?.ath?.usd;
+    const currentPrice = coingekoSummary?.market_data?.current_price?.usd;
+    const athPrice = coingekoSummary?.market_data?.ath?.usd;
     if (!currentPrice || !athPrice) {
       return;
     }
     return +(currentPrice / athPrice * 100).toFixed(2);
-  }
-
-  innerStokeColorForRatio(ratio: number, limit1: number, limit2: number) : string {
-    return ratio <= limit1
-      ? this.innerStrokeColor_DANGER
-      : ratio <= limit2
-        ? this.innerStrokeColor_WARN
-        : this.innerStrokeColor_SUCCESS;
-  }
-
-  outerStokeColorByRatio(ratio: number, limit1: number, limit2: number) : string {
-    return ratio <= limit1
-      ? this.outerStrokeColor_DANGER
-      : ratio <= limit2
-        ? this.outerStrokeColor_WARN
-        : this.outerStrokeColor_SUCCESS;
   }
 
   drawPriceChart(coingekoMarketData: any): void {
@@ -291,15 +278,15 @@ export class SummaryComponent implements OnInit {
       pricesLabels.push(priceLabel.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
 
-    const priceChart = new Chart('priceChart', {
+    const chart = new Chart('priceChart', {
       type: 'line',
       data: {
         labels: pricesLabels,
         datasets: [
           {
             data: pricesY,
-            borderColor: "rgb(234, 128, 252)",
-            backgroundColor: "rgb(234, 128, 252, 0.1)",
+            borderColor: this.borderColor,
+            backgroundColor: this.backgroundColor,
             fill: true,
             borderWidth: 2,
             tension: 0.4,
@@ -386,8 +373,8 @@ export class SummaryComponent implements OnInit {
         datasets: [
           {
             data: volumeY,
-            borderColor: "rgb(234, 128, 252)",
-            backgroundColor: "rgb(234, 128, 252, 0.1)",
+            borderColor: this.borderColor,
+            backgroundColor: this.backgroundColor,
             fill: true,
             borderWidth: 2,
             tension: 0.4,
@@ -472,12 +459,7 @@ export class SummaryComponent implements OnInit {
               bottomRight: 10
             },
             data: data,
-            backgroundColor: [
-              '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
-              '#4891EA', '#EE965B', '#F284D1', '#6FDBCB',
-              '#2D71C4', '#EF5A5A', '#609C29', '#C69B06',
-              '#8A2299', '#996D6C', '#2F2F6C', '#1C6C61',
-            ]
+            backgroundColor: this.colorSchema
           }
         ]
       },
@@ -575,12 +557,7 @@ export class SummaryComponent implements OnInit {
               topRight: 10
             },
             data: data,
-            backgroundColor: [
-              '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
-              '#4891EA', '#EE965B', '#F284D1', '#6FDBCB',
-              '#2D71C4', '#EF5A5A', '#609C29', '#C69B06',
-              '#8A2299', '#996D6C', '#2F2F6C', '#1C6C61',
-            ]
+            backgroundColor: this.colorSchema
           }
         ]
       },
@@ -662,12 +639,7 @@ export class SummaryComponent implements OnInit {
               topRight: 10
             },
             data: data,
-            backgroundColor: [
-              '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
-              '#4891EA', '#EE965B', '#F284D1', '#6FDBCB',
-              '#2D71C4', '#EF5A5A', '#609C29', '#C69B06',
-              '#8A2299', '#996D6C', '#2F2F6C', '#1C6C61',
-            ]
+            backgroundColor: this.colorSchema
           }
         ]
       },
@@ -964,12 +936,7 @@ export class SummaryComponent implements OnInit {
               topRight: 10
             },
             data: data,
-            backgroundColor: [
-              '#89D4F5', '#BCD759', '#FFBF00', '#9961A7',
-              '#4891EA', '#EE965B', '#F284D1', '#6FDBCB',
-              '#2D71C4', '#EF5A5A', '#609C29', '#C69B06',
-              '#8A2299', '#996D6C', '#2F2F6C', '#1C6C61',
-            ]
+            backgroundColor: this.colorSchema
           }
         ]
       },

@@ -139,6 +139,7 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
 }
 
 .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #83CEB5;
 }
 
 :root {
