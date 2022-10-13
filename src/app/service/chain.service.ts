@@ -86,14 +86,10 @@ export class ChainService {
   }
 
   getUnsafeResetAllString(chain: Chain): string {
-    if (chain.newWayUnsafeResetAll) {
-      return this.getChainBinaryName(chain) + ' tendermint unsafe-reset-all --home $HOME/' + chain.homeDirectoryName + " --keep-addr-book";
+    if (chain.isTendermintUnsafeResetEnabled) {
+      return chain.binaryName + ' tendermint unsafe-reset-all --home $HOME/' + chain.homeDirectoryName + " --keep-addr-book";
     }
-    return this.getChainBinaryName(chain) + ' unsafe-reset-all';
-  }
-
-  getChainBinaryName(chain: Chain): string {
-    return chain.binaryName || chain.serviceName;
+    return chain.binaryName + ' unsafe-reset-all';
   }
 
   getArchiveReason(chain: Chain): string {
@@ -103,5 +99,24 @@ export class ChainService {
       return `${chainNet} ended ${endedAtNTimeAgo} ago.`;
     }
     return chain.archiveReason || '';
+  }
+
+  getChainAddressBook(chain: Chain) {
+    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json`;
+    return this.http.get(url);
+  }
+
+  getIPGeoInfo(ip: string) {
+    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
+    const url = `https://api.ipgeolocation.io/ipgeo?ip=${ip}${apiKey}`;
+    return this.http.get(url);
+  }
+
+  getIPGeoInfoBulk(ips: string[]) {
+    const formData: any = new FormData();
+    formData.append('ips', ips);
+    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
+    const url = `https://api.ipgeolocation.io/ipgeo-bulk?${apiKey}`;
+    return this.http.post(url, formData);
   }
 }

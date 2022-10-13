@@ -13,15 +13,39 @@
   </div>
 
   <div class="menu">
-    <a
-      class="item"
-      routerLinkActive="active"
-      *ngIf="!chain.summaryDisabled"
-      [routerLink]="['./']"
-      [routerLinkActiveOptions]="{exact: true}"
-    >
-      Summary
-    </a>
+    <div>
+      <a class="item"
+        routerLinkActive="active"
+         *ngIf="chain.isSummaryEnabled || chain.isDecentralizationMapEnabled"
+        [routerLink]="['./']"
+        [routerLinkActiveOptions]="{exact: true}">
+        Summary
+      </a>
+      <div
+        class="sub-item-container"
+        routerLinkActive="active"
+        [routerLink]="['./']"
+        [routerLinkActiveOptions]="{exact: true}"
+      >
+        <a
+          class="sub-item"
+          *ngIf="chain.isSummaryEnabled"
+          [routerLink]="['./']"
+          (click)="scrollToFragment('metrics')"
+        >
+          Chain Metrics
+        </a>
+        <a
+          class="sub-item"
+          *ngIf="chain.isDecentralizationMapEnabled"
+          [routerLink]="['./']"
+          (click)="scrollToFragment('decentralization')"
+        >
+          Decentralization Map
+        </a>
+      </div>
+    </div>
+
 
     <div>
       <a
@@ -85,7 +109,7 @@
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('state-sync')"
-          *ngIf="!chain.stateSyncDisabled"
+          *ngIf="!chain.isStateSyncEnabled"
         >
           State Sync
         </a>

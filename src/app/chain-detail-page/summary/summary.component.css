@@ -34,6 +34,7 @@
 
 .charts .col {
   position: relative;
+  display: inline-block;
 }
 
 .charts .title {
@@ -88,8 +89,66 @@
   margin-top: 150px;
 }
 
+table {
+  width: 100%;
+}
+
+.mat-cell {
+  font-family: 'Monaco', sans-serif;
+}
+
+.mat-header-cell {
+  font-family: 'Monaco', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.decentralization-map-wrapper {
+  padding-top: 70px;
+  overflow:hidden;
+  padding-bottom: 50%;
+  position:relative;
+  height:0;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.decentralization-map {
+  position:absolute;
+  bottom:0;
+  height: calc(100% - 70px);
+  width:100%;
+}
+
+.total {
+  position: absolute;
+  bottom: 0;
+  margin: 7px;
+  padding: 10px;
+  font-size: 14px;
+  background-color: white;
+}
+
+.simple-table {
+  padding-top: 70px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @media (max-width: 576px) {
   .charts .title {
     font-size: 18px;
+  }
+  .total {
+    font-size: 11px;
   }
 }

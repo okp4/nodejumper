@@ -1,7 +1,7 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Chain } from "../../model/chain";
 import { ChainStatus } from "../../model/chainStatus";
-import { DOCUMENT, ViewportScroller } from '@angular/common';
+import { ViewportScroller } from '@angular/common';
 import { LeftHandMenuService } from "../../service/left-hand-menu.service";
 import { ChainService } from "../../service/chain.service";
 import { UtilsService } from "../../service/utils.service";
@@ -17,8 +17,7 @@ export class LeftHandMenuComponent implements OnInit {
   chainStatus?: ChainStatus;
   chainStatusMessage?: string;
 
-  constructor(@Inject(DOCUMENT) private document: Document,
-              private leftHandMenuService: LeftHandMenuService,
+  constructor(private leftHandMenuService: LeftHandMenuService,
               public chainService: ChainService,
               private utilsService: UtilsService,
               private viewportScroller: ViewportScroller) {

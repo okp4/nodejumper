@@ -1,18 +1,20 @@
 export class Chain {
   id: string;
   chainName: string;
-  prettyChainName?: string;
   chainId: string;
   logo: string;
   snapshotServer: string;
   rpcServer: string;
   rpcPeer: string;
-  serviceName: string;
-  binaryName?: string;
+  binaryName: string;
   homeDirectoryName: string;
   twitter: string;
   github: string;
   globe: string;
+  denomPow: number;
+
+  prettyChainName?: string;
+  serviceName?: string;
   medium?: string;
   discord?: string;
   telegram?: string;
@@ -20,39 +22,25 @@ export class Chain {
   coingekoCoinId?: string;
   validatorUrl?: string;
   projectOverview?: string;
-  snapshotDisabled?: boolean;
-  stateSyncDisabled?: boolean;
-  summaryDisabled?: boolean;
-  denomName: string;
-  denomPow: number;
+  denomName!: string;
   apiChainId?: string;
-  stateSyncExtraStep?: string;
-  newWayUnsafeResetAll?: boolean;
   isTestnet?: boolean;
-  hardwareRequirements?: string;
   githubRepoName?: string;
   isArchive?: boolean;
   archiveReason?: string;
   endedAt?: string;
   testnetTasksLink?: string;
-  hasWasm?: boolean;
 
-  constructor(id: string, chainName: string, chainId: string, logo:string, snapshotServer: string, rpcServer: string,
-              rpcPeer: string, serviceName: string, homeDirectoryName: string, twitter: string, github: string,
-              globe: string, denomName: string, denomPow: number) {
-    this.id = id;
-    this.chainName = chainName;
-    this.chainId = chainId;
-    this.logo = logo;
-    this.snapshotServer = snapshotServer;
-    this.rpcServer = rpcServer;
-    this.rpcPeer = rpcPeer;
-    this.serviceName = serviceName;
-    this.homeDirectoryName = homeDirectoryName;
-    this.twitter = twitter;
-    this.github = github;
-    this.globe = globe;
-    this.denomName = denomName;
-    this.denomPow = denomPow;
+  hardwareRequirements?: string = '4CPU 8RAM 200GB';
+  isTendermintUnsafeResetEnabled?: boolean = true;
+  isSnapshotEnabled?: boolean = true;
+  isStateSyncEnabled?: boolean = true;
+  isTopLevelWasmEnabled?: boolean = false;
+  isSummaryEnabled?: boolean = false;
+  isDecentralizationMapEnabled?: boolean = false;
+
+  constructor(chainConfig: Partial<Chain> = {}) {
+    Object.assign(this, chainConfig);
+    this.serviceName = chainConfig.binaryName;
   }
 }

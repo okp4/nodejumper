@@ -138,6 +138,10 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   white-space: pre-line;
 }
 
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #83CEB5;
+}
+
 :root {
   --max-width: 1212px;
   --details-color: #57606a;

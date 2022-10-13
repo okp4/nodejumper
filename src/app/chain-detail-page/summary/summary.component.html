@@ -1,5 +1,5 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
-  <div class="row">
+  <div class="row" id="metrics" *ngIf="chain.isSummaryEnabled">
     <div class="col col-12 col-sm-12 col-md-6 col-lg-4">
       <div class="block">
         <div class="title">Price</div>
@@ -56,74 +56,187 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="chain.isSummaryEnabled">
     <div class="ratio-row">
       <div class="col col-8 col-sm-8 col-md-4 col-lg-4"
            ngbTooltip="This ratio shows percentage of bonded tokens in total supply. The higher this ratio the safer is the chain."
            tooltipClass="ratio-tooltip">
-        <circle-progress [percent]="bondedTokensRatio?.ratio"
+        <circle-progress [percent]="bondedTokensRatio"
                          [subtitle]="'Bonded Tokens Ratio'"
-                         [innerStrokeColor]="bondedTokensRatio?.innerStrokeColor || 'rgba(208, 215, 222, 1)'"
-                         [outerStrokeColor]="bondedTokensRatio?.outerStrokeColor"
+                         [innerStrokeColor]="this.strokeInnerColor"
+                         [outerStrokeColor]="this.strokeOuterColor"
         ></circle-progress>
       </div>
       <div class="col col-8 col-sm-8 col-md-4 col-lg-4"
            ngbTooltip="This ratio shows percentage of validators who own more than 50% of bonded tokens in total. The higher this ratio the more decentralized is the chain."
            tooltipClass="ratio-tooltip">
-        <circle-progress [percent]="tokensDistributionRatio?.ratio"
+        <circle-progress [percent]="tokensDistributionRatio"
                          [subtitle]="'Tokens Distribution Ratio'"
-                         [innerStrokeColor]="tokensDistributionRatio?.innerStrokeColor || 'rgba(208, 215, 222, 1)'"
-                         [outerStrokeColor]="tokensDistributionRatio?.outerStrokeColor"
+                         [innerStrokeColor]="this.strokeInnerColor"
+                         [outerStrokeColor]="this.strokeOuterColor"
         ></circle-progress>
       </div>
       <div class="col col-8 col-sm-8 col-md-4 col-lg-4"
            ngbTooltip="This ratio shows percentage of current price in ATH price." tooltipClass="ratio-tooltip">
-        <circle-progress [percent]="athPriceRatio?.ratio"
+        <circle-progress [percent]="athPriceRatio"
                          [subtitle]="'ATH Price Ratio'"
-                         [innerStrokeColor]="athPriceRatio?.innerStrokeColor || 'rgba(208, 215, 222, 1)'"
-                         [outerStrokeColor]="athPriceRatio?.outerStrokeColor"
+                         [innerStrokeColor]="this.strokeInnerColor"
+                         [outerStrokeColor]="this.strokeOuterColor"
         ></circle-progress>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="charts">
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="title">
-          <span>Price Chart ({{CHART_INTERVAL_DAYS}}d)</span>
+      <ng-container *ngIf="chain.isSummaryEnabled">
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+            <span>Price Chart ({{CHART_INTERVAL_DAYS}}d)</span>
+          </div>
+          <div [ngClass]="noPrices ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
+          <canvas id="priceChart" class="chart"></canvas>
         </div>
-        <div [ngClass]="noPrices ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
-        <canvas id="priceChart" class="chart"></canvas>
-      </div>
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="title">
-          <span>Volume Chart ({{CHART_INTERVAL_DAYS}}d)</span>
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+            <span>Volume Chart ({{CHART_INTERVAL_DAYS}}d)</span>
+          </div>
+          <div [ngClass]="noVolumes ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
+          <canvas id="volumeChart" class="chart"></canvas>
         </div>
-        <div [ngClass]="noVolumes ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
-        <canvas id="volumeChart" class="chart"></canvas>
-      </div>
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="title">
-          <span>Voting Power (top 10)</span>
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+            <span>Voting Power (top 10)</span>
+          </div>
+          <canvas id="votingPowerChart" class="chart"></canvas>
+          <mat-progress-spinner
+            color="black"
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isValidatorChartLoading">
+          </mat-progress-spinner>
         </div>
-        <canvas id="votingPowerChart" class="chart"></canvas>
-      </div>
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="title">
-          <span>Commission Distribution (top 5)
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+          <span>Commission Distribution
             <i
               class="fa-solid fa-circle-question"
               ngbTooltip="This chart shows top 5 the most frequently used commission rates among active validators."
               tooltipClass="ratio-tooltip"></i>
           </span>
+          </div>
+          <canvas id="commissionChart" class="chart"></canvas>
+          <mat-progress-spinner
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isValidatorChartLoading">
+          </mat-progress-spinner>
         </div>
-        <canvas id="commissionChart" class="chart"></canvas>
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title"><span>Missed Blocks (over last 100 blocks)</span></div>
+          <div [ngClass]="noMissedBlocks ? 'no-data': 'hide'"><span>No Missed Blocks Yet</span></div>
+          <canvas id="missedBlocksChart" class="chart"></canvas>
+          <mat-progress-spinner
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isValidatorChartLoading">
+          </mat-progress-spinner>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="chain.isDecentralizationMapEnabled">
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12" id="decentralization">
+        <div class="title"><span>Decentralization Map (BETA)</span></div>
+        <div class="decentralization-map-wrapper">
+          <div id="decentralization-map" class="decentralization-map"></div>
+          <div class="total" *ngIf="!isDecentralizationMapLoading">Total | {{geoLocationDataLength}} Nodes</div>
+        </div>
+        <mat-progress-spinner
+          mode="indeterminate"
+          class="spinner"
+          *ngIf="isDecentralizationMapLoading">
+        </mat-progress-spinner>
       </div>
       <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="title"><span>Missed Blocks (over last 100 blocks)</span></div>
-        <div [ngClass]="noMissedBlocks ? 'no-data': 'hide'"><span>No Missed Blocks Yet</span></div>
-        <canvas id="missedBlocksChart" class="chart"></canvas>
+        <div class="title"><span>Nodes Per Continent (BETA)</span></div>
+        <div class="simple-table">
+          <table mat-table [dataSource]="nodesPerContinentDatasource" matSort #nodesPerContinentSort="matSort">
+            <ng-container matColumnDef="continent">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Continent </th>
+              <td mat-cell *matCellDef="let row"> {{row.continent}} </td>
+            </ng-container>
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="nodesPerContinentDisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: nodesPerContinentDisplayColumns;"></tr>
+          </table>
+          <mat-paginator #nodesPerContinentPaginator="matPaginator"
+                         [pageSize]="5"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true"
+          ></mat-paginator>
+        </div>
       </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="title"><span>Nodes Per Country (BETA)</span></div>
+        <div class="simple-table">
+          <table mat-table [dataSource]="nodesPerCountryDatasource" matSort #nodesPerCountrySort="matSort">
+            <ng-container matColumnDef="country">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Country</th>
+              <td mat-cell *matCellDef="let row">
+                <img src="{{row.countryFlag}}" alt="{{row.countryFlag}}" height="20px">
+                {{row.country}}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="nodesPerCountryDisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: nodesPerCountryDisplayColumns;"></tr>
+          </table>
+          <mat-paginator #nodesPerCountryPaginator="matPaginator"
+                         [pageSize]="5"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true"
+          ></mat-paginator>
+        </div>
+      </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+            <span>Nodes Per Hosting (BETA)</span>
+          </div>
+          <canvas id="organizationChart" class="chart"></canvas>
+          <mat-progress-spinner
+            color="black"
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isDecentralizationMapLoading">
+          </mat-progress-spinner>
+      </div>
+      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="title"><span>Nodes Per Hosting (BETA)</span></div>
+        <div class="simple-table">
+          <table mat-table [dataSource]="nodesPerOrganizationDatasource" matSort #nodesPerOrganizationSort="matSort">
+            <ng-container matColumnDef="organization">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Organization </th>
+              <td mat-cell *matCellDef="let row"> {{row.organization}} </td>
+            </ng-container>
+            <ng-container matColumnDef="count">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header> Number Of Nodes </th>
+              <td mat-cell *matCellDef="let row"> {{row.countWithPercentage}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="nodesPerOrganizationDisplayColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: nodesPerOrganizationDisplayColumns;"></tr>
+          </table>
+          <mat-paginator #nodesPerOrganizationPaginator="matPaginator"
+                         [pageSize]="5"
+                         [pageSizeOptions]="[5, 10, 20]"
+                         [showFirstLastButtons]="true"
+          ></mat-paginator>
+        </div>
+      </div>
+      </ng-container>
     </div>
   </div>
 </ng-container>

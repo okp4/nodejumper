@@ -1,8 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chain } from "../../model/chain";
 import { HighlightService } from "../../service/highlight.service";
 import { ChainService } from "../../service/chain.service";
-import { DOCUMENT } from "@angular/common";
 import { SnapshotData } from "../../model/snapshotData";
 import { UtilsService } from "../../service/utils.service";
 
@@ -19,8 +18,7 @@ export class SynchronizationScriptsComponent implements OnInit {
   snapshotData?: SnapshotData;
   livePeers: string[] = [];
 
-  constructor(@Inject(DOCUMENT) private document: Document,
-              private highlightService: HighlightService,
+  constructor(private highlightService: HighlightService,
               public chainService: ChainService,
               private utilsService: UtilsService) {
   }
