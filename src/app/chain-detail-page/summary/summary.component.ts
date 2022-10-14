@@ -272,7 +272,7 @@ export class SummaryComponent implements OnInit {
       let label = new Date(item);
       labels.push(label.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
-    this.chartService.drawLineChart('priceChart', labels, dataY);
+    this.chartService.drawLineChart('priceChart', labels, dataY, true);
   }
 
   drawVolumeChart(coingekoMarketData: any): void {

@@ -17,7 +17,8 @@ export class ChartService {
   constructor(private utilsService: UtilsService) {
   }
 
-  drawLineChart(containerId: string, labels: string[], data: []) {
+  drawLineChart(containerId: string, labels: string[], data: [], isPriceChart: boolean = false) {
+    const _this = this;
     const chart = new Chart(containerId, {
       type: 'line',
       data: {
@@ -81,6 +82,12 @@ export class ChartService {
               font: {
                 size: 15,
                 family: 'Monaco'
+              },
+              callback: function (value) {
+                if (isPriceChart) {
+                  return value;
+                }
+                return _this.utilsService.compactNumber(parseInt(value.toString()), 2);
               }
             }
           }
