@@ -381,6 +381,11 @@ export class ChartService {
               font: {
                 size: 15,
                 family: 'Monaco'
+              },
+              callback: function (value, index) {
+                let label = this.getLabelForValue(index);
+                console.log(label);
+                return label.split(' (')[0];
               }
             }
           },

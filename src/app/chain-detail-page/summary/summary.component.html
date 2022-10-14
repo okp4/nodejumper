@@ -79,6 +79,7 @@
       <div class="col col-8 col-sm-8 col-md-4 col-lg-4"
            ngbTooltip="This ratio shows percentage of current price in ATH price." tooltipClass="ratio-tooltip">
         <circle-progress [percent]="athPriceRatio"
+                         [title]="athPriceRatio"
                          [subtitle]="'ATH Price Ratio'"
                          [innerStrokeColor]="this.strokeInnerColor"
                          [outerStrokeColor]="this.strokeOuterColor"
@@ -93,15 +94,25 @@
           <div class="title">
             <span>Price Chart ({{CHART_INTERVAL_DAYS}}d)</span>
           </div>
-          <div [ngClass]="noPrices ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
+          <div [ngClass]="noPriceData ? 'no-data': 'hide'"><span>No Data</span></div>
           <canvas id="priceChart" class="chart"></canvas>
+          <mat-progress-spinner
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isCoingekoChartLoading">
+          </mat-progress-spinner>
         </div>
         <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
           <div class="title">
             <span>Volume Chart ({{CHART_INTERVAL_DAYS}}d)</span>
           </div>
-          <div [ngClass]="noVolumes ? 'no-data': 'hide'"><span>No Market Data Yet</span></div>
+          <div [ngClass]="noVolumeData ? 'no-data': 'hide'"><span>No Data</span></div>
           <canvas id="volumeChart" class="chart"></canvas>
+          <mat-progress-spinner
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isCoingekoChartLoading">
+          </mat-progress-spinner>
         </div>
         <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
           <div class="title">
@@ -133,7 +144,7 @@
         </div>
         <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
           <div class="title"><span>Missed Blocks (over last 100 blocks)</span></div>
-          <div [ngClass]="noMissedBlocks ? 'no-data': 'hide'"><span>No Missed Blocks Yet</span></div>
+          <div [ngClass]="noMissedBlocksData ? 'no-data': 'hide'"><span>No Data</span></div>
           <canvas id="missedBlocksChart" class="chart"></canvas>
           <mat-progress-spinner
             mode="indeterminate"

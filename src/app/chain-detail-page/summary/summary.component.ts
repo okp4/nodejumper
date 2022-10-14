@@ -21,9 +21,9 @@ export class SummaryComponent implements OnInit {
   price: string | undefined;
   summary: any;
   CHART_INTERVAL_DAYS: number;
-  noPrices: boolean | undefined;
-  noVolumes: boolean | undefined;
-  noMissedBlocks: boolean | undefined;
+  noPriceData: boolean | undefined;
+  noVolumeData: boolean | undefined;
+  noMissedBlocksData: boolean | undefined;
   bondedTokensRatio: any;
   tokensDistributionRatio: any;
   athPriceRatio: any;
@@ -49,6 +49,7 @@ export class SummaryComponent implements OnInit {
   nodesPerOrganizationDatasource: any;
   nodesPerContinentDatasource: any;
 
+  isCoingekoChartLoading = true;
   isValidatorChartLoading = true;
   isDecentralizationMapLoading = true;
 
@@ -90,18 +91,32 @@ export class SummaryComponent implements OnInit {
         });
       const coingekoCoinId = this.chain.coingekoCoinId || this.chain.id;
       this.chainSummarySubscription = this.chainService.getCoingekoSummary(coingekoCoinId)
-        .subscribe((coingekoSummary: any) => {
-          this.price = this.extractPrice(coingekoSummary);
-          const ratio = this.extractAthPriceRatio(coingekoSummary);
-          if (ratio) {
-            this.athPriceRatio = ratio;
+        .subscribe({
+          next: (coingekoSummary: any) => {
+            this.price = this.extractPrice(coingekoSummary);
+            const ratio = this.extractAthPriceRatio(coingekoSummary);
+            if (ratio) {
+              this.athPriceRatio = ratio;
+            }
+          },
+          error: (err: any) => {
+            this.price = '-';
+            this.athPriceRatio = '-';
           }
         });
 
       this.coingekoMarketDataSubscription = this.chainService.getCoingekoMarketData(coingekoCoinId, this.CHART_INTERVAL_DAYS)
-        .subscribe((coingekoMarketData: any) => {
-          this.drawPriceChart(coingekoMarketData);
-          this.drawVolumeChart(coingekoMarketData);
+        .subscribe({
+          next: (coingekoMarketData: any) => {
+            this.isCoingekoChartLoading = false;
+            this.drawPriceChart(coingekoMarketData);
+            this.drawVolumeChart(coingekoMarketData);
+          },
+          error: (err: any) => {
+            this.isCoingekoChartLoading = false;
+            this.noPriceData = true;
+            this.noVolumeData = true;
+          }
         });
 
       this.chainValidatorsSubscription = this.chainService.getChainValidators(apiChainId)
@@ -245,7 +260,7 @@ export class SummaryComponent implements OnInit {
   drawPriceChart(coingekoMarketData: any): void {
     const prices = coingekoMarketData.prices.slice(0, -1);
     if (!prices.length) {
-      this.noPrices = true;
+      this.noPriceData = true;
       return;
     }
     const dataX = prices.map((item: any) => item[0]);
@@ -261,7 +276,7 @@ export class SummaryComponent implements OnInit {
   drawVolumeChart(coingekoMarketData: any): void {
     const volume = coingekoMarketData.total_volumes.slice(0, -1);
     if (!volume.length) {
-      this.noVolumes = true;
+      this.noVolumeData = true;
       return;
     }
     const dataX = volume.map((item: any) => item[0]);
@@ -312,7 +327,7 @@ export class SummaryComponent implements OnInit {
     const labels = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.moniker);
     const data = validators.filter((validator: any) => validator.missedBlocks).map((validator: any) => validator.missedBlocks);
     if (!data.length) {
-      this.noMissedBlocks = true;
+      this.noMissedBlocksData = true;
       return;
     }
     this.chartService.drawMissedBlocksBarChart('missedBlocksChart', labels, data);
@@ -469,6 +484,7 @@ export class SummaryComponent implements OnInit {
   drawNodesPerOrganizationDistribution(geoLocationData: []) {
     const organizationMergeMap: { [key: string]: string } = {
       'Contabo': 'Contabo GmbH',
+      'Amazon Technologies Inc.': 'Amazon.com, Inc.',
       'Charter Communications Inc': 'Charter Communications, Inc',
     };
     const nodesPerOrganization: any = {};
@@ -514,6 +530,9 @@ export class SummaryComponent implements OnInit {
   }
 
   drawNodesPerOrganizationChart(tableData: any[]): void {
+    const customShortOrganizationNames : { [key: string]: string } = {
+      'The Constant Company, LLC': 'The Constant'
+    };
     const topOrganizations = tableData.slice(0, 5);
     const otherOrganizations = tableData.slice(5);
     const otherOrganization = {
@@ -530,8 +549,13 @@ export class SummaryComponent implements OnInit {
       const count = organization.count;
       const total = this.geoLocationDataLength;
       const percentage = this.utilsService.calculatePercentage(count, total!);
-      const shortOrganizationName = organization.organization.split(' ')[0].replace(',', '');
-      return `${shortOrganizationName} (${percentage}%)`
+      let shortOrganizationName = organization.organization.split(' ')[0].replace(',', '');
+      Object.keys(customShortOrganizationNames).forEach((name: string) => {
+        if (name === organization.organization) {
+          shortOrganizationName = customShortOrganizationNames[name];
+        }
+      })
+      return `${shortOrganizationName} (${percentage}%)`;
     }));
     const data = topOrganizations.map((organization) => organization.count);
     this.chartService.drawNodesPerOrganizationBarChart('organizationChart', labels, data);
