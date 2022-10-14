@@ -166,6 +166,18 @@
           *ngIf="isDecentralizationMapLoading">
         </mat-progress-spinner>
       </div>
+        <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="title">
+            <span>Nodes Per Hosting (BETA)</span>
+          </div>
+          <canvas id="organizationChart" class="chart"></canvas>
+          <mat-progress-spinner
+            color="black"
+            mode="indeterminate"
+            class="spinner"
+            *ngIf="isDecentralizationMapLoading">
+          </mat-progress-spinner>
+        </div>
       <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
         <div class="title"><span>Nodes Per Continent (BETA)</span></div>
         <div class="simple-table">
@@ -212,18 +224,6 @@
                          [showFirstLastButtons]="true"
           ></mat-paginator>
         </div>
-      </div>
-      <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
-          <div class="title">
-            <span>Nodes Per Hosting (BETA)</span>
-          </div>
-          <canvas id="organizationChart" class="chart"></canvas>
-          <mat-progress-spinner
-            color="black"
-            mode="indeterminate"
-            class="spinner"
-            *ngIf="isDecentralizationMapLoading">
-          </mat-progress-spinner>
       </div>
       <div class="col col-12 col-sm-12 col-md-12 col-lg-12">
         <div class="title"><span>Nodes Per Hosting (BETA)</span></div>

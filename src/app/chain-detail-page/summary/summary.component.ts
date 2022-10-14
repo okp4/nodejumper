@@ -545,7 +545,9 @@ export class SummaryComponent implements OnInit {
     otherOrganizations.forEach((organization: any) => {
       otherOrganization.count += organization.count;
     })
-    topOrganizations.push(otherOrganization);
+    if (otherOrganization.count) {
+      topOrganizations.push(otherOrganization);
+    }
 
     const labels = topOrganizations.map((organization => {
       const count = organization.count;
