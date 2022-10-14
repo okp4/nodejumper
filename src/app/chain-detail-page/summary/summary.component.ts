@@ -133,7 +133,9 @@ export class SummaryComponent implements OnInit {
       this.chainService.getChainAddressBook(this.chain)
         .subscribe((addressBook: any) => {
           const addressBookEntries: any = [];
-          addressBook.addrs.forEach((address: any) => {
+          addressBook.addrs
+            .filter((address: any) => address.last_success !== '0001-01-01T00:00:00Z')
+            .forEach((address: any) => {
             addressBookEntries.push({
               id: address.addr.id,
               ip: address.addr.ip
