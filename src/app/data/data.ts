@@ -594,6 +594,7 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     projectOverview: "Cosmos based blockchain for handling card ownership, card creation and voting on cards.",
     isTestnet: true,
+    isDecentralizationMapEnabled: true
   }),
   new Chain({
     id: "terpnetwork-testnet",
