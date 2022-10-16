@@ -1,4 +1,4 @@
-name: Deploy NodeJumper
+name: Deploy Nodejumper
 
 on:
   push:
