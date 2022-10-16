@@ -272,7 +272,7 @@ export class SummaryComponent implements OnInit {
       let label = new Date(item);
       labels.push(label.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
-    this.chartService.drawLineChart('priceChart', labels, dataY, true);
+    this.chartService.drawLineChart('priceChart', labels, dataY);
   }
 
   drawVolumeChart(coingekoMarketData: any): void {
@@ -288,7 +288,8 @@ export class SummaryComponent implements OnInit {
       let label = new Date(item);
       labels.push(label.toLocaleDateString('en', {month: 'short', day: 'numeric'}));
     });
-    this.chartService.drawLineChart('volumeChart', labels, dataY);
+    const yTicksCallback = (value: any) => this.utilsService.compactNumber(parseInt(value.toString()), 2);
+    this.chartService.drawLineChart('volumeChart', labels, dataY, yTicksCallback);
   }
 
   drawVotingPowerChart(validators: any, chain: Chain): void {

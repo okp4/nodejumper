@@ -21,7 +21,6 @@ export class Chain {
   blockExplorer?: string;
   coingekoCoinId?: string;
   validatorUrl?: string;
-  projectOverview?: string;
   denomName!: string;
   apiChainId?: string;
   isTestnet?: boolean;

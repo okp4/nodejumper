@@ -17,9 +17,8 @@ export class ChartService {
   constructor(private utilsService: UtilsService) {
   }
 
-  drawLineChart(containerId: string, labels: string[], data: [], isPriceChart: boolean = false) {
-    const _this = this;
-    const chart = new Chart(containerId, {
+  drawLineChart(containerId: string, labels: string[], data: [], yTicksCallback?: any) {
+    const chartConfig: any = {
       type: 'line',
       data: {
         labels: labels,
@@ -49,7 +48,7 @@ export class ChartService {
               family: 'Monaco'
             },
             callbacks: {
-              label: function (context) {
+              label: function (context: any) {
                 let label = context.dataset.label || '';
                 if (context.parsed.y !== null) {
                   label += new Intl.NumberFormat('en-US', {
@@ -83,19 +82,20 @@ export class ChartService {
                 size: 15,
                 family: 'Monaco'
               },
-              callback: function (value) {
-                if (isPriceChart) {
-                  return value;
-                }
-                return _this.utilsService.compactNumber(parseInt(value.toString()), 2);
-              }
             }
           }
         }
       }
-    });
+    };
+    if (yTicksCallback) {
+      chartConfig.options.scales.y.ticks.callback = yTicksCallback;
+    }
+    const chart = new Chart(containerId, chartConfig);
   }
 
+  drawBarChart(containerId: string, labels: string[], data: []) {
+
+  }
   drawVotingPowerBarChart(containerId: string, labels: string[], data: []) {
     const _this = this;
     const chart = new Chart(containerId, {
