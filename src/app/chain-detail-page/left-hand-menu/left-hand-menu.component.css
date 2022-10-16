@@ -6,7 +6,7 @@
   background-color: white;
   position: fixed;
   box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
-  z-index: 105; /* higher than header z-index (100) to be able to popup tooltip on top*/
+  z-index: 1002; /* higher than header z-index (1001) to be able to popup tooltip on top*/
   margin-top: 15px;
 }
 
@@ -204,7 +204,7 @@
     top: 0;
     right: 0;
     margin: 0;
-    z-index: 105;
+    z-index: 1002;
     height: 100%;
     outline: none;
     border-radius: unset;
