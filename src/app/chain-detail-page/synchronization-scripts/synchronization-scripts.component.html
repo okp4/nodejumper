@@ -24,7 +24,7 @@ mv $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup $HOME/{{ch
 sudo systemctl restart {{chain.serviceName}}
 sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat</code></pre>
   </div>
-  <div class="row" *ngIf="!chain.isStateSyncEnabled" id="state-sync">
+  <div class="row" *ngIf="chain.isStateSyncEnabled" id="state-sync">
     <p class="title">State Sync</p>
     <pre><code class="language-bash">sudo systemctl stop {{chain.serviceName}}
 

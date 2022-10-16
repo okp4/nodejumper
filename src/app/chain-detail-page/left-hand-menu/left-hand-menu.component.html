@@ -102,6 +102,7 @@
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('snapshot')"
+          *ngIf="chain.isSnapshotEnabled"
         >
           Snapshot
         </a>
@@ -109,7 +110,7 @@
           class="sub-item"
           [routerLink]="['./sync']"
           (click)="scrollToFragment('state-sync')"
-          *ngIf="!chain.isStateSyncEnabled"
+          *ngIf="chain.isStateSyncEnabled"
         >
           State Sync
         </a>
