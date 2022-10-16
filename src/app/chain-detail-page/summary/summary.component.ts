@@ -410,7 +410,7 @@ export class SummaryComponent implements OnInit {
           const label = `Node ID: ${addressBookEntry.id}
                         <br> IP: ${geolocation.ip}
                         <br> Provider: ${geolocation.isp}
-                        <br> Country: <img height="20px" src="${geolocation.country_flag}" alt="${geolocation.country_name}"> ${geolocation.country_name}`;
+                        <br> Country: <img height="20px" width="35px" src="${geolocation.country_flag}" alt="${geolocation.country_name}"> ${geolocation.country_name}`;
           const content = `<div class="marker-popup">${label}</div>`;
           const marker = L.marker(position, {icon: markerIcon});
           marker.bindPopup(content, {
