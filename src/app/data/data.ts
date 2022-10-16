@@ -254,8 +254,7 @@ export const CHAINS: Chain[] = [
     denomName: "ufis",
     denomPow: 6,
     githubRepoName: 'stafihub',
-    isSummaryEnabled: true,
-    isDecentralizationMapEnabled: true
+    isSummaryEnabled: true
   }),
   new Chain({
     id: "sifchain",
@@ -577,8 +576,7 @@ export const CHAINS: Chain[] = [
     validatorUrl: "https://explorer.kjnodes.com/cardchain/staking/ccvaloper1d2gnx8gxf44tkjky7ftwfkg9k0lln56x8tp7zl",
     denomName: "ubpf",
     denomPow: 6,
-    isTestnet: true,
-    isDecentralizationMapEnabled: true
+    isTestnet: true
   }),
   new Chain({
     id: "terpnetwork-testnet",

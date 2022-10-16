@@ -391,7 +391,6 @@ export class ChartService {
               },
               callback: function (value, index) {
                 let label = this.getLabelForValue(index);
-                console.log(label);
                 return label.split(' (')[0];
               }
             }

@@ -3,12 +3,15 @@ import { ChainService } from "../../service/chain.service";
 import { Chain } from "../../model/chain";
 import { Router } from "@angular/router";
 import { UtilsService } from "../../service/utils.service";
-import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import { forkJoin, map } from "rxjs";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatTableDataSource } from "@angular/material/table";
 import { MatSort } from '@angular/material/sort';
 import { ChartService } from "../../service/chart.service";
+import 'leaflet';
+import "leaflet.markercluster";
+
+declare let L: any;
 
 @Component({
   selector: 'app-summary',
@@ -341,7 +344,7 @@ export class SummaryComponent implements OnInit {
     forkJoin(getIPGeoHttpRequests).subscribe((geoLocationData: any) => {
       this.isDecentralizationMapLoading = false;
       this.geoLocationDataLength = this.getGeoLocationDataLength(geoLocationData);
-      this.drawGoogleMap(geoLocationData);
+      this.drawLeafletMap(geoLocationData);
       this.drawNodesPerContinentDistributionTable(geoLocationData);
       this.drawNodesPerCountryDistributionTable(geoLocationData);
       this.drawNodesPerOrganizationDistribution(geoLocationData);
@@ -377,48 +380,46 @@ export class SummaryComponent implements OnInit {
     return geoLocationDataLength;
   }
 
-  drawGoogleMap(geoLocationData: []) {
-    const googleMap = new google.maps.Map(document.getElementById('decentralization-map') as HTMLElement, {
-      zoom: 1,
-      center: {lat: 20, lng: 20},
-      streetViewControl: false
-    });
-    const infoWindow = new google.maps.InfoWindow({
-      content: "",
-      disableAutoPan: true
-    });
+  drawLeafletMap(geoLocationData: []) {
 
-    const markers: any = [];
-    const markerClustererMap = new MarkerClusterer({markers, map: googleMap});
+    const map = L.map('decentralization-map').setView([20, 20], 1);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    map.zoomControl.setPosition('bottomright');
+    map.attributionControl.setPrefix(false);
 
+    const markerIcon =
+      L.icon({
+        iconSize: [25, 41],
+        iconAnchor: [10, 41],
+        popupAnchor: [2, -40],
+        iconUrl: "assets/marker-icon.png",
+        shadowUrl: "assets/marker-shadow.png",
+      })
+    const markerCluster = L.markerClusterGroup({
+      showCoverageOnHover: false,
+      animate: true
+    });
     geoLocationData.forEach((httpResponse: any) => {
       const data = httpResponse.data;
       const addressBookEntries = httpResponse.addressBookEntries;
       data
         .filter((geolocation: any) => !geolocation.message)
         .forEach((geolocation: any, i: number) => {
-          const position = {lat: +geolocation.latitude, lng: +geolocation.longitude};
+          const position = [+geolocation.latitude, +geolocation.longitude];
           const addressBookEntry: any = addressBookEntries[i];
           const label = `Node ID: ${addressBookEntry.id}
                         <br> IP: ${geolocation.ip}
                         <br> Provider: ${geolocation.isp}
                         <br> Country: <img height="20px" src="${geolocation.country_flag}" alt="${geolocation.country_name}"> ${geolocation.country_name}`;
-          const marker = new google.maps.Marker({
-            position
+          const content = `<div class="marker-popup">${label}</div>`;
+          const marker = L.marker(position, {icon: markerIcon});
+          marker.bindPopup(content, {
+            maxWidth: 560
           });
-          marker.addListener("click", () => {
-            const innerStyles = "word-wrap: break-word;" +
-              "  font-family: 'Monaco', sans-serif !important;" +
-              "  font-size: 14px;" +
-              "  line-height: 25px;";
-            const content = `<div style="${innerStyles}">${label}</div>`;
-            infoWindow.setContent(content);
-            infoWindow.open(googleMap, marker);
-          });
-          markers.push(marker);
+          markerCluster.addLayer(marker);
         });
     });
-    markerClustererMap.addMarkers(markers);
+    map.addLayer(markerCluster);
   }
 
   drawNodesPerContinentDistributionTable(geoLocationData: []) {

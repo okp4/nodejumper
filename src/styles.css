@@ -142,6 +142,13 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   stroke: #83CEB5;
 }
 
+.marker-popup {
+  word-wrap: break-word;
+  font-family: 'Monaco', sans-serif !important;
+  font-size: 14px;
+  line-height: 25px;
+}
+
 :root {
   --max-width: 1212px;
   --details-color: #57606a;
@@ -180,5 +187,10 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
 
   body.left-hand-menu-open .card {
     transform: translateX(0);
+  }
+
+  .marker-popup {
+    font-size: 10px;
+    line-height: 18px;
   }
 }
