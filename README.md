@@ -37,13 +37,13 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470576-ff1a41c6-8a23-40e4-8f18-87b128fdafe3.png" alt="StafiHub"></td>
     <td>StaFiHub</td>
     <td>Mainnet</td>
-    <td>https://nodejumper.io/stafihub/installation</td>
+    <td>https://nodejumper.io/stafihub</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470533-68d3c332-ec1b-4cfc-89e7-d8905549d64a.png" alt="Galaxy"></td>
     <td>Galaxy</td>
     <td>Mainnet</td>
-    <td>https://nodejumper.io/galaxy/installation</td>
+    <td>https://nodejumper.io/galaxy</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470537-c07bd8de-ff8c-49de-bfbd-ad17f6a4e23b.png" alt="Kichain"></td>
@@ -85,7 +85,7 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470582-b3c2859e-43f6-4bcb-81b0-4803b2833fd9.png" alt="Teritori"></td>
     <td>Teritori</td>
     <td>Mainnet</td>
-    <td>https://nodejumper.io/teritori/installation</td>
+    <td>https://nodejumper.io/teritori</td>
   </tr>  
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/191722903-3f59fea2-a283-4a7f-a57a-5bacfff4d4b9.png" alt="Sifchain"></td>
@@ -97,37 +97,37 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470528-91c89337-6a0e-439f-bf49-23f7a253cdaa.png" alt="DWS"></td>
     <td>DWS</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/dws-testnet/installation</td>
+    <td>https://nodejumper.io/dws-testnet</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470554-3b67d447-f406-48e5-9506-18260b416ce3.png" alt="Paloma"></td>
     <td>Paloma</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/paloma-testnet/installation</td>
+    <td>https://nodejumper.io/paloma-testnet</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470573-53b472ee-784a-4f5e-8a63-7315e057f494.png" alt="Sei"></td>
     <td>Sei</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/sei-testnet/installation</td>
+    <td>https://nodejumper.io/sei-testnet</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181472237-c1f1d4dc-34ee-467a-a594-f8bf021ed2fe.png" alt="Stride"></td>
     <td>Stride</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/stride-testnet/installation</td>
+    <td>https://nodejumper.io/stride-testnet</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/181470582-b3c2859e-43f6-4bcb-81b0-4803b2833fd9.png" alt="Teritori"></td>
     <td>Teritori</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/teritori-testnet/installation</td>
+    <td>https://nodejumper.io/teritori-testnet</td>
   </tr>
   <tr>
     <td><img width="50" src="https://user-images.githubusercontent.com/27004732/193849588-62c835dc-9d36-4973-9a46-4c86243c0572.png" alt="Empower"></td>
     <td>Empower Chain</td>
     <td>Testnet</td>
-    <td>https://nodejumper.io/empower-testnet/installation</td>
+    <td>https://nodejumper.io/empower-testnet</td>
   </tr>
 </table>
 
