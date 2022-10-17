@@ -67,7 +67,8 @@ export const CHAINS: Chain[] = [
     denomName: "uxki",
     denomPow: 6,
     githubRepoName: 'ki-tools',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    isTopLevelWasmEnabled: true
   }),
   new Chain({
     id: "desmos",
