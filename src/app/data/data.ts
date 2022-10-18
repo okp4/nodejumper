@@ -21,8 +21,7 @@ export const CHAINS: Chain[] = [
     denomName: "uatolo",
     denomPow: 6,
     githubRepoName: 'rizon',
-    isSummaryEnabled: true,
-    isTendermintUnsafeResetEnabled: false
+    isSummaryEnabled: true
   }),
   new Chain({
     id: "bitcanna",
