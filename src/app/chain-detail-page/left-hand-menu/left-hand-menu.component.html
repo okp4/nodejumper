@@ -140,7 +140,7 @@
         Public API
       </a>
       <div
-        class="sub-item-container-2"
+        class="sub-item-container-3"
         routerLinkActive="active"
         [routerLink]="['./api']"
       >
@@ -157,6 +157,13 @@
           (click)="scrollToFragment('lcd')"
         >
           LCD (REST)
+        </a>
+        <a
+          class="sub-item"
+          [routerLink]="['./api']"
+          (click)="scrollToFragment('grpc')"
+        >
+          GRPC
         </a>
       </div>
     </div>
