@@ -244,10 +244,18 @@
       </div>
     </div>
     <div class="command-container" [ngClass]="hideForSearch(dfc1c198b2fd) ? 'd-none' : ''" #dfc1c198b2fd>
-      <p>Jail Reason</p>
+      <p>Signing Info</p>
       <div class="copy-button-container">
         <div class="command">{{chain.binaryName}} query slashing signing-info $({{chain.binaryName}} tendermint
           show-validator)
+        </div>
+        <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
+      </div>
+    </div>
+    <div class="command-container" [ngClass]="hideForSearch(c2897ad4a110) ? 'd-none' : ''" #c2897ad4a110>
+      <p>Jail Reason</p>
+      <div class="copy-button-container">
+        <div class="command">{{chain.binaryName}} query valset get-validator-jail-reason $({{chain.binaryName}} tendermint show-validator)
         </div>
         <button class="copy-button" type="button" (click)="handleCopyClick($event)">Copy</button>
       </div>
