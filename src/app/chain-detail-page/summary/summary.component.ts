@@ -27,6 +27,7 @@ export class SummaryComponent implements OnInit {
   noPriceData: boolean | undefined;
   noVolumeData: boolean | undefined;
   noMissedBlocksData: boolean | undefined;
+  noGeolocationData: boolean | undefined;
   bondedTokensRatio: any;
   tokensDistributionRatio: any;
   athPriceRatio: any;
@@ -144,7 +145,12 @@ export class SummaryComponent implements OnInit {
               ip: address.addr.ip
             });
           });
-          this.drawNodesDecentralizationAnalytics(addressBookEntries);
+          if (addressBookEntries.length) {
+            this.drawNodesDecentralizationAnalytics(addressBookEntries);
+          } else {
+            this.noGeolocationData = true;
+            this.isDecentralizationMapLoading = false;
+          }
         });
     }
   }

@@ -157,6 +157,7 @@
         <div class="col col-12 col-sm-12 col-md-12 col-lg-12" id="decentralization">
           <div class="title"><span>Decentralization Map (BETA)</span></div>
           <div class="decentralization-map-wrapper">
+            <div [ngClass]="noGeolocationData ? 'no-data': 'hide'"><span>No Data</span></div>
             <div id="decentralization-map" class="decentralization-map"></div>
             <div class="total" *ngIf="!isDecentralizationMapLoading">Total | {{geoLocationDataLength}} Nodes</div>
           </div>
@@ -170,6 +171,7 @@
           <div class="title">
             <span>Nodes Per Hosting (BETA)</span>
           </div>
+          <div [ngClass]="noGeolocationData ? 'no-data': 'hide'"><span>No Data</span></div>
           <canvas id="organizationChart" class="chart"></canvas>
           <mat-progress-spinner
             color="black"
