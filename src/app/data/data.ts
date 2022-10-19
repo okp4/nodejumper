@@ -672,5 +672,28 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     hardwareRequirements: "4CPU 8RAM 200GB",
     isTestnet: true
+  }),
+  new Chain({
+    id: "haqq-testnet",
+    chainName: "haqq",
+    prettyChainName: "Haqq Network",
+    chainId: "haqq_54211-3",
+    logo: "haqq.svg",
+    snapshotServer: "https://snapshots1-testnet.nodejumper.io",
+    rpcServer: "https://haqq-testnet.nodejumper.io",
+    rpcPeer: "eba8c88bb316eb42deed201c84013d2a945537f4@haqq-testnet.nodejumper.io:30656",
+    binaryName: "haqqd",
+    homeDirectoryName: ".haqqd",
+    twitter: "https://twitter.com/Islamic_coin",
+    github: "https://github.com/haqq-network",
+    telegram: "https://t.me/islamiccoin_int",
+    globe: "https://islamiccoin.net/",
+    discord: "https://discord.gg/aZMm8pekhZ",
+    blockExplorer: "https://haqq.explorers.guru/",
+    validatorUrl: "https://haqq.explorers.guru/",
+    denomName: "aISLM",
+    denomPow: 18,
+    hardwareRequirements: "8CPU 16RAM 500GB",
+    isTestnet: true
   })
 ];
