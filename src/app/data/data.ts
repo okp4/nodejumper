@@ -430,7 +430,7 @@ export const CHAINS: Chain[] = [
     medium: "https://medium.com/@uptickproject",
     discord: "https://discord.gg/w7mYy8btu7",
     blockExplorer: "https://explorer.testnet.uptick.network/uptick-network-testnet",
-    validatorUrl: "https://explorer.testnet.uptick.network/uptick-network-testnet/staking/uptickvaloper1krfszwgypy2pzzkh94juf4jcnyfkczzqr45l5u",
+    validatorUrl: "https://explorer.testnet.uptick.network/uptick-network-testnet/staking/uptickvaloper1fhxvtld4u6d6a4tvnhyrguvzm53gl3tk93dag5",
     denomName: "auptick",
     denomPow: 6,
     archiveReason: 'Testnet ended.',
