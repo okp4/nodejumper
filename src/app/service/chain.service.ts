@@ -102,8 +102,7 @@ export class ChainService {
   }
 
   getChainAddressBook(chain: Chain) {
-    const salt = (new Date()).getTime();
-    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json?${salt}`;
+    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json`;
     return this.http.get(url);
   }
 
