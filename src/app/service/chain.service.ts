@@ -102,21 +102,15 @@ export class ChainService {
   }
 
   getChainAddressBook(chain: Chain) {
-    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json`;
-    return this.http.get(url);
-  }
-
-  getIPGeoInfo(ip: string) {
-    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
-    const url = `https://api.ipgeolocation.io/ipgeo?ip=${ip}${apiKey}`;
+    const salt = (new Date()).getTime();
+    const url = `${chain.snapshotServer}/${chain.id}/addrbook.json?${salt}`;
     return this.http.get(url);
   }
 
   getIPGeoInfoBulk(ips: string[]) {
     const formData: any = new FormData();
     formData.append('ips', ips);
-    const apiKey = environment.geolocationApiKey ? ('&apiKey=' + environment.geolocationApiKey) : '';
-    const url = `https://api.ipgeolocation.io/ipgeo-bulk?${apiKey}`;
+    const url = `${environment.baseUrl}/api/v1/geo-location-bulk`;
     return this.http.post(url, formData);
   }
 }
