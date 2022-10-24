@@ -687,7 +687,7 @@ export const CHAINS: Chain[] = [
     globe: "https://okp4.network",
     discord: "https://discord.gg/nfPMBqc7Qe",
     blockExplorer: "https://okp4.explorers.guru",
-    validatorUrl: "https://okp4.explorers.guru/",
+    validatorUrl: "https://okp4.explorers.guru/validator/okp4valoper10ec4zues3x4xaz89dhv5h4fkdz4cukyln9kze9",
     denomName: "uknow",
     denomPow: 6,
     hardwareRequirements: "4CPU 8RAM 200GB",
