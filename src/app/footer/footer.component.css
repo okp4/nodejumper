@@ -13,3 +13,9 @@ footer .container {
   justify-content: space-between;
   max-width: var(--max-width);;
 }
+
+@media (max-width: 576px) {
+  footer {
+    font-size: 14px;
+  }
+}

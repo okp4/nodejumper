@@ -57,10 +57,28 @@ header {
   opacity: var(--button-opacity-active);
 }
 
+.stand-for-ukraine {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: rgb(42 42 71 / 6%) 0 10px 16px;
+  background: linear-gradient(rgb(95, 130, 255) 50%, rgb(255, 230, 0) 50%);
+}
+
 @media (max-width: 576px) {
-  .title,
+  .container {
+    padding-right: 5px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
   .social-icon {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .btn-bars-menu {
@@ -74,5 +92,10 @@ header {
   .btn-social.hide,
   .btn-bars-menu.hide {
     display: none;
+  }
+
+  .stand-for-ukraine {
+    height: 23px;
+    width: 23px;
   }
 }
