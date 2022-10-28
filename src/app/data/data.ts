@@ -579,7 +579,7 @@ export const CHAINS: Chain[] = [
     id: "terpnetwork-testnet",
     chainName: "terp",
     prettyChainName: "Terp Network",
-    chainId: "athena-1",
+    chainId: "athena-2",
     logo: "terp.webp",
     snapshotServer: "https://snapshots2-testnet.nodejumper.io",
     rpcServer: "https://terp-testnet.nodejumper.io",
