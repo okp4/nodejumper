@@ -115,8 +115,7 @@ export const CHAINS: Chain[] = [
     denomName: "uflix",
     denomPow: 6,
     githubRepoName: 'omniflixhub',
-    isSummaryEnabled: true,
-    isTendermintUnsafeResetEnabled: false
+    isSummaryEnabled: true
   }),
   new Chain({
     id: "starname",
@@ -477,6 +476,7 @@ export const CHAINS: Chain[] = [
     denomName: "ubpf",
     denomPow: 6,
     isTestnet: true,
+    isTendermintUnsafeResetEnabled: false,
     hardwareRequirementsData: {
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',

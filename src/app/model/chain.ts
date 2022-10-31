@@ -42,6 +42,6 @@ export class Chain {
 
   constructor(chainConfig: Partial<Chain> = {}) {
     Object.assign(this, chainConfig);
-    this.serviceName = chainConfig.binaryName;
+    this.serviceName = this.serviceName || chainConfig.binaryName;
   }
 }
