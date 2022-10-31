@@ -149,6 +149,11 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
   line-height: 25px;
 }
 
+.fa-circle-question {
+  cursor: pointer;
+  font-size: 18px;
+}
+
 :root {
   --max-width: 1212px;
   --details-color: #57606a;

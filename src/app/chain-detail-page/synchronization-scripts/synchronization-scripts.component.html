@@ -1,7 +1,12 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
   <div class="row" *ngIf="chain.isSnapshotEnabled" id="snapshot">
     <div>
-      <p class="title">Snapshot</p>
+      <p class="title">Snapshot
+        <i
+        class="fa-solid fa-circle-question"
+        ngbTooltip="This section allows your node to join the network in a few minutes by using the snapshot. Note that the snapshot server is periodically state-synced, so the snapshots do not contain full history."
+        tooltipClass="ratio-tooltip"></i>
+      </p>
       <p class="details">
         height: <strong>{{snapshotData?.snapshotHeight || '' | number: '2.'}} {{snapshotData?.snapshotBlockTime ? ('(' + snapshotData?.snapshotBlockTime + ' ago)') : ''}}</strong>; size: <strong>{{snapshotData?.snapshotSize || ''}}</strong>; pruning: <strong>custom/100/0/10</strong>; indexer: <strong>null</strong>
       </p>
@@ -25,7 +30,12 @@ sudo systemctl restart {{chain.serviceName}}
 sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat</code></pre>
   </div>
   <div class="row" *ngIf="chain.isStateSyncEnabled" id="state-sync">
-    <p class="title">State Sync</p>
+    <p class="title">State Sync
+      <i
+        class="fa-solid fa-circle-question"
+        ngbTooltip="This section allows your node to join the network in a few minutes by using state sync. Note that the node will have a truncated block history starting at the height of the restored snapshot."
+        tooltipClass="ratio-tooltip"></i>
+    </p>
     <pre><code class="language-bash">sudo systemctl stop {{chain.serviceName}}
 
 cp $HOME/{{chain.homeDirectoryName}}/data/priv_validator_state.json $HOME/{{chain.homeDirectoryName}}/priv_validator_state.json.backup
@@ -54,7 +64,12 @@ sudo journalctl -u {{chain.serviceName}} -f --no-hostname -o cat</code></pre>
   </div>
   <div class="row" id="peers">
     <div>
-      <p class="title">Live Peers</p>
+      <p class="title">Live Peers
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="List of real time peers Nodejumper node is connected to. These peers will help to connect to the network and start receiving blocks."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
       <p class="details">
         number of active peers: <strong>{{this.livePeers.length || 1}}</strong>
       </p>
@@ -65,7 +80,15 @@ sed -i 's|^persistent_peers *=.*|persistent_peers = "'$peers'"|' $HOME/{{chain.h
   </div>
   <div class="row" id="addrbook">
     <div>
-      <p class="title">Address Book</p>
+      <p class="title" style="display: inline-block">Address Book
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="This address book stores all peers Nodejumper node has ever learned about, it will help you to connect to the network and start receiving blocks."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
+      <p class="details">
+        updates every: <strong>1h</strong>
+      </p>
     </div>
     <pre><code class="language-bash">curl -s {{chain.snapshotServer}}/{{chain.id}}/addrbook.json > $HOME/{{chain.homeDirectoryName}}/config/addrbook.json</code></pre>
   </div>

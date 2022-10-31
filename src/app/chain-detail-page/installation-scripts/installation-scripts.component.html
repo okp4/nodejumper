@@ -1,7 +1,16 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
-  <div class="row" id="hardware" *ngIf="chain.hardwareRequirements">
-    <p class="title">Hardware Requirements</p>
-    <pre><code class="language-bash">{{chain.hardwareRequirements}}</code></pre>
+  <div class="row" id="hardware" *ngIf="chain.hardwareRequirementsData">
+    <p class="title">Hardware Requirements
+      <i
+        class="fa-solid fa-circle-question"
+        ngbTooltip="Recommended hardware specification to run the node."
+        tooltipClass="ratio-tooltip"></i>
+    </p>
+    <div class="details">
+      <a href="https://hetzner.cloud/?ref=dYKZk3JiQYo2">Rent On Hetzner({{chain.hardwareRequirementsData.hetznerServerType}})</a><span> | </span>
+      <a href="https://hetzner.cloud/?ref=dYKZk3JiQYo2">Rent On Contabo({{chain.hardwareRequirementsData.contaboServerType}})</a>
+    </div>
+    <pre><code class="language-bash">{{chain.hardwareRequirementsData.specification}}</code></pre>
   </div>
   <div class="row" id="tasks" *ngIf="chain.testnetTasksLink">
     <p class="title">Tasks</p>
@@ -9,13 +18,23 @@
   </div>
   <div class="row" id="automatic">
     <div>
-      <p class="title">Automatic Installation</p>
+      <p class="title">Automatic Installation
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="This section installs the node automatically with optimized configuration. Note that this type of script is meant to be used by advanced users preferably."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
       <p class="details">pruning: <strong>custom/100/0/10</strong>; indexer: <strong>kv</strong></p>
     </div>
     <pre><code class="language-bash">source <(curl -s {{automaticScriptUrl}})</code></pre>
   </div>
   <div class="row" id="manual">
-    <p class="title">Manual Installation</p>
+    <p class="title">Manual Installation
+      <i
+        class="fa-solid fa-circle-question"
+        ngbTooltip="This section contains a list of the commands to install the node in manual mode. Note that this type of script is recommended for newbies."
+        tooltipClass="ratio-tooltip"></i>
+    </p>
     <pre><code class="language-bash"># install dependencies, if needed
 sudo apt update
 sudo apt install -y curl git jq lz4 build-essential unzip
@@ -27,7 +46,12 @@ fi</code></pre>
     <pre><code class="language-bash">{{manualScriptContent}}</code></pre>
   </div>
   <div class="row" id="create-validator" *ngIf="testnetInstructionsContent">
-    <p class="title">Create Validator</p>
+    <p class="title">Create Validator
+      <i
+        class="fa-solid fa-circle-question"
+        ngbTooltip="This section contains a list of the commands to create a validator."
+        tooltipClass="ratio-tooltip"></i>
+    </p>
     <pre><code class="language-bash">{{testnetInstructionsContent}}</code></pre>
   </div>
 </ng-container>

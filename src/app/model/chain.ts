@@ -1,3 +1,5 @@
+import { HardwareRequirementsData } from "./hardwareRequirementsData";
+
 export class Chain {
   id: string;
   chainName: string;
@@ -29,8 +31,8 @@ export class Chain {
   archiveReason?: string;
   endedAt?: string;
   testnetTasksLink?: string;
+  hardwareRequirementsData?: HardwareRequirementsData;
 
-  hardwareRequirements?: string = '4CPU 8RAM 200GB';
   isTendermintUnsafeResetEnabled?: boolean = true;
   isSnapshotEnabled?: boolean = true;
   isStateSyncEnabled?: boolean = true;

@@ -1,7 +1,12 @@
 <ng-container *ngIf="this.chainService.activeChain as chain">
   <div class="row" id="rpc">
     <div>
-      <p class="title">RPC Endpoint</p>
+      <p class="title">RPC Endpoint
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="Secure Tendermint RPC server. It provides a comprehensive API to interact with the blockchain."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
       <div class="code-block" id="rpc-link">
         <a href="{{chain.rpcServer}}">
           {{chain.rpcServer}}:443
@@ -11,7 +16,12 @@
   </div>
   <div class="row" id="api">
     <div>
-      <p class="title">LCD (Rest) API Endpoint</p>
+      <p class="title">LCD (Rest) API Endpoint
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="Secure LCD server. It provides a comprehensive API to interact with the blockchain."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
       <p class="details">With Swagger enabled</p>
       <div class="code-block" id="api-link">
         <a href="{{chain.rpcServer + ':1317'}}">
@@ -22,7 +32,12 @@
   </div>
   <div class="row" id="grpc">
     <div>
-      <p class="title">GRPC Endpoint</p>
+      <p class="title">GRPC Endpoint
+        <i
+          class="fa-solid fa-circle-question"
+          ngbTooltip="Secure GRPC server. It provides a comprehensive API to interact with the blockchain."
+          tooltipClass="ratio-tooltip"></i>
+      </p>
       <div class="code-block" id="grpc-link">
         <a href="{{chain.rpcServer + ':9090'}}">
           {{chain.rpcServer + ':9090'}}
