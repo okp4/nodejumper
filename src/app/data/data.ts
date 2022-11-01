@@ -669,6 +669,19 @@ export const CHAINS: Chain[] = [
     isTestnet: true,
     isUpcoming: true
   }),
+  new Chain({
+    id: "sui-testnet",
+    chainName: "Sui",
+    chainId: "devnet",
+    logo: "sui.webp",
+    twitter: "https://twitter.com/SuiNetwork",
+    github: "https://github.com/MystenLabs/sui",
+    globe: "https://sui.io",
+    discord: "https://discord.com/invite/sui",
+    medium: "https://medium.com/mysten-labs",
+    isTestnet: true,
+    isUpcoming: true
+  }),
 
   ////////////////////////////////
   // Archive
