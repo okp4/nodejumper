@@ -13,9 +13,11 @@ export class HomePageComponent implements OnInit {
   mainnetChains: Chain[] = [];
   testnetChains: Chain[] = [];
   archiveChains: Chain[] = [];
+  upcomingChains: Chain[] = [];
   searchQuery: string = '';
   chainType = 'all';
   showAbout = false;
+  showArchive = false;
 
   constructor(public chainService: ChainService, public stateService: StateService) {
     this.applyChainTypeWithFilter(this.chainType, "");
@@ -40,17 +42,20 @@ export class HomePageComponent implements OnInit {
       case 'mainnet':
         this.mainnetChains = this.chainService.getChains(chainType, searchText);
         this.testnetChains = [];
+        this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = this.chainService.getChains(chainType, searchText, true);
         break;
       case 'testnet':
         this.mainnetChains = [];
         this.testnetChains = this.chainService.getChains(chainType, searchText);
+        this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = this.chainService.getChains(chainType, searchText, true);
         break;
       case 'all':
       default:
         this.mainnetChains = this.chainService.getChains('mainnet', searchText);
         this.testnetChains = this.chainService.getChains('testnet', searchText);
+        this.upcomingChains = this.chainService.getChains('all', searchText, false, true);
         this.archiveChains = this.chainService.getChains('all', searchText, true);
     }
   }

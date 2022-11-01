@@ -35,7 +35,7 @@ export class LeftHandMenuComponent implements OnInit {
         socialIcons.item(i)?.classList.add('hide');
       }
     }
-    if (this.chain && !this.chain.isArchive) {
+    if (this.chain && !this.chain.isArchive && !this.chain.isUpcoming) {
       this.chainService.getChainStatus(this.chain)
         .subscribe({
           next: (data: any) => {

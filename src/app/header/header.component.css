@@ -36,6 +36,11 @@ header {
 
 .btn-social {
   padding-right: 0;
+  outline: none;
+}
+
+.btn-social:first-child {
+  padding-left: 0;
 }
 
 .btn-bars-menu {

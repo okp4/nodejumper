@@ -102,10 +102,25 @@
         <app-chain-card [chain]="chain"></app-chain-card>
       </a>
     </div>
-    <div class="title-container" *ngIf="archiveChains.length">
-      <p class="title">Archive</p>
+    <div class="title-container" *ngIf="upcomingChains.length">
+      <p class="title">Upcoming</p>
     </div>
-    <div class="chain-cards-container" *ngIf="archiveChains.length">
+    <div class="chain-cards-container" *ngIf="upcomingChains.length">
+      <a
+        *ngFor="let chain of upcomingChains"
+        [routerLink]="[this.rootRouterLink(chain)]"
+        class="col col-12 col-sm-6 col-md-4 col-lg-3 text-decoration-none"
+      >
+        <app-chain-card [chain]="chain"></app-chain-card>
+      </a>
+    </div>
+    <div class="title-container archive-title-container" *ngIf="archiveChains.length" (click)="showArchive=!showArchive">
+      <p class="title">
+        <i class="fa-solid fa-caret-right" *ngIf="!showArchive"></i>
+        <i class="fa-solid fa-caret-down" *ngIf="showArchive"></i>
+        Archive</p>
+    </div>
+    <div class="chain-cards-container" *ngIf="archiveChains.length && showArchive">
       <a
         *ngFor="let chain of archiveChains"
         [routerLink]="[this.rootRouterLink(chain)]"

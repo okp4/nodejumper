@@ -1,6 +1,10 @@
 import { Chain } from "../model/chain";
 
 export const CHAINS: Chain[] = [
+
+  ////////////////////////////////
+  // Mainnet
+  ////////////////////////////////
   new Chain({
     id: "rizon",
     chainName: "Rizon",
@@ -319,6 +323,9 @@ export const CHAINS: Chain[] = [
     isStateSyncEnabled: false,
   }),
 
+  ////////////////////////////////
+  // Testnet
+  ////////////////////////////////
   new Chain({
     id: "sei-testnet",
     chainName: "Sei",
@@ -621,7 +628,51 @@ export const CHAINS: Chain[] = [
       contaboServerType: 'VPS S'
     }
   }),
+  ////////////////////////////////
+  // Upcoming
+  ////////////////////////////////
+  new Chain({
+    id: "defund-testnet",
+    chainName: "defund",
+    prettyChainName: "DeFund Finance",
+    chainId: "defund-private-2",
+    logo: "defund.webp",
+    twitter: "https://twitter.com/defund_finance",
+    github: "https://github.com/defund-labs",
+    globe: "https://defund.app",
+    discord: "https://discord.gg/UsER6bWuUq",
+    isTestnet: true,
+    isUpcoming: true
+  }),
+  new Chain({
+    id: "neutron-testnet",
+    chainName: "Neutron",
+    chainId: "quark-1",
+    logo: "neutron.jpeg",
+    twitter: "https://twitter.com/Neutron_org",
+    github: "https://github.com/neutron-org",
+    globe: "https://neutron.org",
+    discord: "https://discord.gg/U7c5uaxFSq",
+    isTestnet: true,
+    isUpcoming: true
+  }),
+  new Chain({
+    id: "celestia-testnet",
+    chainName: "Celestia",
+    chainId: "mamaki",
+    logo: "celestia.webp",
+    twitter: "https://twitter.com/CelestiaOrg",
+    telegram: "https://t.me/CelestiaCommunity",
+    github: "https://github.com/celestiaorg",
+    globe: "https://celestia.org/",
+    discord: "https://discord.gg/kUSueaB22b",
+    isTestnet: true,
+    isUpcoming: true
+  }),
 
+  ////////////////////////////////
+  // Archive
+  ////////////////////////////////
   new Chain({
     id: "another1-testnet",
     chainName: "Another-1",

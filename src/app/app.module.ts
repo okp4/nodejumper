@@ -30,6 +30,7 @@ import { MatPaginatorModule } from "@angular/material/paginator";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {MatSortModule} from '@angular/material/sort';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
+import { TbdComponent } from './chain-detail-page/tbd/tbd.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
     SummaryComponent,
     CheatSheetComponent,
     UpgradeScriptsComponent,
-    ApiComponent
+    ApiComponent,
+    TbdComponent
   ],
   imports: [
     BrowserModule,

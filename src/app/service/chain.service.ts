@@ -16,10 +16,11 @@ export class ChainService {
               private utilsService: UtilsService) {
   }
 
-  getChains(chainType?: string, searchText?: string, isArchive?: boolean): Chain[] {
+  getChains(chainType?: string, searchText?: string, isArchive?: boolean, isUpcoming?: boolean): Chain[] {
     const lowerCaseQuery = searchText?.toLocaleLowerCase() || ""
     return CHAINS
       .filter(chain => this.filterByArchive(chain, isArchive))
+      .filter(chain => this.filterByUpcoming(chain, isUpcoming))
       .filter(chain => this.filterByType(chain, chainType))
       .filter(chain => this.filterByQuery(chain, lowerCaseQuery))
       .sort((chain1, chain2) => {
@@ -48,6 +49,10 @@ export class ChainService {
 
   filterByArchive(chain: Chain, isArchive?: boolean) : boolean {
     return !!chain.isArchive === !!isArchive;
+  }
+
+  filterByUpcoming(chain: Chain, isUpcoming?: boolean) : boolean {
+    return !!chain.isUpcoming === !!isUpcoming;
   }
 
   getAllChains(): Chain[] {

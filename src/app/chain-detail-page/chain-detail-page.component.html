@@ -2,5 +2,6 @@
   <app-left-hand-menu [chain]="chain"></app-left-hand-menu>
 </div>
 <div class="content">
-  <router-outlet></router-outlet>
+  <app-tbd *ngIf="chain?.isUpcoming"></app-tbd>
+  <router-outlet *ngIf="!chain?.isUpcoming"></router-outlet>
 </div>

@@ -26,6 +26,7 @@ export class Chain {
   denomName!: string;
   apiChainId?: string;
   isTestnet?: boolean;
+  isUpcoming?: boolean;
   githubRepoName?: string;
   isArchive?: boolean;
   archiveReason?: string;
