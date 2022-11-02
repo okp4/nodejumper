@@ -51,6 +51,12 @@ export class HomePageComponent implements OnInit {
         this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = this.chainService.getChains(chainType, searchText, true);
         break;
+      case 'upcoming':
+        this.mainnetChains = [];
+        this.testnetChains = [];
+        this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
+        this.archiveChains = [];
+        break;
       case 'all':
       default:
         this.mainnetChains = this.chainService.getChains('mainnet', searchText);

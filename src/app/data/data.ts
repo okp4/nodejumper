@@ -682,6 +682,61 @@ export const CHAINS: Chain[] = [
     isTestnet: true,
     isUpcoming: true
   }),
+  new Chain({
+    id: "nibiru-testnet",
+    chainName: "nibiru",
+    prettyChainName: "Nibiru Chain",
+    chainId: "nibiru-testnet-1",
+    logo: "nibiru.webp",
+    twitter: "https://twitter.com/NibiruChain",
+    github: "https://github.com/NibiruChain",
+    globe: "https://nibiru.fi",
+    discord: "https://discord.com/invite/zjkzZwrez5",
+    medium: "https://blog.nibiru.fi/",
+    isTestnet: true,
+    isUpcoming: true
+  }),
+  new Chain({
+    id: "gnoland-testnet",
+    chainName: "gnoland",
+    prettyChainName: "Gno Land",
+    chainId: "test2",
+    logo: "gnoland.webp",
+    twitter: "https://twitter.com/_gnoland",
+    github: "https://github.com/gnolang",
+    globe: "https://gno.land",
+    discord: "https://discord.gg/gmM6jcMFGs",
+    telegram: "https://t.me/gnoland",
+    isTestnet: true,
+    isUpcoming: true
+  }),
+  new Chain({
+    id: "dydx-testnet",
+    chainName: "dYdx",
+    chainId: "",
+    logo: "dydx.webp",
+    twitter: "https://twitter.com/dydx",
+    github: "https://github.com/dydxprotocol",
+    globe: "https://dydx.exchange",
+    discord: "https://discord.gg/Jmgu8z6sVv",
+    medium: "https://medium.com/dydxderivatives",
+    isTestnet: true,
+    isUpcoming: true
+  }),
+  new Chain({
+    id: "wormhole-testnet",
+    chainName: "Wormhole",
+    chainId: "",
+    logo: "wormhole.webp",
+    twitter: "https://twitter.com/wormholecrypto",
+    github: "https://github.com/wormhole-foundation",
+    globe: "https://wormhole.com",
+    discord: "https://discord.com/invite/wormholecrypto",
+    telegram: "https://t.me/wormholecrypto",
+    medium: "https://wormholecrypto.medium.com",
+    isTestnet: true,
+    isUpcoming: true
+  }),
 
   ////////////////////////////////
   // Archive

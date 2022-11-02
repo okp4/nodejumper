@@ -38,6 +38,7 @@ export class ChainService {
 
   filterByType(chain: Chain, chainType?: string): boolean {
     return chainType == 'all'
+      || chainType == 'upcoming'
       || (chainType == 'mainnet' && !chain.isTestnet || false)
       || (chainType == 'testnet' && !!chain.isTestnet || false);
   }

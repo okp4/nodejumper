@@ -48,7 +48,7 @@
         />
       </div>
     </div>
-    <div class="col col-12 col-sm-5 col-md-5 col-lg-4">
+    <div class="col col-12 col-sm-7 col-md-7 col-lg-4">
       <div class="tabs-container">
         <div
           class="tab-button"
@@ -71,10 +71,17 @@
         >
           Testnet
         </div>
+        <div
+          class="tab-button"
+          (click)="stateService.chainType.next('upcoming')"
+          [ngClass]="chainType == 'upcoming' ? 'active': ''"
+        >
+          Upcoming
+        </div>
       </div>
     </div>
-    <div class="col col-12 col-sm-7 col-md-7 col-lg-2">
-      <div class="chains-count">{{mainnetChains.length + testnetChains.length + archiveChains.length}} chain(s)</div>
+    <div class="col col-12 col-sm-5 col-md-5 col-lg-2">
+      <div class="chains-count">{{mainnetChains.length + testnetChains.length + upcomingChains.length +  archiveChains.length}} chain(s)</div>
     </div>
   </div>
   <div class="row">
@@ -131,7 +138,7 @@
     </div>
     <div
       class="empty-result"
-      *ngIf="mainnetChains.length === 0 && testnetChains.length === 0"
+      *ngIf="mainnetChains.length === 0 && testnetChains.length === 0 && upcomingChains.length === 0 && archiveChains.length === 0"
     >
       <p>Oops, we can't find any results.</p>
     </div>
