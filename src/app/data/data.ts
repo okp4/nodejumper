@@ -25,7 +25,8 @@ export const CHAINS: Chain[] = [
     denomName: "uatolo",
     denomPow: 6,
     githubRepoName: 'rizon',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "bitcanna",
@@ -47,7 +48,8 @@ export const CHAINS: Chain[] = [
     denomName: "ubcna",
     denomPow: 6,
     githubRepoName: 'bcna',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.10'
   }),
   new Chain({
     id: "kichain",
@@ -72,7 +74,8 @@ export const CHAINS: Chain[] = [
     githubRepoName: 'ki-tools',
     isSummaryEnabled: true,
     isTopLevelWasmEnabled: true,
-    isStateSyncEnabled: false
+    isStateSyncEnabled: false,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "desmos",
@@ -96,7 +99,7 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     githubRepoName: 'desmos',
     isSummaryEnabled: true,
-    isTendermintUnsafeResetEnabled: false
+    cosmosSdkVersion: 'v0.44.4'
   }),
   new Chain({
     id: "omniflix",
@@ -119,7 +122,8 @@ export const CHAINS: Chain[] = [
     denomName: "uflix",
     denomPow: 6,
     githubRepoName: 'omniflixhub',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "starname",
@@ -144,7 +148,7 @@ export const CHAINS: Chain[] = [
     githubRepoName: 'starnamed',
     isStateSyncEnabled: false,
     isSummaryEnabled: true,
-    isTendermintUnsafeResetEnabled: false
+    cosmosSdkVersion: 'v0.42.5'
   }),
   new Chain({
     id: "osmosis",
@@ -167,7 +171,8 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     githubRepoName: 'osmosis',
     isStateSyncEnabled: false,
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.46.1'
   }),
   new Chain({
     id: "galaxy",
@@ -189,7 +194,7 @@ export const CHAINS: Chain[] = [
     denomName: "uglx",
     denomPow: 6,
     githubRepoName: 'galaxy',
-    isTendermintUnsafeResetEnabled: false
+    cosmosSdkVersion: 'v0.45.1'
   }),
   new Chain({
     id: "evmos",
@@ -211,7 +216,8 @@ export const CHAINS: Chain[] = [
     denomName: "aevmos",
     denomPow: 18,
     githubRepoName: 'evmos',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "juno",
@@ -234,7 +240,8 @@ export const CHAINS: Chain[] = [
     coingekoCoinId: "juno-network",
     denomPow: 6,
     githubRepoName: 'juno',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "stafihub",
@@ -256,7 +263,8 @@ export const CHAINS: Chain[] = [
     denomName: "ufis",
     denomPow: 6,
     githubRepoName: 'stafihub',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "sifchain",
@@ -278,7 +286,8 @@ export const CHAINS: Chain[] = [
     denomName: "rowan",
     denomPow: 18,
     githubRepoName: 'sifnode',
-    isSummaryEnabled: true
+    isSummaryEnabled: true,
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "rebus",
@@ -299,7 +308,8 @@ export const CHAINS: Chain[] = [
     validatorUrl: "https://restake.app/rebus/rebusvaloper1kwv8r3n93dwtk59l5lkyp9qn3u5jzxzy0mrdp8/delegate",
     denomName: "arebus",
     denomPow: 6,
-    githubRepoName: 'rebus.core'
+    githubRepoName: 'rebus.core',
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "teritori",
@@ -321,6 +331,7 @@ export const CHAINS: Chain[] = [
     denomPow: 6,
     githubRepoName: 'teritori-chain',
     isStateSyncEnabled: false,
+    cosmosSdkVersion: 'v0.45.9'
   }),
 
   ////////////////////////////////
@@ -353,7 +364,8 @@ export const CHAINS: Chain[] = [
       specification: '4CPU 8RAM 100GB',
       hetznerServerType: 'CPX31',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.4'
   }),
   new Chain({
     id: "dws-testnet",
@@ -380,7 +392,8 @@ export const CHAINS: Chain[] = [
       specification: '4CPU 8RAM 100GB',
       hetznerServerType: 'CPX31',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.5'
   }),
   new Chain({
     id: "uptick-testnet",
@@ -408,7 +421,8 @@ export const CHAINS: Chain[] = [
       specification: '4CPU 8RAM 100GB',
       hetznerServerType: 'CPX31',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.46.0'
   }),
   new Chain({
     id: "paloma-testnet",
@@ -434,7 +448,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.10'
   }),
   new Chain({
     id: "teritori-testnet",
@@ -462,7 +477,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "cardchain-testnet",
@@ -483,12 +499,12 @@ export const CHAINS: Chain[] = [
     denomName: "ubpf",
     denomPow: 6,
     isTestnet: true,
-    isTendermintUnsafeResetEnabled: false,
     hardwareRequirementsData: {
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.44.5'
   }),
   new Chain({
     id: "terpnetwork-testnet",
@@ -516,7 +532,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "empower-testnet",
@@ -544,7 +561,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.46.1'
   }),
   new Chain({
     id: "ollo-testnet",
@@ -571,7 +589,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.7'
   }),
   new Chain({
     id: "haqq-testnet",
@@ -598,7 +617,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "okp4-testnet",
@@ -626,7 +646,8 @@ export const CHAINS: Chain[] = [
       specification: '3CPU 4RAM 80GB',
       hetznerServerType: 'CPX21',
       contaboServerType: 'VPS S'
-    }
+    },
+    cosmosSdkVersion: 'v0.46.2'
   }),
   ////////////////////////////////
   // Upcoming

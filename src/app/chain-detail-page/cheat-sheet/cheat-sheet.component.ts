@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChainService } from "../../service/chain.service";
 import { ChainCheatSheet } from "../../model/chainCheatSheet";
 import { ActivatedRoute } from "@angular/router";
+import { UtilsService } from "../../service/utils.service";
 
 @Component({
   selector: 'app-cheat-sheet',
@@ -14,6 +15,7 @@ export class CheatSheetComponent implements OnInit {
   searchText = '';
 
   constructor(public chainService: ChainService,
+              public utilsService: UtilsService,
               private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.searchText = params['q'];
@@ -52,6 +54,7 @@ export class CheatSheetComponent implements OnInit {
         savedChainInfo.pruningKeepEvery || 0,
         savedChainInfo.pruningInterval || 10,
         savedChainInfo.txId || '',
+        activeChain.cosmosSdkVersion
       );
     }
   }

@@ -25,13 +25,14 @@ export class ChainCheatSheet {
   pruningKeepEvery: number;
   pruningInterval: number;
   txId: string;
+  cosmosSdkVersion: string;
 
   constructor(id: string, chainId: string, denomName: string, binaryName: string, homeDirectoryName: string,
               keyName: string, gas: number, moniker: string, identity: string,
               details: string, proposalId: number, toValoperAddress: string, toWalletAddress: string,
               portIncrement: number, serviceName: string, commissionRate: string, commissionMaxRate: string,
               commissionMaxChangeRate: string, githubRepoName: string, amount:number, indexer: string, pruning: string,
-              pruningKeepRecent: number, pruningKeepEvery: number, pruningInterval: number, txId: string) {
+              pruningKeepRecent: number, pruningKeepEvery: number, pruningInterval: number, txId: string, cosmosSdkVersion: string) {
     this.id = id;
     this.chainId = chainId;
     this.denomName = denomName;
@@ -58,5 +59,6 @@ export class ChainCheatSheet {
     this.pruningKeepEvery = pruningKeepEvery;
     this.pruningInterval = pruningInterval;
     this.txId = txId;
+    this.cosmosSdkVersion = cosmosSdkVersion;
   }
 }

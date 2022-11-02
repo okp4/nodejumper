@@ -220,7 +220,7 @@
       <p>Edit Existing Validator</p>
       <div class="copy-button-container">
         <div class="command multiline">{{chain.binaryName}} tx staking edit-validator \
---moniker="{{chain.moniker || '&lt;YOUR_MONIKER&gt;'}}" \
+{{utilsService.isCosmosSdkVersionGreaterThan(chain.cosmosSdkVersion, 'v0.45.6')  ? '--new-moniker' : '--moniker'}}="{{chain.moniker || '&lt;YOUR_MONIKER&gt;'}}" \
 --identity={{chain.identity || '&lt;YOUR_IDENTITY&gt;'}} \
 --details="{{chain.details || '&lt;YOUR_DETAILS&gt;'}}" \
 --chain-id={{chain.chainId}} \

@@ -14,6 +14,7 @@ export class Chain {
   github: string;
   globe: string;
   denomPow: number;
+  cosmosSdkVersion: string;
 
   prettyChainName?: string;
   serviceName?: string;
@@ -34,7 +35,6 @@ export class Chain {
   testnetTasksLink?: string;
   hardwareRequirementsData?: HardwareRequirementsData;
 
-  isTendermintUnsafeResetEnabled?: boolean = true;
   isSnapshotEnabled?: boolean = true;
   isStateSyncEnabled?: boolean = true;
   isTopLevelWasmEnabled?: boolean = false;

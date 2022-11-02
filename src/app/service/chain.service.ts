@@ -92,7 +92,7 @@ export class ChainService {
   }
 
   getUnsafeResetAllString(chain: Chain): string {
-    if (chain.isTendermintUnsafeResetEnabled) {
+    if (this.utilsService.isCosmosSdkVersionGreaterThan(chain.cosmosSdkVersion, 'v0.45.3')) {
       return chain.binaryName + ' tendermint unsafe-reset-all --home $HOME/' + chain.homeDirectoryName + " --keep-addr-book";
     }
     return chain.binaryName + ' unsafe-reset-all';

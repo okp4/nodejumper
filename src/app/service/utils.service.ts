@@ -58,4 +58,23 @@ export class UtilsService {
   calculatePercentage(partial: number, total: number) {
     return ((partial * 100) / total).toFixed(2)
   }
+
+  isCosmosSdkVersionGreaterThan(v1: string, v2: string) {
+    if (v1 === v2) {
+      return true;
+    }
+    const v1Array = v1.replace(/v/g, ' ').split('.');
+    const v2Array = v2.replace(/v/g, ' ').split('.');
+    for (let i = 0; i < v1Array.length; i++) {
+      const part1 = +v1Array[i];
+      const part2 = +v2Array[i];
+      if (part1 > part2) {
+        return true;
+      }
+      if (part1 < part2) {
+        return false;
+      }
+    }
+    return false;
+  }
 }
