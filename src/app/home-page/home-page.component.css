@@ -102,9 +102,6 @@ input::placeholder {
 }
 
 @media (max-width: 576px) {
-  .chains-count {
-    justify-content: center;
-  }
   .who-we-are-button {
     display: none;
   }
