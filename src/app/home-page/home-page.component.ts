@@ -18,6 +18,7 @@ export class HomePageComponent implements OnInit {
   chainType = 'all';
   showAbout = false;
   showArchive = false;
+  chainsCount: number;
 
   constructor(public chainService: ChainService, public stateService: StateService) {
     this.applyChainTypeWithFilter(this.chainType, "");
@@ -44,18 +45,21 @@ export class HomePageComponent implements OnInit {
         this.testnetChains = [];
         this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = this.chainService.getChains(chainType, searchText, true);
+        this.chainsCount = this.mainnetChains.length;
         break;
       case 'testnet':
         this.mainnetChains = [];
         this.testnetChains = this.chainService.getChains(chainType, searchText);
         this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = this.chainService.getChains(chainType, searchText, true);
+        this.chainsCount = this.testnetChains.length;
         break;
       case 'upcoming':
         this.mainnetChains = [];
         this.testnetChains = [];
         this.upcomingChains = this.chainService.getChains(chainType, searchText, false, true);
         this.archiveChains = [];
+        this.chainsCount = this.upcomingChains.length;
         break;
       case 'all':
       default:
@@ -63,6 +67,16 @@ export class HomePageComponent implements OnInit {
         this.testnetChains = this.chainService.getChains('testnet', searchText);
         this.upcomingChains = this.chainService.getChains('all', searchText, false, true);
         this.archiveChains = this.chainService.getChains('all', searchText, true);
+        this.chainsCount = this.mainnetChains.length + this.testnetChains.length;
+    }
+    if (searchText) {
+      this.chainsCount = this.mainnetChains.length
+        + this.testnetChains.length
+        + this.upcomingChains.length
+        + this.archiveChains.length;
+      if (this.archiveChains.length) {
+        this.showArchive = true;
+      }
     }
   }
 
