@@ -709,13 +709,27 @@ export const CHAINS: Chain[] = [
     prettyChainName: "Nibiru Chain",
     chainId: "nibiru-testnet-1",
     logo: "nibiru.webp",
+    snapshotServer: "https://snapshots3-testnet.nodejumper.io",
+    rpcServer: "https://nibiru-testnet.nodejumper.io",
+    rpcPeer: "b32bb87364a52df3efcbe9eacc178c96b35c823a@nibiru-testnet.nodejumper.io:26656",
+    binaryName: "nibid",
+    homeDirectoryName: ".nibid",
     twitter: "https://twitter.com/NibiruChain",
     github: "https://github.com/NibiruChain",
     globe: "https://nibiru.fi",
     discord: "https://discord.com/invite/zjkzZwrez5",
     medium: "https://blog.nibiru.fi/",
+    blockExplorer: "https://nibiru.explorers.guru",
+    validatorUrl: "https://nibiru.explorers.guru/validator/nibivaloper1r9kmadqs9nsppn4wz5yp4rw8zn9545rcueqhyr",
+    denomName: "nibid",
+    denomPow: 6,
     isTestnet: true,
-    isUpcoming: true
+    hardwareRequirementsData: {
+      specification: '4CPU 8RAM 100GB',
+      hetznerServerType: 'CPX31',
+      contaboServerType: 'VPS S'
+    },
+    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "gnoland-testnet",
