@@ -198,4 +198,12 @@ div.code-toolbar > .toolbar > .toolbar-item > button:active,
     font-size: 10px;
     line-height: 18px;
   }
+
+  p.title {
+    font-size: 22px;
+  }
+
+  .tooltip-inner {
+    max-width: 200px !important;
+  }
 }

@@ -19,7 +19,7 @@ import {InstallationScriptsComponent} from './chain-detail-page/installation-scr
 import {NgxGoogleAnalyticsModule, NgxGoogleAnalyticsRouterModule} from "ngx-google-analytics";
 import {SummaryComponent} from './chain-detail-page/summary/summary.component';
 import {NgCircleProgressModule} from "ng-circle-progress";
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule, NgbTooltipConfig } from "@ng-bootstrap/ng-bootstrap";
 import {LeftHandMenuService} from "./service/left-hand-menu.service";
 import {CheatSheetComponent} from './chain-detail-page/cheat-sheet/cheat-sheet.component';
 import {UpgradeScriptsComponent} from './chain-detail-page/upgrade-scripts/upgrade-scripts.component';
@@ -31,6 +31,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import {MatSortModule} from '@angular/material/sort';
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { TbdComponent } from './chain-detail-page/tbd/tbd.component';
+import { DeviceDetectorService } from "ngx-device-detector";
 
 @NgModule({
   declarations: [
@@ -73,10 +74,11 @@ import { TbdComponent } from './chain-detail-page/tbd/tbd.component';
     MatSortModule,
     MatProgressSpinnerModule
   ],
-  providers: [ChainService, HighlightService, LeftHandMenuService],
+  providers: [ChainService, HighlightService, LeftHandMenuService, NgbTooltipConfig],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(router: Router) {
+  constructor(router: Router, ngbTooltipConfig: NgbTooltipConfig, deviceService: DeviceDetectorService) {
+    ngbTooltipConfig.triggers = deviceService.isMobile() ? 'click:blur' : 'hover focus';
   }
 }
