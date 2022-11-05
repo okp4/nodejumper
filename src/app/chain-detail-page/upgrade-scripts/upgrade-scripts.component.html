@@ -19,7 +19,7 @@
       <pre><code class="language-bash"># install dependencies, if needed
 sudo apt update
 sudo apt install -y tmux</code></pre>
-      <pre><code class="language-bash">tmux new -s {{upgradeData.version.split('.').join('')}}
+      <pre><code class="language-bash">tmux new -s {{this.chain.id}}-{{upgradeData.version.split('.').join('')}}
 bash <(curl -s https://raw.githubusercontent.com/nodejumper-org/cosmos-scripts/master/utils/schedule_upgrade.sh) -n {{chain.chainName}} -i {{chain.chainId}} -t {{upgradeData.height}} -v {{upgradeData.version}} -b {{chain.binaryName}} -c {{"https://nodejumper.io/"+chain.chainName.toLowerCase()+"/cheat-sheet"}}
 
 #CTRL+B D to exit the session</code></pre>
