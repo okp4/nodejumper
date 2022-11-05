@@ -747,7 +747,7 @@ export const CHAINS: Chain[] = [
   }),
   new Chain({
     id: "dydx-testnet",
-    chainName: "dydx",
+    chainName: "dYdX",
     chainId: "",
     logo: "dydx.webp",
     twitter: "https://twitter.com/dydx",
