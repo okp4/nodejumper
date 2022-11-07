@@ -129,6 +129,12 @@ Nodejumper supports around 17 networks and the number is constantly growing.
     <td>Testnet</td>
     <td>https://nodejumper.io/empower-testnet</td>
   </tr>
+  <tr>
+    <td><img width="50" src="https://raw.githubusercontent.com/nodejumper-org/nodejumper/master/src/assets/img/chain/okp4.webp" alt="OKP4"></td>
+    <td>OKP4</td>
+    <td>Testnet</td>
+    <td>https://nodejumper.io/okp4-testnet</td>
+  </tr>
 </table>
 
 ## Contributors
