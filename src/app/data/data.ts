@@ -649,22 +649,64 @@ export const CHAINS: Chain[] = [
     },
     cosmosSdkVersion: 'v0.46.2'
   }),
-  ////////////////////////////////
-  // Upcoming
-  ////////////////////////////////
+  new Chain({
+    id: "nibiru-testnet",
+    chainName: "nibiru",
+    prettyChainName: "Nibiru Chain",
+    chainId: "nibiru-testnet-1",
+    logo: "nibiru.webp",
+    snapshotServer: "https://snapshots3-testnet.nodejumper.io",
+    rpcServer: "https://nibiru-testnet.nodejumper.io",
+    rpcPeer: "b32bb87364a52df3efcbe9eacc178c96b35c823a@nibiru-testnet.nodejumper.io:27656",
+    binaryName: "nibid",
+    homeDirectoryName: ".nibid",
+    twitter: "https://twitter.com/NibiruChain",
+    github: "https://github.com/NibiruChain",
+    globe: "https://nibiru.fi",
+    discord: "https://discord.com/invite/zjkzZwrez5",
+    medium: "https://blog.nibiru.fi/",
+    blockExplorer: "https://nibiru.explorers.guru",
+    validatorUrl: "https://nibiru.explorers.guru/validator/nibivaloper1r9kmadqs9nsppn4wz5yp4rw8zn9545rcueqhyr",
+    denomName: "nibid",
+    denomPow: 6,
+    isTestnet: true,
+    hardwareRequirementsData: {
+      specification: '4CPU 8RAM 100GB',
+      hetznerServerType: 'CPX31',
+      contaboServerType: 'VPS S'
+    },
+    cosmosSdkVersion: 'v0.45.9'
+  }),
   new Chain({
     id: "defund-testnet",
     chainName: "defund",
     prettyChainName: "DeFund Finance",
     chainId: "defund-private-2",
     logo: "defund.webp",
+    snapshotServer: "https://snapshots3-testnet.nodejumper.io",
+    rpcServer: "https://defund-testnet.nodejumper.io",
+    rpcPeer: "6366ac3af3995ecbc48c13ce9564aef0c7a6d7df@defund-testnet.nodejumper.io:28656",
+    binaryName: "defundd",
+    homeDirectoryName: ".defund",
     twitter: "https://twitter.com/defund_finance",
     github: "https://github.com/defund-labs",
     globe: "https://defund.app",
     discord: "https://discord.gg/UsER6bWuUq",
+    blockExplorer: "https://defund.explorers.guru",
+    validatorUrl: "",
     isTestnet: true,
-    isUpcoming: true
+    denomName: "ufetf",
+    denomPow: 6,
+    hardwareRequirementsData: {
+      specification: '4CPU 8RAM 100GB',
+      hetznerServerType: 'CPX31',
+      contaboServerType: 'VPS S'
+    },
+    cosmosSdkVersion: 'v0.45.10'
   }),
+  ////////////////////////////////
+  // Upcoming
+  ////////////////////////////////
   new Chain({
     id: "neutron-testnet",
     chainName: "Neutron",
@@ -702,34 +744,6 @@ export const CHAINS: Chain[] = [
     medium: "https://medium.com/mysten-labs",
     isTestnet: true,
     isUpcoming: true
-  }),
-  new Chain({
-    id: "nibiru-testnet",
-    chainName: "nibiru",
-    prettyChainName: "Nibiru Chain",
-    chainId: "nibiru-testnet-1",
-    logo: "nibiru.webp",
-    snapshotServer: "https://snapshots3-testnet.nodejumper.io",
-    rpcServer: "https://nibiru-testnet.nodejumper.io",
-    rpcPeer: "b32bb87364a52df3efcbe9eacc178c96b35c823a@nibiru-testnet.nodejumper.io:26656",
-    binaryName: "nibid",
-    homeDirectoryName: ".nibid",
-    twitter: "https://twitter.com/NibiruChain",
-    github: "https://github.com/NibiruChain",
-    globe: "https://nibiru.fi",
-    discord: "https://discord.com/invite/zjkzZwrez5",
-    medium: "https://blog.nibiru.fi/",
-    blockExplorer: "https://nibiru.explorers.guru",
-    validatorUrl: "https://nibiru.explorers.guru/validator/nibivaloper1r9kmadqs9nsppn4wz5yp4rw8zn9545rcueqhyr",
-    denomName: "nibid",
-    denomPow: 6,
-    isTestnet: true,
-    hardwareRequirementsData: {
-      specification: '4CPU 8RAM 100GB',
-      hetznerServerType: 'CPX31',
-      contaboServerType: 'VPS S'
-    },
-    cosmosSdkVersion: 'v0.45.9'
   }),
   new Chain({
     id: "gnoland-testnet",

@@ -16,6 +16,7 @@ export class SynchronizationScriptsComponent implements OnInit {
 
   chain?: Chain;
   snapshotData?: SnapshotData;
+  snapshotBlockTime?: string;
   livePeers: string[] = [];
 
   constructor(private highlightService: HighlightService,
@@ -55,6 +56,9 @@ export class SynchronizationScriptsComponent implements OnInit {
           const snapshotSize = data.snapshotSize + 'B';
           const snapshotBlockTime = this.utilsService.humanReadableTimeDifferenceString(data.snapshotBlockTime);
           this.snapshotData = new SnapshotData(snapshotHeight, snapshotSize, snapshotBlockTime);
+          if (snapshotBlockTime && !snapshotBlockTime.startsWith('-')) {
+            this.snapshotBlockTime = snapshotBlockTime;
+          }
         });
     }
     this.highlightService.highlightAll(this.highlightLinks.bind(this));

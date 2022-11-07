@@ -43,8 +43,10 @@ export class LeftHandMenuComponent implements OnInit {
             const latestBlockTime = data.result.sync_info.latest_block_time;
             const timeDifferenceInSeconds = this.utilsService.humanReadableTimeDifferenceSeconds(latestBlockTime);
             this.chainStatus = timeDifferenceInSeconds > 60 ? ChainStatus.HALTED : ChainStatus.SYNCED;
-            this.chainStatusMessage = `Latest Block: ${latestBlockHeight}
-            (${this.utilsService.secondsToHumanReadableFormat(timeDifferenceInSeconds)} ago)`;
+            this.chainStatusMessage = `Latest Block: ${latestBlockHeight}\n`;
+            if (timeDifferenceInSeconds > 0) {
+              this.chainStatusMessage += `(${this.utilsService.secondsToHumanReadableFormat(timeDifferenceInSeconds)} ago)`;
+            }
           },
           error: (error: any) => {
             this.chainStatus = ChainStatus.INACTIVE;
