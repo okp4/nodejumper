@@ -698,7 +698,7 @@ export const CHAINS: Chain[] = [
     denomName: "ufetf",
     denomPow: 6,
     hardwareRequirementsData: {
-      specification: '4CPU 8RAM 100GB',
+      specification: '4CPU 8RAM 160GB',
       hetznerServerType: 'CPX31',
       contaboServerType: 'VPS S'
     },
